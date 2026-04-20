@@ -80,7 +80,7 @@
     margin-top: 3px;
   }
 
-  nav { display: flex; gap: 2rem; }
+  nav { display: flex; gap: 2rem; align-items: center; }
   nav a {
     color: #ccc;
     text-decoration: none;
@@ -91,6 +91,23 @@
     transition: color 0.2s;
   }
   nav a:hover { color: var(--brand-gold-light); }
+
+  .admin-nav-btn {
+    background: none;
+    border: 1px solid rgba(200,134,10,0.4);
+    color: rgba(200,134,10,0.6);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .admin-nav-btn:hover { border-color: var(--brand-gold); color: var(--brand-gold-light); }
+  .admin-nav-btn.logged-in { border-color: rgba(45,180,80,0.5); color: rgba(100,220,130,0.8); }
 
   /* ── HERO SLIDESHOW ── */
   .hero {
@@ -211,7 +228,196 @@
   }
   .arrow-btn:hover { background: var(--brand-gold); }
 
-  /* ── PHOTO NOTE BAR ── */
+  /* ── ADMIN LOGIN MODAL ── */
+  .modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,6,2,0.82);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-backdrop.open { display: flex; }
+
+  .login-modal {
+    background: #1e1408;
+    border: 1px solid var(--brand-gold);
+    border-radius: 12px;
+    padding: 2.4rem 2.4rem 2rem;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    position: relative;
+  }
+
+  .modal-logo {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-logo-ring {
+    width: 56px; height: 56px;
+    background: var(--brand-gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 10px;
+  }
+
+  .modal-logo-ring svg { width: 30px; height: 30px; }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: var(--brand-gold-light);
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .modal-sub {
+    font-size: 0.78rem;
+    color: #888;
+    text-align: center;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+  }
+
+  .modal-field { margin-bottom: 1rem; }
+
+  .modal-field label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brand-tan);
+    margin-bottom: 6px;
+  }
+
+  .modal-field input {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(200,134,10,0.3);
+    border-radius: var(--radius);
+    color: #f0e6d0;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1rem;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .modal-field input:focus { border-color: var(--brand-gold); }
+
+  .modal-error {
+    color: #f07070;
+    font-size: 0.82rem;
+    text-align: center;
+    margin-bottom: 0.8rem;
+    min-height: 20px;
+  }
+
+  .modal-submit {
+    width: 100%;
+    background: var(--brand-gold);
+    color: var(--brand-dark);
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 13px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .modal-submit:hover { background: var(--brand-gold-light); }
+
+  .modal-close {
+    position: absolute;
+    top: 14px; right: 16px;
+    background: none; border: none;
+    color: #666; font-size: 1.3rem;
+    cursor: pointer; line-height: 1;
+  }
+  .modal-close:hover { color: #ccc; }
+
+  /* ── ADMIN LOCK OVERLAY (over add-section) ── */
+  .add-section { position: relative; }
+
+  .admin-lock {
+    position: absolute;
+    inset: 0;
+    background: rgba(10,6,2,0.88);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    cursor: default;
+  }
+
+  .lock-icon {
+    width: 64px; height: 64px;
+    background: rgba(200,134,10,0.12);
+    border: 2px solid rgba(200,134,10,0.35);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lock-icon svg { width: 30px; height: 30px; fill: var(--brand-gold); }
+
+  .lock-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--brand-gold-light);
+  }
+
+  .lock-sub {
+    font-size: 0.82rem;
+    color: #888;
+    letter-spacing: 0.06em;
+  }
+
+  .lock-btn {
+    background: var(--brand-gold);
+    color: var(--brand-dark);
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 11px 28px;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: background 0.2s;
+  }
+  .lock-btn:hover { background: var(--brand-gold-light); }
+
+  /* admin logout bar */
+  .admin-bar {
+    display: none;
+    background: rgba(45,120,60,0.15);
+    border-bottom: 1px solid rgba(45,180,80,0.25);
+    text-align: center;
+    padding: 7px;
+    font-size: 0.78rem;
+    color: #7be09a;
+    letter-spacing: 0.06em;
+  }
+  .admin-bar.visible { display: block; }
+  .admin-bar button {
+    background: none; border: 1px solid rgba(100,220,130,0.4);
+    color: #7be09a; border-radius: 20px;
+    font-size: 0.72rem; padding: 2px 12px;
+    cursor: pointer; margin-left: 12px;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+  .admin-bar button:hover { background: rgba(100,220,130,0.1); }
   .photo-note {
     background: var(--brand-brown);
     color: var(--brand-tan);
@@ -599,12 +805,46 @@
   </a>
   <nav>
     <a href="#products">Products</a>
-    <a href="#add-product">Add Item</a>
     <a href="#contact">Contact</a>
+    <button class="admin-nav-btn" id="admin-nav-btn" title="Admin login">&#128274; Admin</button>
   </nav>
 </header>
 
-<!-- HERO SLIDESHOW -->
+<!-- ADMIN BAR (visible when logged in) -->
+<div class="admin-bar" id="admin-bar">
+  &#10003; Logged in as Admin
+  <button id="logout-btn">Log Out</button>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal-backdrop" id="login-modal" role="dialog" aria-modal="true" aria-label="Admin login">
+  <div class="login-modal">
+    <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+    <div class="modal-logo">
+      <div class="modal-logo-ring">
+        <svg viewBox="0 0 30 30" fill="none">
+          <rect x="7" y="13" width="16" height="12" rx="2" fill="#1a1208"/>
+          <path d="M10 13V10a5 5 0 0110 0v3" stroke="#1a1208" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <circle cx="15" cy="18" r="2" fill="#c8860a"/>
+        </svg>
+      </div>
+      <div class="modal-title">Admin Access</div>
+      <div class="modal-sub">Custom Tags Plus</div>
+    </div>
+    <div class="modal-field">
+      <label for="admin-user">Username</label>
+      <input type="text" id="admin-user" autocomplete="username" placeholder="Enter username">
+    </div>
+    <div class="modal-field">
+      <label for="admin-pass">Password</label>
+      <input type="password" id="admin-pass" autocomplete="current-password" placeholder="Enter password">
+    </div>
+    <div class="modal-error" id="modal-error"></div>
+    <button class="modal-submit" id="modal-submit">Unlock Admin Panel</button>
+  </div>
+</div>
+
+
 <section class="hero" id="slideshow" aria-label="Product photo slideshow">
   <div class="slides">
 
@@ -795,6 +1035,16 @@
 
 <!-- ADD PRODUCT FORM -->
 <section class="add-section" id="add-product">
+
+  <!-- LOCK OVERLAY — shown to non-admins -->
+  <div class="admin-lock" id="admin-lock">
+    <div class="lock-icon">
+      <svg viewBox="0 0 30 30"><rect x="7" y="13" width="16" height="12" rx="2"/><path d="M10 13V10a5 5 0 0110 0v3" stroke="#c8860a" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="15" cy="18" r="2" fill="#c8860a"/></svg>
+    </div>
+    <div class="lock-title">Admin Only</div>
+    <div class="lock-sub">Sign in to add or manage products</div>
+    <button class="lock-btn" id="lock-login-btn">&#128274; Admin Login</button>
+  </div>
   <div class="add-inner">
     <h2 class="section-title">Add a New Item</h2>
     <p class="section-sub">Fill out the form below to add a product to your listings.</p>
@@ -914,6 +1164,91 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  /* ── ADMIN CONFIG — change these credentials ── */
+  const ADMIN_USER = 'admin';
+  const ADMIN_PASS = 'tagsplus2024';   /* ← set your own password here */
+
+  /* ── SESSION STATE ── */
+  let isAdmin = sessionStorage.getItem('ctp_admin') === '1';
+
+  function applyAdminState() {
+    const lock   = document.getElementById('admin-lock');
+    const bar    = document.getElementById('admin-bar');
+    const navBtn = document.getElementById('admin-nav-btn');
+    if (isAdmin) {
+      lock.style.display   = 'none';
+      bar.classList.add('visible');
+      navBtn.textContent   = '✓ Admin';
+      navBtn.classList.add('logged-in');
+    } else {
+      lock.style.display   = '';
+      bar.classList.remove('visible');
+      navBtn.textContent   = '🔒 Admin';
+      navBtn.classList.remove('logged-in');
+    }
+  }
+  applyAdminState();
+
+  /* ── MODAL OPEN / CLOSE ── */
+  function openModal() {
+    document.getElementById('login-modal').classList.add('open');
+    document.getElementById('admin-user').focus();
+    document.getElementById('modal-error').textContent = '';
+    document.getElementById('admin-user').value = '';
+    document.getElementById('admin-pass').value = '';
+  }
+  function closeModal() {
+    document.getElementById('login-modal').classList.remove('open');
+  }
+
+  document.getElementById('admin-nav-btn').addEventListener('click', () => {
+    if (isAdmin) {
+      if (confirm('Log out of admin panel?')) logout();
+    } else {
+      openModal();
+    }
+  });
+  document.getElementById('lock-login-btn').addEventListener('click', openModal);
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  document.getElementById('login-modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('login-modal')) closeModal();
+  });
+
+  /* ── LOGIN ── */
+  function attemptLogin() {
+    const u = document.getElementById('admin-user').value.trim();
+    const p = document.getElementById('admin-pass').value;
+    const err = document.getElementById('modal-error');
+    if (u === ADMIN_USER && p === ADMIN_PASS) {
+      isAdmin = true;
+      sessionStorage.setItem('ctp_admin', '1');
+      closeModal();
+      applyAdminState();
+      document.getElementById('add-product').scrollIntoView({ behavior:'smooth' });
+    } else {
+      err.textContent = 'Incorrect username or password.';
+      document.getElementById('admin-pass').value = '';
+      document.getElementById('admin-pass').focus();
+    }
+  }
+
+  document.getElementById('modal-submit').addEventListener('click', attemptLogin);
+  document.getElementById('admin-pass').addEventListener('keydown', e => {
+    if (e.key === 'Enter') attemptLogin();
+  });
+  document.getElementById('admin-user').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('admin-pass').focus();
+  });
+
+  /* ── LOGOUT ── */
+  function logout() {
+    isAdmin = false;
+    sessionStorage.removeItem('ctp_admin');
+    applyAdminState();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  document.getElementById('logout-btn').addEventListener('click', logout);
+
   /* ── SLIDESHOW ── */
   const slides = document.querySelectorAll('.slide');
   const dotsContainer = document.getElementById('slide-dots');
@@ -971,12 +1306,14 @@
 
   /* ── ADD PRODUCT ── */
   document.getElementById('add-btn').addEventListener('click', () => {
-    const name = document.getElementById('item-name').value.trim();
+    if (!isAdmin) { openModal(); return; }
+
+    const name  = document.getElementById('item-name').value.trim();
     const style = document.getElementById('item-style').value;
-    const animal = document.getElementById('item-animal').value;
-    const size = document.getElementById('item-size').value;
+    const animal= document.getElementById('item-animal').value;
+    const size  = document.getElementById('item-size').value;
     const color = document.getElementById('item-color').value;
-    const desc = document.getElementById('item-desc').value.trim();
+    const desc  = document.getElementById('item-desc').value.trim();
     const price = document.getElementById('item-price').value.trim();
     const badge = document.getElementById('item-badge').value.trim();
 
@@ -1011,10 +1348,8 @@
 
     document.getElementById('products-grid').appendChild(card);
 
-    /* reset form */
     ['item-name','item-style','item-animal','item-size','item-desc','item-price','item-badge'].forEach(id => {
-      const el = document.getElementById(id);
-      el.value = el.tagName === 'SELECT' ? '' : '';
+      document.getElementById(id).value = '';
     });
     document.getElementById('item-color').value = '';
     document.querySelectorAll('.color-swatch').forEach(b => b.classList.remove('selected'));
