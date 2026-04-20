@@ -7,780 +7,180 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --brand-dark: #1a1208;
-    --brand-brown: #5c3d0e;
-    --brand-gold: #c8860a;
+    --brand-dark:       #1a1208;
+    --brand-brown:      #5c3d0e;
+    --brand-gold:       #c8860a;
     --brand-gold-light: #e8a82c;
-    --brand-cream: #fdf6e9;
-    --brand-tan: #f0ddb5;
-    --brand-text: #2b1d06;
-    --brand-muted: #7a5c2e;
+    --brand-cream:      #fdf6e9;
+    --brand-tan:        #f0ddb5;
+    --brand-text:       #2b1d06;
+    --brand-muted:      #7a5c2e;
     --radius: 6px;
     --shadow: 0 4px 24px rgba(92,61,14,0.13);
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--brand-cream); color: var(--brand-text); min-height: 100vh; }
 
-  body {
-    font-family: 'Source Sans 3', sans-serif;
-    background: var(--brand-cream);
-    color: var(--brand-text);
-    min-height: 100vh;
-  }
-
-  /* ── HEADER ── */
+  /* HEADER */
   header {
     background: var(--brand-dark);
     padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 72px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px; position: sticky; top: 0; z-index: 200;
     border-bottom: 3px solid var(--brand-gold);
   }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    text-decoration: none;
-  }
-
-  .logo-icon {
-    width: 44px; height: 44px;
-    background: var(--brand-gold);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-  }
-
+  .logo { display: flex; align-items: center; gap: 14px; text-decoration: none; cursor: pointer; }
+  .logo-icon { width: 44px; height: 44px; background: var(--brand-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .logo-icon svg { width: 26px; height: 26px; }
+  .logo-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; color: #fff; letter-spacing: 0.01em; line-height: 1; }
+  .logo-tagline { font-size: 0.68rem; color: var(--brand-gold-light); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 3px; }
 
-  .logo-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1;
+  /* TAB NAV */
+  .tab-nav { display: flex; align-items: stretch; height: 100%; }
+  .tab-btn {
+    background: none; border: none; border-bottom: 3px solid transparent; margin-bottom: -3px;
+    color: #bbb; font-family: 'Source Sans 3', sans-serif; font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.07em; text-transform: uppercase; padding: 0 1.4rem;
+    cursor: pointer; display: flex; align-items: center; gap: 7px;
+    transition: color 0.2s, border-color 0.2s; white-space: nowrap;
   }
+  .tab-btn:hover { color: var(--brand-gold-light); }
+  .tab-btn.active { color: var(--brand-gold-light); border-bottom-color: var(--brand-gold); }
+  .tab-btn.admin-tab { color: rgba(200,134,10,0.5); }
+  .tab-btn.admin-tab:hover { color: rgba(200,134,10,0.8); }
+  .tab-btn.admin-tab.active { color: #7be09a; border-bottom-color: #4db870; }
 
-  .logo-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: 0.01em;
-  }
+  /* ADMIN BAR */
+  .admin-bar { display: none; background: rgba(30,80,40,0.18); border-bottom: 1px solid rgba(60,180,90,0.25); text-align: center; padding: 7px 1rem; font-size: 0.78rem; color: #7be09a; letter-spacing: 0.06em; }
+  .admin-bar.visible { display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .admin-bar-logout { background: none; border: 1px solid rgba(100,220,130,0.4); color: #7be09a; border-radius: 20px; font-size: 0.72rem; padding: 2px 12px; cursor: pointer; font-family: 'Source Sans 3', sans-serif; }
+  .admin-bar-logout:hover { background: rgba(100,220,130,0.1); }
 
-  .logo-tagline {
-    font-size: 0.7rem;
-    color: var(--brand-gold-light);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-top: 3px;
-  }
+  /* PAGES */
+  .page { display: none; }
+  .page.active { display: block; }
 
-  nav { display: flex; gap: 2rem; align-items: center; }
-  nav a {
-    color: #ccc;
-    text-decoration: none;
-    font-size: 0.875rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    font-weight: 600;
-    transition: color 0.2s;
-  }
-  nav a:hover { color: var(--brand-gold-light); }
-
-  .admin-nav-btn {
-    background: none;
-    border: 1px solid rgba(200,134,10,0.4);
-    color: rgba(200,134,10,0.6);
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-weight: 600;
-    padding: 5px 12px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .admin-nav-btn:hover { border-color: var(--brand-gold); color: var(--brand-gold-light); }
-  .admin-nav-btn.logged-in { border-color: rgba(45,180,80,0.5); color: rgba(100,220,130,0.8); }
-
-  /* ── HERO SLIDESHOW ── */
-  .hero {
-    position: relative;
-    height: 520px;
-    overflow: hidden;
-    background: var(--brand-dark);
-  }
-
+  /* HERO */
+  .hero { position: relative; height: 520px; overflow: hidden; background: var(--brand-dark); }
   .slides { position: relative; width: 100%; height: 100%; }
-
-  .slide {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.9s ease;
-    background-size: cover;
-    background-position: center;
-  }
-
+  .slide { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.9s ease; background-size: cover; background-position: center; }
   .slide.active { opacity: 1; }
-
-  /* Placeholder gradient slides (replace src with real photos) */
   .slide-1 { background: linear-gradient(135deg, #3b2000 0%, #7a4a00 50%, #c8860a 100%); }
   .slide-2 { background: linear-gradient(135deg, #0d1f0d 0%, #1a4020 50%, #2d7a40 100%); }
   .slide-3 { background: linear-gradient(135deg, #1a0a1a 0%, #4a1560 50%, #8b30a8 100%); }
   .slide-4 { background: linear-gradient(135deg, #1a0808 0%, #5c1010 50%, #c43030 100%); }
   .slide-5 { background: linear-gradient(135deg, #07121e 0%, #0f3060 50%, #1a5aa0 100%); }
-
-  .slide-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.55) 100%);
-  }
-
-  .slide-label {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    color: #fff;
-    z-index: 2;
-  }
-
-  .slide-label h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.4rem;
-    font-weight: 900;
-    text-shadow: 0 2px 16px rgba(0,0,0,0.5);
-    white-space: nowrap;
-  }
-
-  .slide-label p {
-    font-size: 1rem;
-    color: var(--brand-gold-light);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: 6px;
-  }
-
-  /* Tag shape decorations on slides */
-  .tag-deco {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -60%);
-    opacity: 0.25;
-  }
-
-  /* Slide dots */
-  .slide-dots {
-    position: absolute;
-    bottom: 14px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-    z-index: 10;
-  }
-
-  .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.4);
-    cursor: pointer;
-    transition: background 0.3s, transform 0.3s;
-    border: none;
-  }
+  .slide-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.55) 100%); }
+  .slide-label { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); text-align: center; color: #fff; z-index: 2; }
+  .slide-label h2 { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; text-shadow: 0 2px 16px rgba(0,0,0,0.5); white-space: nowrap; }
+  .slide-label p { font-size: 1rem; color: var(--brand-gold-light); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; }
+  .tag-deco { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%); opacity: 0.25; }
+  .slide-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; border: none; transition: background 0.3s, transform 0.3s; }
   .dot.active { background: var(--brand-gold-light); transform: scale(1.3); }
-
-  .slide-arrows {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 1.5rem;
-    z-index: 10;
-    pointer-events: none;
-  }
-
-  .arrow-btn {
-    pointer-events: all;
-    background: rgba(0,0,0,0.4);
-    border: 1px solid rgba(255,255,255,0.25);
-    color: #fff;
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.2rem;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s;
-  }
+  .slide-arrows { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 1.5rem; z-index: 10; pointer-events: none; }
+  .arrow-btn { pointer-events: all; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.25); color: #fff; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
   .arrow-btn:hover { background: var(--brand-gold); }
 
-  /* ── ADMIN LOGIN MODAL ── */
-  .modal-backdrop {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(10,6,2,0.82);
-    z-index: 999;
-    align-items: center;
-    justify-content: center;
-  }
-  .modal-backdrop.open { display: flex; }
-
-  .login-modal {
-    background: #1e1408;
-    border: 1px solid var(--brand-gold);
-    border-radius: 12px;
-    padding: 2.4rem 2.4rem 2rem;
-    width: 100%;
-    max-width: 380px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-    position: relative;
-  }
-
-  .modal-logo {
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-
-  .modal-logo-ring {
-    width: 56px; height: 56px;
-    background: var(--brand-gold);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 10px;
-  }
-
-  .modal-logo-ring svg { width: 30px; height: 30px; }
-
-  .modal-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 900;
-    color: var(--brand-gold-light);
-    text-align: center;
-    margin-bottom: 4px;
-  }
-
-  .modal-sub {
-    font-size: 0.78rem;
-    color: #888;
-    text-align: center;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 1.6rem;
-  }
-
-  .modal-field { margin-bottom: 1rem; }
-
-  .modal-field label {
-    display: block;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--brand-tan);
-    margin-bottom: 6px;
-  }
-
-  .modal-field input {
-    width: 100%;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(200,134,10,0.3);
-    border-radius: var(--radius);
-    color: #f0e6d0;
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 1rem;
-    padding: 10px 14px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .modal-field input:focus { border-color: var(--brand-gold); }
-
-  .modal-error {
-    color: #f07070;
-    font-size: 0.82rem;
-    text-align: center;
-    margin-bottom: 0.8rem;
-    min-height: 20px;
-  }
-
-  .modal-submit {
-    width: 100%;
-    background: var(--brand-gold);
-    color: var(--brand-dark);
-    border: none;
-    border-radius: var(--radius);
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 13px;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .modal-submit:hover { background: var(--brand-gold-light); }
-
-  .modal-close {
-    position: absolute;
-    top: 14px; right: 16px;
-    background: none; border: none;
-    color: #666; font-size: 1.3rem;
-    cursor: pointer; line-height: 1;
-  }
-  .modal-close:hover { color: #ccc; }
-
-  /* ── ADMIN LOCK OVERLAY (over add-section) ── */
-  .add-section { position: relative; }
-
-  .admin-lock {
-    position: absolute;
-    inset: 0;
-    background: rgba(10,6,2,0.88);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    cursor: default;
-  }
-
-  .lock-icon {
-    width: 64px; height: 64px;
-    background: rgba(200,134,10,0.12);
-    border: 2px solid rgba(200,134,10,0.35);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .lock-icon svg { width: 30px; height: 30px; fill: var(--brand-gold); }
-
-  .lock-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    color: var(--brand-gold-light);
-  }
-
-  .lock-sub {
-    font-size: 0.82rem;
-    color: #888;
-    letter-spacing: 0.06em;
-  }
-
-  .lock-btn {
-    background: var(--brand-gold);
-    color: var(--brand-dark);
-    border: none;
-    border-radius: var(--radius);
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 11px 28px;
-    cursor: pointer;
-    margin-top: 6px;
-    transition: background 0.2s;
-  }
-  .lock-btn:hover { background: var(--brand-gold-light); }
-
-  /* admin logout bar */
-  .admin-bar {
-    display: none;
-    background: rgba(45,120,60,0.15);
-    border-bottom: 1px solid rgba(45,180,80,0.25);
-    text-align: center;
-    padding: 7px;
-    font-size: 0.78rem;
-    color: #7be09a;
-    letter-spacing: 0.06em;
-  }
-  .admin-bar.visible { display: block; }
-  .admin-bar button {
-    background: none; border: 1px solid rgba(100,220,130,0.4);
-    color: #7be09a; border-radius: 20px;
-    font-size: 0.72rem; padding: 2px 12px;
-    cursor: pointer; margin-left: 12px;
-    font-family: 'Source Sans 3', sans-serif;
-  }
-  .admin-bar button:hover { background: rgba(100,220,130,0.1); }
-  .photo-note {
-    background: var(--brand-brown);
-    color: var(--brand-tan);
-    text-align: center;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    padding: 8px;
-    text-transform: uppercase;
-  }
-
-  /* ── SECTION WRAPPER ── */
-  .section {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 4rem 2rem;
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--brand-brown);
-    position: relative;
-    display: inline-block;
-    margin-bottom: 0.4rem;
-  }
-
-  .section-title::after {
-    content: '';
-    display: block;
-    height: 3px;
-    background: var(--brand-gold);
-    width: 60%;
-    margin-top: 6px;
-  }
-
-  .section-sub {
-    color: var(--brand-muted);
-    font-size: 1rem;
-    margin-bottom: 2.5rem;
-    margin-top: 0.5rem;
-  }
-
-  /* ── PRODUCT GRID ── */
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.75rem;
-  }
-
-  .product-card {
-    background: #fff;
-    border: 1px solid #e8d5b0;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: transform 0.25s, box-shadow 0.25s;
-    position: relative;
-  }
-
-  .product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 36px rgba(92,61,14,0.2);
-  }
-
-  .card-img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    display: block;
-    background: var(--brand-tan);
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* placeholder tag illustration inside card */
-  .card-img-placeholder {
-    width: 100%;
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .card-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: var(--brand-gold);
-    color: var(--brand-dark);
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 20px;
-  }
-
-  .card-body { padding: 1.2rem 1.4rem 1.4rem; }
-
-  .card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--brand-brown);
-    margin-bottom: 6px;
-  }
-
-  .card-desc {
-    font-size: 0.875rem;
-    color: #5a4020;
-    line-height: 1.6;
-    margin-bottom: 12px;
-  }
-
-  .card-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 14px;
-  }
-
-  .meta-pill {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 20px;
-    background: var(--brand-cream);
-    border: 1px solid #d4b87a;
-    color: var(--brand-brown);
-  }
-
-  .card-price {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--brand-brown);
-  }
-
-  .card-price span {
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: var(--brand-muted);
-    margin-left: 4px;
-  }
-
-  /* ── ADD PRODUCT FORM ── */
-  .add-section {
-    background: var(--brand-dark);
-    padding: 4rem 2rem;
-  }
-
-  .add-inner {
-    max-width: 780px;
-    margin: 0 auto;
-  }
-
-  .add-inner .section-title { color: var(--brand-gold-light); }
-  .add-inner .section-title::after { background: var(--brand-gold-light); }
-  .add-inner .section-sub { color: #bbb; }
-
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
-  }
-
-  .form-grid .full { grid-column: 1 / -1; }
-
-  .form-group { display: flex; flex-direction: column; gap: 6px; }
-
-  label {
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--brand-tan);
-  }
-
-  input[type="text"],
-  input[type="number"],
-  select,
-  textarea {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(200,134,10,0.35);
-    border-radius: var(--radius);
-    color: #f0e6d0;
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 0.95rem;
-    padding: 10px 14px;
-    outline: none;
-    transition: border-color 0.2s, background 0.2s;
-    width: 100%;
-  }
-
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--brand-gold);
-    background: rgba(200,134,10,0.1);
-  }
-
-  select option { background: #2b1d06; color: #f0e6d0; }
-
-  textarea { resize: vertical; min-height: 90px; }
-
-  .color-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 2px;
-  }
-
-  .color-swatch {
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    border: 2px solid transparent;
-    cursor: pointer;
-    transition: transform 0.2s, border-color 0.2s;
-    outline: none;
-  }
-  .color-swatch:hover { transform: scale(1.15); }
-  .color-swatch.selected { border-color: #fff; transform: scale(1.2); }
-
-  .image-upload-area {
-    border: 2px dashed rgba(200,134,10,0.4);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-    color: #aaa;
-    font-size: 0.875rem;
-  }
-  .image-upload-area:hover {
-    border-color: var(--brand-gold);
-    background: rgba(200,134,10,0.06);
-    color: var(--brand-gold-light);
-  }
-  .image-upload-area input { display: none; }
-
-  .submit-btn {
-    margin-top: 1.5rem;
-    background: var(--brand-gold);
-    color: var(--brand-dark);
-    border: none;
-    border-radius: var(--radius);
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 14px 36px;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .submit-btn:hover { background: var(--brand-gold-light); transform: translateY(-2px); }
-  .submit-btn:active { transform: translateY(0); }
-
-  .success-msg {
-    display: none;
-    background: rgba(45,122,64,0.2);
-    border: 1px solid rgba(45,180,80,0.4);
-    color: #7be09a;
-    border-radius: var(--radius);
-    padding: 12px 16px;
-    font-size: 0.9rem;
-    margin-top: 1rem;
-  }
-
-  /* ── WHY US STRIP ── */
-  .why-strip {
-    background: var(--brand-tan);
-    border-top: 2px solid #e0c070;
-    border-bottom: 2px solid #e0c070;
-    padding: 2.5rem 2rem;
-  }
-
-  .why-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    text-align: center;
-  }
-
-  .why-item {}
-
-  .why-icon {
-    width: 52px; height: 52px;
-    background: var(--brand-gold);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 12px;
-  }
-
+  /* WHY STRIP */
+  .why-strip { background: var(--brand-tan); border-top: 2px solid #e0c070; border-bottom: 2px solid #e0c070; padding: 2.5rem 2rem; }
+  .why-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center; }
+  .why-icon { width: 52px; height: 52px; background: var(--brand-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
   .why-icon svg { width: 26px; height: 26px; fill: var(--brand-dark); }
-
-  .why-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--brand-brown);
-    margin-bottom: 5px;
-  }
-
+  .why-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--brand-brown); margin-bottom: 5px; }
   .why-desc { font-size: 0.85rem; color: var(--brand-muted); line-height: 1.5; }
 
-  /* ── CONTACT ── */
-  .contact-bar {
-    background: var(--brand-brown);
-    color: var(--brand-tan);
-    text-align: center;
-    padding: 2.5rem 2rem;
-  }
+  /* PRODUCTS */
+  .section { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--brand-brown); position: relative; display: inline-block; margin-bottom: 0.4rem; }
+  .section-title::after { content: ''; display: block; height: 3px; background: var(--brand-gold); width: 60%; margin-top: 6px; }
+  .section-sub { color: var(--brand-muted); font-size: 1rem; margin-bottom: 2.5rem; margin-top: 0.5rem; }
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.75rem; }
+  .product-card { background: #fff; border: 1px solid #e8d5b0; border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.25s, box-shadow 0.25s; position: relative; }
+  .product-card:hover { transform: translateY(-4px); box-shadow: 0 10px 36px rgba(92,61,14,0.2); }
+  .card-img { width: 100%; height: 180px; object-fit: cover; display: block; }
+  .card-img-placeholder { width: 100%; height: 180px; display: flex; align-items: center; justify-content: center; }
+  .card-badge { position: absolute; top: 12px; right: 12px; background: var(--brand-gold); color: var(--brand-dark); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
+  .card-body { padding: 1.2rem 1.4rem 1.4rem; }
+  .card-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--brand-brown); margin-bottom: 6px; }
+  .card-desc { font-size: 0.875rem; color: #5a4020; line-height: 1.6; margin-bottom: 12px; }
+  .card-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .meta-pill { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; background: var(--brand-cream); border: 1px solid #d4b87a; color: var(--brand-brown); }
+  .card-price { font-size: 1.05rem; font-weight: 700; color: var(--brand-brown); }
+  .card-price span { font-size: 0.8rem; font-weight: 400; color: var(--brand-muted); margin-left: 4px; }
 
-  .contact-bar h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    color: var(--brand-gold-light);
-    margin-bottom: 0.5rem;
-  }
-
-  .contact-bar p { font-size: 0.95rem; margin-bottom: 1.2rem; opacity: 0.85; }
-
-  .contact-link {
-    display: inline-block;
-    background: var(--brand-gold);
-    color: var(--brand-dark);
-    font-weight: 700;
-    font-size: 0.9rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 12px 30px;
-    border-radius: var(--radius);
-    transition: background 0.2s;
-  }
+  /* CONTACT PAGE */
+  .contact-page { min-height: 65vh; display: flex; align-items: center; justify-content: center; background: var(--brand-brown); padding: 4rem 2rem; }
+  .contact-inner { text-align: center; max-width: 520px; }
+  .contact-inner h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: var(--brand-gold-light); margin-bottom: 0.8rem; }
+  .contact-inner p { color: var(--brand-tan); font-size: 1rem; line-height: 1.7; margin-bottom: 1.6rem; opacity: 0.9; }
+  .contact-link { display: inline-block; background: var(--brand-gold); color: var(--brand-dark); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 13px 32px; border-radius: var(--radius); transition: background 0.2s; }
   .contact-link:hover { background: var(--brand-gold-light); }
+  .contact-note { margin-top: 1.5rem; font-size: 0.83rem; color: var(--brand-tan); opacity: 0.6; }
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--brand-dark);
-    color: #666;
-    text-align: center;
-    font-size: 0.8rem;
-    padding: 1.4rem 2rem;
-    border-top: 2px solid var(--brand-gold);
-  }
+  /* ADMIN LOCK SCREEN */
+  .admin-lock-screen { min-height: 70vh; display: flex; align-items: center; justify-content: center; background: var(--brand-dark); padding: 3rem 2rem; }
+  .lock-card { background: #1e1408; border: 1px solid var(--brand-gold); border-radius: 14px; padding: 2.8rem 2.6rem 2.4rem; width: 100%; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); text-align: center; }
+  .lock-ring { width: 64px; height: 64px; background: var(--brand-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+  .lock-ring svg { width: 32px; height: 32px; }
+  .lock-card h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--brand-gold-light); margin-bottom: 4px; }
+  .lock-sub { font-size: 0.78rem; color: #777; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2rem; }
+  .lock-field { text-align: left; margin-bottom: 1rem; }
+  .lock-field label { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-tan); margin-bottom: 6px; }
+  .lock-field input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(200,134,10,0.3); border-radius: var(--radius); color: #f0e6d0; font-family: 'Source Sans 3', sans-serif; font-size: 1rem; padding: 11px 14px; outline: none; transition: border-color 0.2s; }
+  .lock-field input:focus { border-color: var(--brand-gold); }
+  .lock-error { color: #f07070; font-size: 0.82rem; min-height: 22px; margin-bottom: 0.6rem; }
+  .lock-submit { width: 100%; background: var(--brand-gold); color: var(--brand-dark); border: none; border-radius: var(--radius); font-family: 'Source Sans 3', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 13px; cursor: pointer; transition: background 0.2s; }
+  .lock-submit:hover { background: var(--brand-gold-light); }
 
+  /* ADMIN PANEL */
+  .admin-panel { display: none; background: var(--brand-dark); padding: 4rem 2rem 5rem; }
+  .admin-panel.visible { display: block; }
+  .admin-inner { max-width: 780px; margin: 0 auto; }
+  .admin-header-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.3rem; flex-wrap: wrap; gap: 1rem; }
+  .admin-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--brand-gold-light); display: inline-block; }
+  .admin-title::after { content: ''; display: block; height: 3px; background: var(--brand-gold-light); width: 60%; margin-top: 6px; }
+  .admin-sub { color: #aaa; font-size: 0.95rem; margin-bottom: 2.5rem; margin-top: 0.5rem; }
+  .panel-logout-btn { background: none; border: 1px solid rgba(100,220,130,0.4); color: #7be09a; border-radius: 20px; font-size: 0.75rem; padding: 6px 16px; cursor: pointer; font-family: 'Source Sans 3', sans-serif; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; transition: background 0.2s; margin-top: 6px; }
+  .panel-logout-btn:hover { background: rgba(100,220,130,0.1); }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .form-grid .full { grid-column: 1 / -1; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-tan); }
+  input[type="text"], input[type="number"], select, textarea { background: rgba(255,255,255,0.07); border: 1px solid rgba(200,134,10,0.35); border-radius: var(--radius); color: #f0e6d0; font-family: 'Source Sans 3', sans-serif; font-size: 0.95rem; padding: 10px 14px; outline: none; width: 100%; transition: border-color 0.2s, background 0.2s; }
+  input:focus, select:focus, textarea:focus { border-color: var(--brand-gold); background: rgba(200,134,10,0.1); }
+  select option { background: #2b1d06; color: #f0e6d0; }
+  textarea { resize: vertical; min-height: 90px; }
+  .color-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+  .color-swatch { width: 30px; height: 30px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform 0.2s, border-color 0.2s; outline: none; }
+  .color-swatch:hover { transform: scale(1.15); }
+  .color-swatch.selected { border-color: #fff; transform: scale(1.2); }
+  .image-upload-area { border: 2px dashed rgba(200,134,10,0.4); border-radius: var(--radius); padding: 1.5rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; color: #aaa; font-size: 0.875rem; display: block; }
+  .image-upload-area:hover { border-color: var(--brand-gold); background: rgba(200,134,10,0.06); color: var(--brand-gold-light); }
+  .image-upload-area input { display: none; }
+  .submit-btn { margin-top: 1.5rem; background: var(--brand-gold); color: var(--brand-dark); border: none; border-radius: var(--radius); font-family: 'Source Sans 3', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 36px; cursor: pointer; transition: background 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 10px; }
+  .submit-btn:hover { background: var(--brand-gold-light); transform: translateY(-2px); }
+  .submit-btn:active { transform: translateY(0); }
+  .success-msg { display: none; background: rgba(45,122,64,0.2); border: 1px solid rgba(45,180,80,0.4); color: #7be09a; border-radius: var(--radius); padding: 12px 16px; font-size: 0.9rem; margin-top: 1rem; }
+  .tip-box { margin-top: 2.5rem; padding: 1.4rem; background: rgba(200,134,10,0.08); border: 1px solid rgba(200,134,10,0.25); border-radius: 6px; color: #b8a070; font-size: 0.83rem; line-height: 1.7; }
+  .tip-box strong { color: var(--brand-gold-light); display: block; margin-bottom: 6px; }
+  .tip-box code { background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 3px; }
+
+  /* FOOTER */
+  footer { background: var(--brand-dark); color: #666; text-align: center; font-size: 0.8rem; padding: 1.4rem 2rem; border-top: 2px solid var(--brand-gold); }
   footer span { color: var(--brand-gold); }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 680px) {
-    header { flex-direction: column; height: auto; padding: 1rem; gap: 0.75rem; }
-    nav { gap: 1.2rem; }
-    .hero { height: 380px; }
-    .slide-label h2 { font-size: 1.6rem; }
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    header { flex-direction: column; height: auto; padding: 0.75rem 1rem; gap: 0; }
+    .tab-nav { width: 100%; justify-content: center; border-top: 1px solid rgba(255,255,255,0.08); }
+    .tab-btn { padding: 0.65rem 0.9rem; font-size: 0.78rem; }
+    .hero { height: 360px; }
+    .slide-label h2 { font-size: 1.5rem; }
     .form-grid { grid-template-columns: 1fr; }
     .form-grid .full { grid-column: 1; }
+    .admin-header-row { flex-direction: column; }
   }
 </style>
 </head>
@@ -788,9 +188,9 @@
 
 <!-- HEADER -->
 <header>
-  <a href="#" class="logo">
+  <a class="logo" id="logo-home">
     <div class="logo-icon">
-      <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 26 26" fill="none">
         <ellipse cx="13" cy="16" rx="9" ry="8" stroke="#1a1208" stroke-width="2" fill="none"/>
         <rect x="10" y="3" width="6" height="8" rx="3" fill="#1a1208"/>
         <circle cx="13" cy="6" r="1.5" fill="#c8860a"/>
@@ -798,487 +198,418 @@
         <line x1="11" y1="16" x2="15" y2="16" stroke="#1a1208" stroke-width="1.5"/>
       </svg>
     </div>
-    <div class="logo-text">
-      <span class="logo-name">Custom Tags Plus</span>
-      <span class="logo-tagline">Laser Engraved Livestock Tags</span>
+    <div>
+      <div class="logo-name">Custom Tags Plus</div>
+      <div class="logo-tagline">Laser Engraved Livestock Tags</div>
     </div>
   </a>
-  <nav>
-    <a href="#products">Products</a>
-    <a href="#contact">Contact</a>
-    <button class="admin-nav-btn" id="admin-nav-btn" title="Admin login">&#128274; Admin</button>
+
+  <nav class="tab-nav">
+    <button class="tab-btn active" data-tab="store">🏪 Store</button>
+    <button class="tab-btn" data-tab="contact">✉ Contact</button>
+    <button class="tab-btn admin-tab" data-tab="admin">
+      <span id="admin-tab-icon">🔒</span> <span id="admin-tab-label">Admin</span>
+    </button>
   </nav>
 </header>
 
-<!-- ADMIN BAR (visible when logged in) -->
+<!-- Admin status bar -->
 <div class="admin-bar" id="admin-bar">
-  &#10003; Logged in as Admin
-  <button id="logout-btn">Log Out</button>
-</div>
-
-<!-- LOGIN MODAL -->
-<div class="modal-backdrop" id="login-modal" role="dialog" aria-modal="true" aria-label="Admin login">
-  <div class="login-modal">
-    <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
-    <div class="modal-logo">
-      <div class="modal-logo-ring">
-        <svg viewBox="0 0 30 30" fill="none">
-          <rect x="7" y="13" width="16" height="12" rx="2" fill="#1a1208"/>
-          <path d="M10 13V10a5 5 0 0110 0v3" stroke="#1a1208" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <circle cx="15" cy="18" r="2" fill="#c8860a"/>
-        </svg>
-      </div>
-      <div class="modal-title">Admin Access</div>
-      <div class="modal-sub">Custom Tags Plus</div>
-    </div>
-    <div class="modal-field">
-      <label for="admin-user">Username</label>
-      <input type="text" id="admin-user" autocomplete="username" placeholder="Enter username">
-    </div>
-    <div class="modal-field">
-      <label for="admin-pass">Password</label>
-      <input type="password" id="admin-pass" autocomplete="current-password" placeholder="Enter password">
-    </div>
-    <div class="modal-error" id="modal-error"></div>
-    <button class="modal-submit" id="modal-submit">Unlock Admin Panel</button>
-  </div>
+  <span>✓ Logged in as Admin</span>
+  <button class="admin-bar-logout" id="admin-bar-logout">Log Out</button>
 </div>
 
 
-<section class="hero" id="slideshow" aria-label="Product photo slideshow">
-  <div class="slides">
+<!-- ═══════════════════════════
+     PAGE: STORE
+═══════════════════════════ -->
+<div class="page active" id="page-store">
 
-    <div class="slide slide-1 active">
-      <div class="slide-overlay"></div>
-      <svg class="tag-deco" width="260" height="200" viewBox="0 0 260 200" fill="none">
-        <ellipse cx="130" cy="130" rx="110" ry="60" stroke="white" stroke-width="2"/>
-        <rect x="100" y="20" width="60" height="80" rx="30" stroke="white" stroke-width="2"/>
-        <line x1="80" y1="100" x2="180" y2="100" stroke="white" stroke-width="1.5"/>
-        <line x1="90" y1="120" x2="170" y2="120" stroke="white" stroke-width="1.5"/>
-        <line x1="95" y1="140" x2="165" y2="140" stroke="white" stroke-width="1.5"/>
-      </svg>
-      <div class="slide-label">
-        <h2>Premium Ear Tags</h2>
-        <p>Laser precision — every character, every time</p>
+  <section class="hero" aria-label="Product slideshow">
+    <div class="slides">
+      <div class="slide slide-1 active">
+        <div class="slide-overlay"></div>
+        <svg class="tag-deco" width="260" height="200" viewBox="0 0 260 200" fill="none">
+          <ellipse cx="130" cy="130" rx="110" ry="60" stroke="white" stroke-width="2"/>
+          <rect x="100" y="20" width="60" height="80" rx="30" stroke="white" stroke-width="2"/>
+          <line x1="80" y1="100" x2="180" y2="100" stroke="white" stroke-width="1.5"/>
+          <line x1="90" y1="120" x2="170" y2="120" stroke="white" stroke-width="1.5"/>
+        </svg>
+        <div class="slide-label"><h2>Premium Ear Tags</h2><p>Laser precision — every character, every time</p></div>
+      </div>
+      <div class="slide slide-2">
+        <div class="slide-overlay"></div>
+        <svg class="tag-deco" width="260" height="200" viewBox="0 0 260 200" fill="none">
+          <rect x="40" y="60" width="80" height="110" rx="40" stroke="white" stroke-width="2"/>
+          <rect x="140" y="40" width="80" height="130" rx="8" stroke="white" stroke-width="2"/>
+          <rect x="30" y="25" width="100" height="60" rx="30" stroke="white" stroke-width="2"/>
+        </svg>
+        <div class="slide-label"><h2>All Sizes &amp; Styles</h2><p>Button, flag, two-piece, visual ID tags</p></div>
+      </div>
+      <div class="slide slide-3">
+        <div class="slide-overlay"></div>
+        <svg class="tag-deco" width="300" height="180" viewBox="0 0 300 180" fill="none">
+          <ellipse cx="60"  cy="100" rx="45" ry="55" stroke="white" stroke-width="2"/>
+          <ellipse cx="150" cy="100" rx="45" ry="55" stroke="white" stroke-width="2"/>
+          <ellipse cx="240" cy="100" rx="45" ry="55" stroke="white" stroke-width="2"/>
+          <circle cx="60"  cy="50" r="8" stroke="white" stroke-width="2"/>
+          <circle cx="150" cy="50" r="8" stroke="white" stroke-width="2"/>
+          <circle cx="240" cy="50" r="8" stroke="white" stroke-width="2"/>
+        </svg>
+        <div class="slide-label"><h2>Vibrant Color Options</h2><p>Match your herd management system</p></div>
+      </div>
+      <div class="slide slide-4">
+        <div class="slide-overlay"></div>
+        <div class="slide-label"><h2>Custom Numbering</h2><p>Ranch name, animal ID, breed info &amp; more</p></div>
+      </div>
+      <div class="slide slide-5">
+        <div class="slide-overlay"></div>
+        <div class="slide-label"><h2>Built for the Ranch</h2><p>Durable, readable, built to last in the field</p></div>
       </div>
     </div>
+    <div class="slide-arrows">
+      <button class="arrow-btn" id="prev-slide">&#8592;</button>
+      <button class="arrow-btn" id="next-slide">&#8594;</button>
+    </div>
+    <div class="slide-dots" id="slide-dots"></div>
+  </section>
 
-    <div class="slide slide-2">
-      <div class="slide-overlay"></div>
-      <svg class="tag-deco" width="260" height="200" viewBox="0 0 260 200" fill="none">
-        <rect x="40" y="60" width="80" height="110" rx="40" stroke="white" stroke-width="2"/>
-        <rect x="140" y="40" width="80" height="130" rx="8" stroke="white" stroke-width="2"/>
-        <rect x="30" y="25" width="100" height="60" rx="30" stroke="white" stroke-width="2"/>
-      </svg>
-      <div class="slide-label">
-        <h2>All Sizes & Styles</h2>
-        <p>Button, flag, two-piece, visual ID tags</p>
+  <section class="why-strip">
+    <div class="why-inner">
+      <div class="why-item">
+        <div class="why-icon"><svg viewBox="0 0 26 26"><path d="M13 3l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg></div>
+        <div class="why-title">Laser Precision</div>
+        <div class="why-desc">Sharp, permanent engraving that never fades or flakes, no matter the weather.</div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon"><svg viewBox="0 0 26 26"><rect x="4" y="6" width="18" height="14" rx="2"/><path d="M9 6V5a4 4 0 018 0v1"/><circle cx="13" cy="13" r="2"/></svg></div>
+        <div class="why-title">Multiple Styles</div>
+        <div class="why-desc">Button, flag, two-piece, and visual ID styles for cattle, sheep, goats &amp; swine.</div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon"><svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="9"/><circle cx="13" cy="9" r="2" fill="#c8860a"/><circle cx="9" cy="16" r="2" fill="#1a1208"/><circle cx="17" cy="16" r="2" fill="#1a1208"/></svg></div>
+        <div class="why-title">10+ Colors</div>
+        <div class="why-desc">White, yellow, orange, green, red, blue, purple, pink, and more in stock.</div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon"><svg viewBox="0 0 26 26"><path d="M4 20L13 5l9 15H4z"/><line x1="13" y1="11" x2="13" y2="15"/><circle cx="13" cy="17" r="1"/></svg></div>
+        <div class="why-title">Small Batches OK</div>
+        <div class="why-desc">No massive minimum orders — perfect for small operations and custom one-offs.</div>
       </div>
     </div>
+  </section>
 
-    <div class="slide slide-3">
-      <div class="slide-overlay"></div>
-      <svg class="tag-deco" width="300" height="180" viewBox="0 0 300 180" fill="none">
-        <ellipse cx="60" cy="100" rx="45" ry="55" stroke="white" stroke-width="2"/>
-        <ellipse cx="150" cy="100" rx="45" ry="55" stroke="white" stroke-width="2"/>
-        <ellipse cx="240" cy="100" rx="45" ry="55" stroke="white" stroke-width="2"/>
-        <circle cx="60" cy="50" r="8" stroke="white" stroke-width="2"/>
-        <circle cx="150" cy="50" r="8" stroke="white" stroke-width="2"/>
-        <circle cx="240" cy="50" r="8" stroke="white" stroke-width="2"/>
-      </svg>
-      <div class="slide-label">
-        <h2>Vibrant Color Options</h2>
-        <p>Match your herd management system</p>
+  <section class="section">
+    <h2 class="section-title">Our Products</h2>
+    <p class="section-sub">Browse our current inventory of custom laser-engraved ear tags.</p>
+    <div class="products-grid" id="products-grid">
+
+      <div class="product-card">
+        <div class="card-img-placeholder" style="background:linear-gradient(135deg,#fffae0,#f5d07a);">
+          <svg width="90" height="110" viewBox="0 0 90 110" fill="none">
+            <ellipse cx="45" cy="75" rx="38" ry="30" fill="#f0c040" stroke="#b8860b" stroke-width="2"/>
+            <rect x="30" y="15" width="30" height="45" rx="15" fill="#f0c040" stroke="#b8860b" stroke-width="2"/>
+            <circle cx="45" cy="22" r="5" fill="#b8860b"/>
+            <text x="27" y="82" font-family="monospace" font-size="11" fill="#5c3d0e" font-weight="bold">A-1042</text>
+          </svg>
+        </div>
+        <span class="card-badge">Popular</span>
+        <div class="card-body">
+          <div class="card-title">Large Cattle Button Tag</div>
+          <div class="card-desc">4" yellow button-style ear tag laser engraved with ranch name and sequential animal ID numbers. UV-stable, weatherproof.</div>
+          <div class="card-meta"><span class="meta-pill">Cattle</span><span class="meta-pill">Yellow</span><span class="meta-pill">4 inch</span><span class="meta-pill">Button</span></div>
+          <div class="card-price">Contact for pricing <span>/ per tag</span></div>
+        </div>
       </div>
-    </div>
 
-    <div class="slide slide-4">
-      <div class="slide-overlay"></div>
-      <div class="slide-label">
-        <h2>Custom Numbering</h2>
-        <p>Ranch name, animal ID, breed info & more</p>
+      <div class="product-card">
+        <div class="card-img-placeholder" style="background:linear-gradient(135deg,#e0f0e0,#70c080);">
+          <svg width="90" height="110" viewBox="0 0 90 110" fill="none">
+            <rect x="15" y="35" width="60" height="70" rx="8" fill="#60b860" stroke="#2d7a40" stroke-width="2"/>
+            <rect x="30" y="10" width="30" height="40" rx="15" fill="#60b860" stroke="#2d7a40" stroke-width="2"/>
+            <circle cx="45" cy="18" r="5" fill="#2d7a40"/>
+            <text x="22" y="78" font-family="monospace" font-size="10" fill="#0d4020" font-weight="bold">SMITH</text>
+            <text x="22" y="93" font-family="monospace" font-size="10" fill="#0d4020" font-weight="bold">RANCH</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Flag Style Sheep Tag</div>
+          <div class="card-desc">2" green flag tag for sheep and goats. Engraved with custom ranch name, scrapie ID, and individual number. Easy-read style.</div>
+          <div class="card-meta"><span class="meta-pill">Sheep</span><span class="meta-pill">Green</span><span class="meta-pill">2 inch</span><span class="meta-pill">Flag</span></div>
+          <div class="card-price">Contact for pricing <span>/ per tag</span></div>
+        </div>
       </div>
-    </div>
 
-    <div class="slide slide-5">
-      <div class="slide-overlay"></div>
-      <div class="slide-label">
-        <h2>Built for the Ranch</h2>
-        <p>Durable, readable, built to last in the field</p>
+      <div class="product-card">
+        <div class="card-img-placeholder" style="background:linear-gradient(135deg,#ffe0e0,#e06060);">
+          <svg width="110" height="100" viewBox="0 0 110 100" fill="none">
+            <ellipse cx="38" cy="60" rx="30" ry="32" fill="#d94040" stroke="#8b0000" stroke-width="2"/>
+            <ellipse cx="78" cy="60" rx="24" ry="26" fill="#c03030" stroke="#8b0000" stroke-width="2"/>
+            <rect x="25" y="12" width="26" height="36" rx="13" fill="#d94040" stroke="#8b0000" stroke-width="2"/>
+            <circle cx="38" cy="19" r="4" fill="#8b0000"/>
+            <text x="18" y="66" font-family="monospace" font-size="9" fill="#fff" font-weight="bold">047</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Two-Piece Hog Tag</div>
+          <div class="card-desc">Heavy-duty red two-piece tag for swine. Engraved with USDA premises ID and sequential lot numbers. High retention design.</div>
+          <div class="card-meta"><span class="meta-pill">Swine</span><span class="meta-pill">Red</span><span class="meta-pill">Large</span><span class="meta-pill">Two-Piece</span></div>
+          <div class="card-price">Contact for pricing <span>/ per tag</span></div>
+        </div>
       </div>
-    </div>
 
+    </div>
+  </section>
+
+</div><!-- /page-store -->
+
+
+<!-- ═══════════════════════════
+     PAGE: CONTACT
+═══════════════════════════ -->
+<div class="page" id="page-contact">
+  <div class="contact-page">
+    <div class="contact-inner">
+      <h2>Get in Touch</h2>
+      <p>Ready to order custom laser-engraved ear tags for your herd? We handle any size batch — from a handful of custom tags to large ranch orders. Ask about styles, colors, and bulk pricing.</p>
+      <a href="mailto:info@customtagsplus.com" class="contact-link">✉ Send Us an Email</a>
+      <p class="contact-note">Or reach us by phone — ask about bulk pricing!</p>
+    </div>
   </div>
+</div>
 
-  <div class="slide-arrows">
-    <button class="arrow-btn" id="prev-slide" aria-label="Previous slide">&#8592;</button>
-    <button class="arrow-btn" id="next-slide" aria-label="Next slide">&#8594;</button>
-  </div>
 
-  <div class="slide-dots" id="slide-dots"></div>
-</section>
+<!-- ═══════════════════════════
+     PAGE: ADMIN
+═══════════════════════════ -->
+<div class="page" id="page-admin">
 
-<div class="photo-note">&#128247; Upload your own photos — see instructions below</div>
-
-<!-- WHY US -->
-<section class="why-strip">
-  <div class="why-inner">
-    <div class="why-item">
-      <div class="why-icon">
-        <svg viewBox="0 0 26 26"><path d="M13 3l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>
-      </div>
-      <div class="why-title">Laser Precision</div>
-      <div class="why-desc">Sharp, permanent engraving that never fades or flakes, no matter the weather.</div>
-    </div>
-    <div class="why-item">
-      <div class="why-icon">
-        <svg viewBox="0 0 26 26"><rect x="4" y="6" width="18" height="14" rx="2"/><path d="M9 6V5a4 4 0 018 0v1"/><circle cx="13" cy="13" r="2"/></svg>
-      </div>
-      <div class="why-title">Multiple Styles</div>
-      <div class="why-desc">Button, flag, two-piece, and visual ID styles for cattle, sheep, goats & swine.</div>
-    </div>
-    <div class="why-item">
-      <div class="why-icon">
-        <svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="9"/><circle cx="13" cy="9" r="2" fill="#c8860a"/><circle cx="9" cy="16" r="2" fill="#1a1208"/><circle cx="17" cy="16" r="2" fill="#1a1208"/></svg>
-      </div>
-      <div class="why-title">10+ Colors</div>
-      <div class="why-desc">White, yellow, orange, green, red, blue, purple, pink, and more in stock.</div>
-    </div>
-    <div class="why-item">
-      <div class="why-icon">
-        <svg viewBox="0 0 26 26"><path d="M4 20L13 5l9 15H4z"/><line x1="13" y1="11" x2="13" y2="15"/><circle cx="13" cy="17" r="1"/></svg>
-      </div>
-      <div class="why-title">Small Batches OK</div>
-      <div class="why-desc">No massive minimum orders — perfect for small operations and custom one-offs.</div>
-    </div>
-  </div>
-</section>
-
-<!-- PRODUCT LISTINGS -->
-<section class="section" id="products">
-  <h2 class="section-title">Our Products</h2>
-  <p class="section-sub">Browse our current inventory of custom laser-engraved ear tags.</p>
-  <div class="products-grid" id="products-grid">
-
-    <!-- SAMPLE CARDS — delete or replace with your own via the Add Item form -->
-    <div class="product-card">
-      <div class="card-img-placeholder" style="background: linear-gradient(135deg,#fffae0,#f5d07a);">
-        <svg width="90" height="110" viewBox="0 0 90 110" fill="none">
-          <ellipse cx="45" cy="75" rx="38" ry="30" fill="#f0c040" stroke="#b8860b" stroke-width="2"/>
-          <rect x="30" y="15" width="30" height="45" rx="15" fill="#f0c040" stroke="#b8860b" stroke-width="2"/>
-          <circle cx="45" cy="22" r="5" fill="#b8860b"/>
-          <text x="27" y="82" font-family="monospace" font-size="11" fill="#5c3d0e" font-weight="bold">A-1042</text>
+  <!-- Lock screen -->
+  <div class="admin-lock-screen" id="admin-lock-screen">
+    <div class="lock-card">
+      <div class="lock-ring">
+        <svg viewBox="0 0 32 32" fill="none">
+          <rect x="7" y="14" width="18" height="13" rx="3" fill="#1a1208"/>
+          <path d="M11 14V11a5 5 0 0110 0v3" stroke="#1a1208" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <circle cx="16" cy="20" r="2.5" fill="#c8860a"/>
         </svg>
       </div>
-      <span class="card-badge">Popular</span>
-      <div class="card-body">
-        <div class="card-title">Large Cattle Button Tag</div>
-        <div class="card-desc">4" yellow button-style ear tag laser engraved with ranch name and sequential animal ID numbers. UV-stable, weatherproof.</div>
-        <div class="card-meta">
-          <span class="meta-pill">Cattle</span>
-          <span class="meta-pill">Yellow</span>
-          <span class="meta-pill">4 inch</span>
-          <span class="meta-pill">Button</span>
-        </div>
-        <div class="card-price">Contact for pricing <span>/ per tag</span></div>
+      <h2>Admin Login</h2>
+      <div class="lock-sub">Custom Tags Plus</div>
+      <div class="lock-field">
+        <label for="login-user">Username</label>
+        <input type="text" id="login-user" autocomplete="username" placeholder="Enter username">
       </div>
-    </div>
-
-    <div class="product-card">
-      <div class="card-img-placeholder" style="background: linear-gradient(135deg,#e0f0e0,#70c080);">
-        <svg width="90" height="110" viewBox="0 0 90 110" fill="none">
-          <rect x="15" y="35" width="60" height="70" rx="8" fill="#60b860" stroke="#2d7a40" stroke-width="2"/>
-          <rect x="30" y="10" width="30" height="40" rx="15" fill="#60b860" stroke="#2d7a40" stroke-width="2"/>
-          <circle cx="45" cy="18" r="5" fill="#2d7a40"/>
-          <text x="22" y="78" font-family="monospace" font-size="10" fill="#0d4020" font-weight="bold">SMITH</text>
-          <text x="22" y="93" font-family="monospace" font-size="10" fill="#0d4020" font-weight="bold">RANCH</text>
-        </svg>
+      <div class="lock-field">
+        <label for="login-pass">Password</label>
+        <input type="password" id="login-pass" autocomplete="current-password" placeholder="Enter password">
       </div>
-      <div class="card-body">
-        <div class="card-title">Flag Style Sheep Tag</div>
-        <div class="card-desc">2" green flag tag for sheep and goats. Engraved with custom ranch name, scrapie ID, and individual number. Easy-read style.</div>
-        <div class="card-meta">
-          <span class="meta-pill">Sheep</span>
-          <span class="meta-pill">Green</span>
-          <span class="meta-pill">2 inch</span>
-          <span class="meta-pill">Flag</span>
-        </div>
-        <div class="card-price">Contact for pricing <span>/ per tag</span></div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="card-img-placeholder" style="background: linear-gradient(135deg,#ffe0e0,#e06060);">
-        <svg width="110" height="100" viewBox="0 0 110 100" fill="none">
-          <ellipse cx="38" cy="60" rx="30" ry="32" fill="#d94040" stroke="#8b0000" stroke-width="2"/>
-          <ellipse cx="78" cy="60" rx="24" ry="26" fill="#c03030" stroke="#8b0000" stroke-width="2"/>
-          <rect x="25" y="12" width="26" height="36" rx="13" fill="#d94040" stroke="#8b0000" stroke-width="2"/>
-          <circle cx="38" cy="19" r="4" fill="#8b0000"/>
-          <text x="18" y="66" font-family="monospace" font-size="9" fill="#fff" font-weight="bold">047</text>
-        </svg>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Two-Piece Hog Tag</div>
-        <div class="card-desc">Heavy-duty red two-piece tag for swine. Engraved with USDA premises ID and sequential lot numbers. High retention design.</div>
-        <div class="card-meta">
-          <span class="meta-pill">Swine</span>
-          <span class="meta-pill">Red</span>
-          <span class="meta-pill">Large</span>
-          <span class="meta-pill">Two-Piece</span>
-        </div>
-        <div class="card-price">Contact for pricing <span>/ per tag</span></div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ADD PRODUCT FORM -->
-<section class="add-section" id="add-product">
-
-  <!-- LOCK OVERLAY — shown to non-admins -->
-  <div class="admin-lock" id="admin-lock">
-    <div class="lock-icon">
-      <svg viewBox="0 0 30 30"><rect x="7" y="13" width="16" height="12" rx="2"/><path d="M10 13V10a5 5 0 0110 0v3" stroke="#c8860a" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="15" cy="18" r="2" fill="#c8860a"/></svg>
-    </div>
-    <div class="lock-title">Admin Only</div>
-    <div class="lock-sub">Sign in to add or manage products</div>
-    <button class="lock-btn" id="lock-login-btn">&#128274; Admin Login</button>
-  </div>
-  <div class="add-inner">
-    <h2 class="section-title">Add a New Item</h2>
-    <p class="section-sub">Fill out the form below to add a product to your listings.</p>
-
-    <div class="form-grid" id="add-form">
-
-      <div class="form-group">
-        <label for="item-name">Product Name</label>
-        <input type="text" id="item-name" placeholder="e.g. Large Cattle Button Tag">
-      </div>
-
-      <div class="form-group">
-        <label for="item-style">Tag Style</label>
-        <select id="item-style">
-          <option value="">Select style…</option>
-          <option>Button</option>
-          <option>Flag</option>
-          <option>Two-Piece</option>
-          <option>Visual ID</option>
-          <option>Tamper-Evident</option>
-          <option>Other</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="item-animal">Animal Type</label>
-        <select id="item-animal">
-          <option value="">Select animal…</option>
-          <option>Cattle</option>
-          <option>Sheep</option>
-          <option>Goats</option>
-          <option>Swine</option>
-          <option>Horses</option>
-          <option>Multi-species</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="item-size">Tag Size</label>
-        <select id="item-size">
-          <option value="">Select size…</option>
-          <option>Small (1–1.5 inch)</option>
-          <option>Medium (2 inch)</option>
-          <option>Large (3–4 inch)</option>
-          <option>Extra Large (4+ inch)</option>
-          <option>Custom</option>
-        </select>
-      </div>
-
-      <div class="form-group full">
-        <label>Tag Color</label>
-        <div class="color-row" id="color-row">
-          <button class="color-swatch" style="background:#f5d07a" title="Yellow" data-color="Yellow"></button>
-          <button class="color-swatch" style="background:#60b860" title="Green" data-color="Green"></button>
-          <button class="color-swatch" style="background:#d94040" title="Red" data-color="Red"></button>
-          <button class="color-swatch" style="background:#3a80d2" title="Blue" data-color="Blue"></button>
-          <button class="color-swatch" style="background:#e07820" title="Orange" data-color="Orange"></button>
-          <button class="color-swatch" style="background:#9b4cc0" title="Purple" data-color="Purple"></button>
-          <button class="color-swatch" style="background:#e070b0" title="Pink" data-color="Pink"></button>
-          <button class="color-swatch" style="background:#fff; border:1px solid #ccc" title="White" data-color="White"></button>
-          <button class="color-swatch" style="background:#333" title="Black" data-color="Black"></button>
-        </div>
-        <input type="hidden" id="item-color" value="">
-      </div>
-
-      <div class="form-group full">
-        <label for="item-desc">Description</label>
-        <textarea id="item-desc" placeholder="Describe what's engraved, features, use case, durability…"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="item-price">Price / Contact Info</label>
-        <input type="text" id="item-price" placeholder="e.g. $1.25/tag or 'Contact for quote'">
-      </div>
-
-      <div class="form-group">
-        <label for="item-badge">Badge (optional)</label>
-        <input type="text" id="item-badge" placeholder="e.g. Popular, New, Sale">
-      </div>
-
-      <div class="form-group full">
-        <label>Product Photo</label>
-        <label class="image-upload-area" for="item-image">
-          <input type="file" id="item-image" accept="image/*">
-          &#128247; Click to choose a photo — or drag & drop here
-          <div id="img-preview" style="margin-top:10px;"></div>
-        </label>
-      </div>
-
-    </div>
-
-    <button class="submit-btn" id="add-btn">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor"><path d="M9 2a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H3a1 1 0 110-2h5V3a1 1 0 011-1z"/></svg>
-      Add to Listings
-    </button>
-    <div class="success-msg" id="success-msg">&#10003; Product added to your listings above!</div>
-
-    <div style="margin-top:2.5rem; padding:1.4rem; background:rgba(200,134,10,0.08); border:1px solid rgba(200,134,10,0.25); border-radius:6px; color:#b8a070; font-size:0.83rem; line-height:1.7;">
-      <strong style="color:var(--brand-gold-light); display:block; margin-bottom:6px;">&#128161; To save products permanently to GitHub Pages:</strong>
-      Products added here are saved in your browser session. To make them permanent, copy the generated card HTML from the browser console and paste it into the <code style="background:rgba(255,255,255,0.08); padding:2px 6px; border-radius:3px;">#products-grid</code> section of your <code style="background:rgba(255,255,255,0.08); padding:2px 6px; border-radius:3px;">index.html</code> file. For slideshow photos, replace the placeholder <code>.slide-1</code> through <code>.slide-5</code> background gradients with <code>background-image: url('your-photo.jpg')</code> in the CSS.
+      <div class="lock-error" id="login-error"></div>
+      <button class="lock-submit" id="login-submit">Unlock Admin Panel</button>
     </div>
   </div>
-</section>
 
-<!-- CONTACT -->
-<section class="contact-bar" id="contact">
-  <h3>Ready to Order?</h3>
-  <p>Get a custom quote for your herd — any size batch, any style, any color.</p>
-  <a href="mailto:info@customtagsplus.com" class="contact-link">&#9993; Get a Quote</a>
-</section>
+  <!-- Admin panel (after login) -->
+  <div class="admin-panel" id="admin-panel">
+    <div class="admin-inner">
+      <div class="admin-header-row">
+        <div>
+          <div class="admin-title">Add New Item</div>
+          <p class="admin-sub">Fill out the form to add a product to your store listing.</p>
+        </div>
+        <button class="panel-logout-btn" id="panel-logout-btn">✕ Log Out</button>
+      </div>
 
-<!-- FOOTER -->
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="item-name">Product Name</label>
+          <input type="text" id="item-name" placeholder="e.g. Large Cattle Button Tag">
+        </div>
+        <div class="form-group">
+          <label for="item-style">Tag Style</label>
+          <select id="item-style">
+            <option value="">Select style…</option>
+            <option>Button</option><option>Flag</option>
+            <option>Two-Piece</option><option>Visual ID</option>
+            <option>Tamper-Evident</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="item-animal">Animal Type</label>
+          <select id="item-animal">
+            <option value="">Select animal…</option>
+            <option>Cattle</option><option>Sheep</option>
+            <option>Goats</option><option>Swine</option>
+            <option>Horses</option><option>Multi-species</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="item-size">Tag Size</label>
+          <select id="item-size">
+            <option value="">Select size…</option>
+            <option>Small (1–1.5 inch)</option>
+            <option>Medium (2 inch)</option>
+            <option>Large (3–4 inch)</option>
+            <option>Extra Large (4+ inch)</option>
+            <option>Custom</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Tag Color</label>
+          <div class="color-row" id="color-row">
+            <button class="color-swatch" style="background:#f5d07a" title="Yellow" data-color="Yellow"></button>
+            <button class="color-swatch" style="background:#60b860" title="Green"  data-color="Green"></button>
+            <button class="color-swatch" style="background:#d94040" title="Red"    data-color="Red"></button>
+            <button class="color-swatch" style="background:#3a80d2" title="Blue"   data-color="Blue"></button>
+            <button class="color-swatch" style="background:#e07820" title="Orange" data-color="Orange"></button>
+            <button class="color-swatch" style="background:#9b4cc0" title="Purple" data-color="Purple"></button>
+            <button class="color-swatch" style="background:#e070b0" title="Pink"   data-color="Pink"></button>
+            <button class="color-swatch" style="background:#fff;border:1px solid #ccc" title="White" data-color="White"></button>
+            <button class="color-swatch" style="background:#333"    title="Black"  data-color="Black"></button>
+          </div>
+          <input type="hidden" id="item-color" value="">
+        </div>
+        <div class="form-group full">
+          <label for="item-desc">Description</label>
+          <textarea id="item-desc" placeholder="Describe what's engraved, features, use case, durability…"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="item-price">Price / Contact Info</label>
+          <input type="text" id="item-price" placeholder="e.g. $1.25/tag or 'Contact for quote'">
+        </div>
+        <div class="form-group">
+          <label for="item-badge">Badge (optional)</label>
+          <input type="text" id="item-badge" placeholder="e.g. Popular, New, Sale">
+        </div>
+        <div class="form-group full">
+          <label>Product Photo</label>
+          <label class="image-upload-area" for="item-image">
+            <input type="file" id="item-image" accept="image/*">
+            📷 Click to choose a photo — or drag &amp; drop here
+            <div id="img-preview" style="margin-top:10px;"></div>
+          </label>
+        </div>
+      </div>
+
+      <button class="submit-btn" id="add-btn">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor"><path d="M9 2a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H3a1 1 0 110-2h5V3a1 1 0 011-1z"/></svg>
+        Add to Store Listings
+      </button>
+      <div class="success-msg" id="success-msg">✓ Product added! Switching to store view…</div>
+
+      <div class="tip-box">
+        <strong>💡 To save products permanently to GitHub Pages:</strong>
+        Products added here are saved in your browser session. To make them permanent, copy the card HTML and paste it into the <code>#products-grid</code> section of <code>index.html</code>. To add real slideshow photos, replace the gradient CSS on <code>.slide-1</code> through <code>.slide-5</code> with <code>background-image: url('photo.jpg')</code>.
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-admin -->
+
+
 <footer>
-  &copy; <span id="year"></span> <span>Custom Tags Plus</span> &mdash; Laser Engraved Livestock Ear Tags &mdash; Built with pride.
+  &copy; <span id="year"></span> <span>Custom Tags Plus</span> — Laser Engraved Livestock Ear Tags — Built with pride.
 </footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  /* ── ADMIN CONFIG — change these credentials ── */
+  /* ── ADMIN CREDENTIALS — change before uploading ── */
   const ADMIN_USER = 'admin';
-  const ADMIN_PASS = 'tagsplus2024';   /* ← set your own password here */
+  const ADMIN_PASS = 'tagsplus2024';
 
-  /* ── SESSION STATE ── */
+  /* ── TAB SWITCHING ── */
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const pages   = document.querySelectorAll('.page');
+
+  function showTab(id) {
+    tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === id));
+    pages.forEach(p => p.classList.toggle('active', p.id === 'page-' + id));
+    if (id === 'store') initSlideshow();
+  }
+
+  tabBtns.forEach(btn => btn.addEventListener('click', () => showTab(btn.dataset.tab)));
+  document.getElementById('logo-home').addEventListener('click', () => showTab('store'));
+
+  /* ── ADMIN AUTH ── */
   let isAdmin = sessionStorage.getItem('ctp_admin') === '1';
 
   function applyAdminState() {
-    const lock   = document.getElementById('admin-lock');
-    const bar    = document.getElementById('admin-bar');
-    const navBtn = document.getElementById('admin-nav-btn');
+    const lock  = document.getElementById('admin-lock-screen');
+    const panel = document.getElementById('admin-panel');
+    const bar   = document.getElementById('admin-bar');
+    const icon  = document.getElementById('admin-tab-icon');
     if (isAdmin) {
-      lock.style.display   = 'none';
+      lock.style.display = 'none';
+      panel.classList.add('visible');
       bar.classList.add('visible');
-      navBtn.textContent   = '✓ Admin';
-      navBtn.classList.add('logged-in');
+      icon.textContent = '✓';
     } else {
-      lock.style.display   = '';
+      lock.style.display = '';
+      panel.classList.remove('visible');
       bar.classList.remove('visible');
-      navBtn.textContent   = '🔒 Admin';
-      navBtn.classList.remove('logged-in');
+      icon.textContent = '🔒';
     }
   }
   applyAdminState();
 
-  /* ── MODAL OPEN / CLOSE ── */
-  function openModal() {
-    document.getElementById('login-modal').classList.add('open');
-    document.getElementById('admin-user').focus();
-    document.getElementById('modal-error').textContent = '';
-    document.getElementById('admin-user').value = '';
-    document.getElementById('admin-pass').value = '';
-  }
-  function closeModal() {
-    document.getElementById('login-modal').classList.remove('open');
-  }
-
-  document.getElementById('admin-nav-btn').addEventListener('click', () => {
-    if (isAdmin) {
-      if (confirm('Log out of admin panel?')) logout();
-    } else {
-      openModal();
-    }
-  });
-  document.getElementById('lock-login-btn').addEventListener('click', openModal);
-  document.getElementById('modal-close').addEventListener('click', closeModal);
-  document.getElementById('login-modal').addEventListener('click', e => {
-    if (e.target === document.getElementById('login-modal')) closeModal();
-  });
-
-  /* ── LOGIN ── */
   function attemptLogin() {
-    const u = document.getElementById('admin-user').value.trim();
-    const p = document.getElementById('admin-pass').value;
-    const err = document.getElementById('modal-error');
+    const u   = document.getElementById('login-user').value.trim();
+    const p   = document.getElementById('login-pass').value;
+    const err = document.getElementById('login-error');
     if (u === ADMIN_USER && p === ADMIN_PASS) {
       isAdmin = true;
       sessionStorage.setItem('ctp_admin', '1');
-      closeModal();
       applyAdminState();
-      document.getElementById('add-product').scrollIntoView({ behavior:'smooth' });
+      err.textContent = '';
     } else {
       err.textContent = 'Incorrect username or password.';
-      document.getElementById('admin-pass').value = '';
-      document.getElementById('admin-pass').focus();
+      document.getElementById('login-pass').value = '';
+      document.getElementById('login-pass').focus();
     }
   }
 
-  document.getElementById('modal-submit').addEventListener('click', attemptLogin);
-  document.getElementById('admin-pass').addEventListener('keydown', e => {
-    if (e.key === 'Enter') attemptLogin();
-  });
-  document.getElementById('admin-user').addEventListener('keydown', e => {
-    if (e.key === 'Enter') document.getElementById('admin-pass').focus();
-  });
-
-  /* ── LOGOUT ── */
   function logout() {
     isAdmin = false;
     sessionStorage.removeItem('ctp_admin');
     applyAdminState();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('login-user').value = '';
+    document.getElementById('login-pass').value = '';
+    showTab('store');
   }
-  document.getElementById('logout-btn').addEventListener('click', logout);
+
+  document.getElementById('login-submit').addEventListener('click', attemptLogin);
+  document.getElementById('login-pass').addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin(); });
+  document.getElementById('login-user').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('login-pass').focus(); });
+  document.getElementById('admin-bar-logout').addEventListener('click', logout);
+  document.getElementById('panel-logout-btn').addEventListener('click', logout);
 
   /* ── SLIDESHOW ── */
-  const slides = document.querySelectorAll('.slide');
-  const dotsContainer = document.getElementById('slide-dots');
-  let current = 0, timer;
-
-  slides.forEach((_, i) => {
-    const d = document.createElement('button');
-    d.className = 'dot' + (i === 0 ? ' active' : '');
-    d.setAttribute('aria-label', 'Slide ' + (i+1));
-    d.addEventListener('click', () => goTo(i));
-    dotsContainer.appendChild(d);
-  });
-
-  function goTo(n) {
-    slides[current].classList.remove('active');
-    dotsContainer.children[current].classList.remove('active');
-    current = (n + slides.length) % slides.length;
-    slides[current].classList.add('active');
-    dotsContainer.children[current].classList.add('active');
-    resetTimer();
+  let slideshowReady = false;
+  function initSlideshow() {
+    if (slideshowReady) return;
+    slideshowReady = true;
+    const slides = document.querySelectorAll('.slide');
+    const dotsEl = document.getElementById('slide-dots');
+    let cur = 0, timer;
+    slides.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', 'Slide ' + (i+1));
+      d.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(d);
+    });
+    function goTo(n) {
+      slides[cur].classList.remove('active'); dotsEl.children[cur].classList.remove('active');
+      cur = (n + slides.length) % slides.length;
+      slides[cur].classList.add('active'); dotsEl.children[cur].classList.add('active');
+      clearInterval(timer); timer = setInterval(() => goTo(cur + 1), 5000);
+    }
+    document.getElementById('next-slide').addEventListener('click', () => goTo(cur + 1));
+    document.getElementById('prev-slide').addEventListener('click', () => goTo(cur - 1));
+    timer = setInterval(() => goTo(cur + 1), 5000);
   }
-
-  function resetTimer() {
-    clearInterval(timer);
-    timer = setInterval(() => goTo(current + 1), 5000);
-  }
-
-  document.getElementById('next-slide').addEventListener('click', () => goTo(current + 1));
-  document.getElementById('prev-slide').addEventListener('click', () => goTo(current - 1));
-  resetTimer();
+  initSlideshow();
 
   /* ── COLOR SWATCHES ── */
   document.querySelectorAll('.color-swatch').forEach(btn => {
@@ -1290,11 +621,9 @@
   });
 
   /* ── IMAGE PREVIEW ── */
-  const imgInput = document.getElementById('item-image');
   let uploadedImgSrc = null;
-  imgInput.addEventListener('change', e => {
-    const file = e.target.files[0];
-    if (!file) return;
+  document.getElementById('item-image').addEventListener('change', e => {
+    const file = e.target.files[0]; if (!file) return;
     const reader = new FileReader();
     reader.onload = ev => {
       uploadedImgSrc = ev.target.result;
@@ -1306,26 +635,19 @@
 
   /* ── ADD PRODUCT ── */
   document.getElementById('add-btn').addEventListener('click', () => {
-    if (!isAdmin) { openModal(); return; }
+    const name   = document.getElementById('item-name').value.trim();
+    const style  = document.getElementById('item-style').value;
+    const animal = document.getElementById('item-animal').value;
+    const size   = document.getElementById('item-size').value;
+    const color  = document.getElementById('item-color').value;
+    const desc   = document.getElementById('item-desc').value.trim();
+    const price  = document.getElementById('item-price').value.trim();
+    const badge  = document.getElementById('item-badge').value.trim();
 
-    const name  = document.getElementById('item-name').value.trim();
-    const style = document.getElementById('item-style').value;
-    const animal= document.getElementById('item-animal').value;
-    const size  = document.getElementById('item-size').value;
-    const color = document.getElementById('item-color').value;
-    const desc  = document.getElementById('item-desc').value.trim();
-    const price = document.getElementById('item-price').value.trim();
-    const badge = document.getElementById('item-badge').value.trim();
-
-    if (!name || !desc) {
-      alert('Please fill in at least the product name and description.');
-      return;
-    }
+    if (!name || !desc) { alert('Please fill in at least the product name and description.'); return; }
 
     const pills = [animal, style, size ? size.replace(/\(.*\)/,'').trim() : '', color]
-      .filter(Boolean)
-      .map(t => '<span class="meta-pill">' + t + '</span>')
-      .join('');
+      .filter(Boolean).map(t => '<span class="meta-pill">' + t + '</span>').join('');
 
     const imgHtml = uploadedImgSrc
       ? '<img src="' + uploadedImgSrc + '" class="card-img" alt="' + name + '">'
@@ -1334,23 +656,19 @@
         + '<rect x="26" y="10" width="28" height="40" rx="14" fill="none" stroke="#5c3d0e" stroke-width="2"/>'
         + '<circle cx="40" cy="17" r="4" fill="#5c3d0e"/></svg></div>';
 
-    const badgeHtml = badge ? '<span class="card-badge">' + badge + '</span>' : '';
-
     const card = document.createElement('div');
     card.className = 'product-card';
-    card.innerHTML = imgHtml + badgeHtml
-      + '<div class="card-body">'
-      + '<div class="card-title">' + name + '</div>'
+    card.innerHTML = imgHtml
+      + (badge ? '<span class="card-badge">' + badge + '</span>' : '')
+      + '<div class="card-body"><div class="card-title">' + name + '</div>'
       + '<div class="card-desc">' + desc + '</div>'
       + '<div class="card-meta">' + pills + '</div>'
-      + '<div class="card-price">' + (price || 'Contact for pricing') + '</div>'
-      + '</div>';
+      + '<div class="card-price">' + (price || 'Contact for pricing') + '</div></div>';
 
     document.getElementById('products-grid').appendChild(card);
 
-    ['item-name','item-style','item-animal','item-size','item-desc','item-price','item-badge'].forEach(id => {
-      document.getElementById(id).value = '';
-    });
+    ['item-name','item-style','item-animal','item-size','item-desc','item-price','item-badge']
+      .forEach(id => { document.getElementById(id).value = ''; });
     document.getElementById('item-color').value = '';
     document.querySelectorAll('.color-swatch').forEach(b => b.classList.remove('selected'));
     document.getElementById('img-preview').innerHTML = '';
@@ -1358,9 +676,7 @@
 
     const msg = document.getElementById('success-msg');
     msg.style.display = 'block';
-    setTimeout(() => { msg.style.display = 'none'; }, 4000);
-
-    document.getElementById('products').scrollIntoView({ behavior:'smooth' });
+    setTimeout(() => { msg.style.display = 'none'; showTab('store'); }, 1800);
   });
 </script>
 </body>
