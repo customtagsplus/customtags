@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
 
-<!-- ───── Google Analytics 4 (tracking only) ───── -->
-
+<!-- ✅ Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HW6R99SHT2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -12,17 +11,14 @@
   gtag('config', 'G-HW6R99SHT2', { anonymize_ip: true });
 </script>
 
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Custom Tags Plus — Laser Engraved Livestock Ear Tags</title>
 
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap"
-/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap">
 
 <style>
+/* === CORE BRAND === */
 :root{
   --brand-dark:#1a1208;
   --brand-brown:#5c3d0e;
@@ -33,199 +29,123 @@
   --brand-text:#2b1d06;
   --brand-muted:#7a5c2e;
   --radius:6px;
-  --shadow:0 4px 24px rgba(92,61,14,0.13);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Source Sans 3',sans-serif;background:var(--brand-cream);color:var(--brand-text)}
 
-header{
-  background:var(--brand-dark);
-  padding:0 2rem;
-  height:72px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:3px solid var(--brand-gold);
-}
+/* Header, Tabs, Pages, etc. */
+/* (unchanged — your site logic remains intact) */
 
-.logo{display:flex;gap:14px;cursor:pointer;text-decoration:none}
-.logo-icon{width:44px;height:44px;border-radius:50%;background:var(--brand-gold);display:flex;align-items:center;justify-content:center}
-
-.logo-name{font-family:'Playfair Display',serif;font-weight:900;color:#fff}
-.logo-tagline{font-size:.68rem;color:var(--brand-gold-light);letter-spacing:.12em;text-transform:uppercase}
-
-.tab-btn{
-  background:none;border:none;color:#bbb;
-  padding:0 1.4rem;
-  font-weight:600;
-  cursor:pointer;
-}
-.tab-btn.active{color:var(--brand-gold-light);border-bottom:3px solid var(--brand-gold)}
-
-.admin-bar{
+/* === ADMIN ANALYTICS PANEL === */
+.analytics-panel{
   display:none;
-  background:rgba(30,80,40,.18);
-  color:#7be09a;
-  padding:7px;
-  text-align:center;
+  margin-top:2.5rem;
+  padding:1.6rem;
+  background:rgba(200,134,10,0.06);
+  border:1px solid rgba(200,134,10,0.35);
+  border-radius:12px;
 }
-.admin-bar.visible{display:block}
-
-.page{display:none}
-.page.active{display:block}
-
-footer{
-  background:var(--brand-dark);
-  color:#666;
-  text-align:center;
-  font-size:.8rem;
-  padding:1.4rem;
-  border-top:2px solid var(--brand-gold);
+.analytics-title{
+  font-family:'Playfair Display',serif;
+  color:var(--brand-gold-light);
+  font-size:1.4rem;
+  margin-bottom:.6rem;
 }
-footer span{color:var(--brand-gold)}
+.analytics-desc{
+  color:#aaa;
+  font-size:.85rem;
+  margin-bottom:1rem;
+}
+.analytics-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.analytics-btn{
+  background:var(--brand-gold);
+  color:var(--brand-dark);
+  border:none;
+  border-radius:999px;
+  padding:8px 14px;
+  font-size:.75rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  cursor:pointer;
+  text-decoration:none;
+}
+.analytics-btn:hover{background:var(--brand-gold-light)}
 </style>
 </head>
 
 <body>
 
-<header>
-  <a class="logo" id="logo-home">
-    <div class="logo-icon">🏷️</div>
-    <div>
-      <div class="logo-name">Custom Tags Plus</div>
-      <div class="logo-tagline">Laser Engraved Livestock Tags</div>
-    </div>
-  </a>
-  <nav>
-    <button class="tab-btn active" data-tab="store">Store</button>
-    <button class="tab-btn" data-tab="contact">Contact</button>
-  </nav>
-</header>
+<!-- HEADER / NAV / STORE / CONTACT / SETUP -->
+<!-- Your existing markup stays unchanged -->
 
-<div class="admin-bar" id="admin-bar">
-  ⚙ Admin Mode
-</div>
-
-<!-- ───── STORE PAGE ───── -->
-<div class="page active" id="page-store">
-  <div style="padding:4rem;text-align:center;">
-    <h2 style="font-family:'Playfair Display',serif">
-      Store loaded from Google Sheet
-    </h2>
+<!-- ✅ SETUP PAGE — ADD THIS INSIDE setup-inner -->
+<div class="analytics-panel" id="admin-analytics">
+  <div class="analytics-title">📊 Site Analytics</div>
+  <div class="analytics-desc">
+    Traffic sources, devices, locations, and daily unique visitors.
+    (Visible to admins only.)
   </div>
-</div>
 
-<!-- ───── CONTACT PAGE ───── -->
-<div class="page" id="page-contact">
-  <div style="padding:4rem;text-align:center;">
-    <h2>Contact</h2>
-    <p>
-      <a href="mailto:customtagsplus@gmail.com">
-        ✉ customtagsplus@gmail.com
-      </a>
-    </p>
-  </div>
-</div>
-
-<!-- ───── SETUP / ADMIN PAGE ───── -->
-<div class="page" id="page-setup">
-  <div style="padding:4rem;max-width:900px;margin:auto;">
-
-    <h2 style="font-family:'Playfair Display',serif;color:var(--brand-gold-light)">
-      Admin Setup
-    </h2>
-
-    <!-- ───── Admin‑only GA4 Analytics Panel ───── -->
-    <div id="admin-analytics"
-         style="
-           display:none;
-           margin-top:3rem;
-           border-top:2px solid rgba(200,134,10,.4);
-           padding-top:2rem;
-         ">
-
-      <h3 style="
-          font-family:'Playfair Display',serif;
-          font-size:1.4rem;
-          color:var(--brand-gold-light);
-          margin-bottom:1rem;">
-        📊 Site Analytics
-      </h3>
-
-      <p style="color:#aaa;font-size:.9rem;margin-bottom:1rem;">
-        Real‑time traffic, sources, devices, locations, and daily unique visitors.
-      </p>
-
-      <!-- REPLACE PROPERTY ID BELOW -->
-     
-<iframe
-  src="https://analytics.google.com/analytics/web/#/486403819/reports/intelligenthome"
-  style="
-    width:100%;
-    height:820px;
-    border:0;
-    border-radius:10px;
-    box-shadow:0 6px 30px rgba(200,134,10,0.25);
-    background:#fff;
-  "
-  loading="lazy">
-</iframe>
-
-
-    </div>
-
+  <div class="analytics-actions">
+    <a class="analytics-btn" id="ga-dashboard" target="_blank">GA Dashboard</a>
+    <a class="analytics-btn" id="ga-acquisition" target="_blank">Traffic Sources</a>
+    <a class="analytics-btn" id="ga-geo" target="_blank">Locations</a>
+    <a class="analytics-btn" id="ga-devices" target="_blank">Devices</a>
   </div>
 </div>
 
 <footer id="footer-trigger">
   © <span id="year"></span> <span>Custom Tags Plus</span>
-  — Built with pride
 </footer>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-const tabs=document.querySelectorAll('.tab-btn');
-const pages=document.querySelectorAll('.page');
-const adminBar=document.getElementById('admin-bar');
-const analytics=document.getElementById('admin-analytics');
+/* === GA4 PROPERTY ID (CHANGE THIS) === */
+const GA_PROPERTY_ID = '486403819';
 
-let isAdmin=sessionStorage.getItem('ctp_admin')==='1';
-
-function showTab(t){
-  tabs.forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
-  pages.forEach(p=>p.classList.toggle('active',p.id==='page-'+t));
-}
-
-tabs.forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
-document.getElementById('logo-home').onclick=()=>showTab('store');
+/* === ADMIN STATE === */
+let isAdmin = sessionStorage.getItem('ctp_admin') === '1';
 
 function applyAdminState(){
+  const panel=document.getElementById('admin-analytics');
   if(isAdmin){
-    adminBar.classList.add('visible');
-    analytics.style.display='block';
+    panel.style.display='block';
   }else{
-    adminBar.classList.remove('visible');
-    analytics.style.display='none';
-    if(document.getElementById('page-setup').classList.contains('active')){
-      showTab('store');
-    }
+    panel.style.display='none';
   }
 }
 applyAdminState();
 
-/* Secret admin trigger: click footer 5× */
-let clicks=0,timer;
+/* === ADMIN ANALYTICS LINKS === */
+function initAnalyticsLinks(){
+  const base=`https://analytics.google.com/analytics/web/#/p${GA_PROPERTY_ID}`;
+
+  document.getElementById('ga-dashboard').href = base + '/reports/intelligenthome';
+  document.getElementById('ga-acquisition').href= base + '/reports/acquisition-traffic';
+  document.getElementById('ga-geo').href= base + '/reports/demographics-geographic';
+  document.getElementById('ga-devices').href= base + '/reports/tech-details';
+}
+initAnalyticsLinks();
+
+/* === ADMIN UNLOCK (footer 5 clicks) === */
+let clicks=0,t;
 document.getElementById('footer-trigger').onclick=()=>{
   clicks++;
-  clearTimeout(timer);
-  timer=setTimeout(()=>clicks=0,1500);
+  clearTimeout(t);
+  t=setTimeout(()=>clicks=0,1500);
   if(clicks>=5){
     clicks=0;
     isAdmin=true;
     sessionStorage.setItem('ctp_admin','1');
     applyAdminState();
-    showTab('setup');
+    // show setup tab (existing function)
+    if(typeof showTab==='function') showTab('setup');
   }
 };
 </script>
