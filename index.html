@@ -630,31 +630,66 @@
   }
 
   /* ─── LOAD PRODUCTS ─── */
-  async function loadProducts(csvUrl) {
-    const grid  = document.getElementById('products-grid');
-    const label = document.getElementById('product-count-label');
-    grid.innerHTML = `<div class="products-state"><div class="spinner"></div><div>Loading products…</div></div>`;
-    label.textContent = 'Loading…';
+async function loadProducts(csvUrl) {
+  const grid  = document.getElementById('products-grid');
+  const label = document.getElementById('product-count-label');
 
-   const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(csvUrl);
-    
-    try {
-      const controller = new AbortController();
-const timeout = setTimeout(() => controller.abort(), 12000);
+  grid.innerHTML = '<div class="products-state"><div class="spinner"></div><div>Loading products…</div></div>';
+  label.textContent = 'Loading…';
 
-const res = await fetch(proxyUrl, { signal: controller.signal });
-clearTimeout(timeout);
+  // ✅ More reliable CORS proxy for Google Sheets CSV
+  const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(csvUrl); // [4](https://www.exactmetrics.com/how-to-see-traffic-sources-in-google-analytics/)[5](https://www.linkedin.com/pulse/how-track-iframe-content-gtm-ga4-using-postmessage-napkyn-inc--qsxxc)
 
-if (!res.ok) throw new Error('Fetch failed: HTTP ' + res.status);
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const text = await res.text();
-      const items = parseCSV(text);
+  // ✅ Timeout so it never hangs forever
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12000);
 
-      if (!items.length) {
-        grid.innerHTML = `<div class="products-state">No products found in your sheet yet.<br><small style="color:#aaa;">Make sure your sheet has a header row and at least one data row.</small></div>`;
-        label.textContent = '';
-        return;
-      }
+  try {
+    const res = await fetch(proxyUrl, { signal: controller.signal });
+    clearTimeout(timeout);
+
+    if (!res.ok) throw new Error('Fetch failed: HTTP ' + res.status);
+
+    const text = await res.text();
+
+    // ✅ Basic sanity check: if proxy returns HTML instead of CSV, show a useful error
+    if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
+      throw new Error('Proxy returned HTML instead of CSV (sheet not published or proxy blocked).');
+    }
+
+    const items = parseCSV(text);
+
+    if (!items.length) {
+      grid.innerHTML =
+        '<div class="products-state">No products found in your sheet yet.<br>' +
+        '<small style="color:#aaa;">Make sure your sheet has a header row and at least one data row.</small></div>';
+      label.textContent = '';
+      return;
+    }
+
+    grid.innerHTML = '';
+    allCards = [];
+
+    items.forEach(item => {
+      const card = buildCard(item);
+      grid.appendChild(card);
+      allCards.push(card);
+    });
+
+    buildFilters(items);
+    label.textContent = items.length + ' product' + (items.length !== 1 ? 's' : '') + ' — updated live from your Google Sheet';
+
+  } catch (err) {
+    clearTimeout(timeout);
+    grid.innerHTML =
+      '<div class="products-state" style="color:#f07070;">Could not load products.<br>' +
+      '<small style="color:#aaa;">' +
+      'Error: ' + (err.name === 'AbortError' ? 'Request timed out (12s).' : err.message) + '<br>' +
+      'Tip: Confirm your sheet is “Publish to web” as CSV and link is correct.' +
+      '</small></div>';
+    label.textContent = '';
+  }
+}
 
       grid.innerHTML = '';
       allCards = [];
