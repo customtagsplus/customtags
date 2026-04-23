@@ -548,8 +548,16 @@
     const GA_PROPERTY_ID = 'G-HW6R99SHT2';
 
     /* ─── TAB SWITCHING ─── */
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const pages   = document.querySelectorAll('.page');
+tabBtns.forEach(btn =>
+  btn.addEventListener('click', () => {
+    if (btn.dataset.tab === 'setup' && !isAdmin) {
+      openModal();           // force login
+      return;
+    }
+    showTab(btn.dataset.tab);
+  })
+);
+
 
     function showTab(id) {
       tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === id));
@@ -627,17 +635,22 @@
     });
 
     /* Footer secret trigger: click 5 times quickly to open login */
-    let footerClicks = 0, footerTimer;
-    document.getElementById('footer-trigger').addEventListener('click', () => {
-      footerClicks++;
-      clearTimeout(footerTimer);
-      footerTimer = setTimeout(() => { footerClicks = 0; }, 1500);
-      if (footerClicks >= 5) {
-        footerClicks = 0;
-        if (isAdmin) showTab('setup');
-        else openModal();
-      }
-    });
+ let footerClicks = 0, footerTimer;
+
+document.getElementById('footer-trigger').addEventListener('click', () => {
+  footerClicks++;
+  clearTimeout(footerTimer);
+  footerTimer = setTimeout(() => footerClicks = 0, 1500);
+
+  if (footerClicks >= 5) {
+    footerClicks = 0;
+    if (isAdmin) {
+      showTab('setup');      // admin only
+    } else {
+      openModal();           // force login
+    }
+  }
+});
 
     /* ─── GA4 Admin Links (open in new tab) ─── */
     function initAnalyticsLinks(){
