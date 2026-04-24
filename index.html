@@ -651,6 +651,7 @@ async function loadProducts(csvUrl) {
     if (!res.ok) throw new Error('Fetch failed: HTTP ' + res.status);
 
     const text = await res.text();
+    console.log("CSV preview:", text.slice(0, 200));
 
     // ✅ Basic sanity check: if proxy returns HTML instead of CSV, show a useful error
     if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
