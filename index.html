@@ -90,12 +90,12 @@
   .slide-fallback-5 { background: linear-gradient(135deg, #07121e 0%, #0f3060 50%, #1a5aa0 100%); }
   /* Real photo slides — image shows full size, no crop */
   .slide-photo img { width: 100%; height: auto; display: block; max-height: 700px; object-fit: contain; background: #0a0704; }
-  .slide-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.0) 50%, rgba(0,0,0,0.65) 100%); pointer-events: none; }
-  .slide-label { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); text-align: center; color: #fff; z-index: 2; white-space: nowrap; }
-  .slide-label h2 { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; text-shadow: 0 2px 16px rgba(0,0,0,0.7); }
-  .slide-label p { font-size: 1rem; color: var(--brand-gold-light); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; }
+  .slide-overlay { display: none; }
+  .slide-label { position: absolute; bottom: 0; left: 0; right: 0; text-align: center; color: #fff; z-index: 2; padding: 1.5rem 1rem 2.5rem; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.75) 100%); }
+  .slide-label h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+  .slide-label p { font-size: 0.9rem; color: var(--brand-gold-light); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 5px; }
   .tag-deco { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%); opacity: 0.22; }
-  .slide-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+  .slide-dots { position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
   .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; border: none; transition: background 0.3s, transform 0.3s; }
   .dot.active { background: var(--brand-gold-light); transform: scale(1.3); }
   .slide-arrows { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 1.5rem; z-index: 10; pointer-events: none; }
@@ -308,7 +308,7 @@
           <rect x="140" y="40" width="80" height="130" rx="8" stroke="white" stroke-width="2"/>
           <rect x="30" y="25" width="100" height="60" rx="30" stroke="white" stroke-width="2"/>
         </svg>
-        <div class="slide-label"><h2>All Sizes &amp; Styles</h2><p>Button, flag, two-piece, visual ID tags</p></div>
+        <div class="slide-label"><h2>All Sizes &amp; Styles</h2><p>Button, zTags, two-piece, visual ID tags</p></div>
       </div>
       <div class="slide slide-fallback slide-fallback-3">
         <div class="slide-overlay"></div>
@@ -349,12 +349,12 @@
       <div class="why-item">
         <div class="why-icon"><svg viewBox="0 0 26 26"><rect x="4" y="6" width="18" height="14" rx="2"/><path d="M9 6V5a4 4 0 018 0v1"/><circle cx="13" cy="13" r="2"/></svg></div>
         <div class="why-title">Multiple Styles</div>
-        <div class="why-desc">Button, flag, two-piece, and visual ID styles for cattle, sheep, goats &amp; swine.</div>
+        <div class="why-desc">Button, zTags, two-piece, and visual ID styles for cattle, sheep, goats &amp; swine.</div>
       </div>
       <div class="why-item">
         <div class="why-icon"><svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="9"/><circle cx="13" cy="9" r="2" fill="#c8860a"/><circle cx="9" cy="16" r="2" fill="#1a1208"/><circle cx="17" cy="16" r="2" fill="#1a1208"/></svg></div>
-        <div class="why-title">10+ Colors</div>
-        <div class="why-desc">White, yellow, orange, green, red, blue, purple, pink, and more in stock.</div>
+        <div class="why-title">7 Colors</div>
+        <div class="why-desc">White, yellow, orange, green, red, blue, pink.</div>
       </div>
       <div class="why-item">
         <div class="why-icon"><svg viewBox="0 0 26 26"><path d="M4 20L13 5l9 15H4z"/><line x1="13" y1="11" x2="13" y2="15"/><circle cx="13" cy="17" r="1"/></svg></div>
@@ -391,9 +391,9 @@
   <div class="contact-page">
     <div class="contact-inner">
       <h2>Get in Touch</h2>
-      <p>Ready to order custom laser-engraved ear tags for your herd? We handle any size batch — from a handful of custom tags to large ranch orders. Ask about styles, colors, and bulk pricing.</p>
-      <a href="mailto:info@customtagsplus.com" class="contact-link">✉ Send Us an Email</a>
-      <p class="contact-note">Or reach us by phone — ask about bulk pricing!</p>
+      <p>Ready to order custom laser-engraved ear tags for your herd? We handle any size batch — from a handful of custom tags to large ranch orders. Ask about styles, colors.</p>
+      <a href="mailto:customtagsplus@gmail.com" class="contact-link">✉ Send Us an Email</a>
+      <p class="contact-note">Or reach us by phone — 1-605-682-9620!</p>
     </div>
   </div>
 </div>
@@ -500,7 +500,7 @@
           <div class="step-num">6</div>
           <div class="step-body">
             <strong>Inventory</strong>
-            <p>Put a number like <code>42</code> in the <code>inventory</code> column and the card shows a green "42 in stock" badge. Values ≤1000 show yellow "Low stock". <code>0</code> or the text <code>Out of Stock</code> shows red. Leave blank to hide the inventory display entirely.</p>
+            <p>Put a number like <code>42</code> in the <code>inventory</code> column and the card shows a green "42 in stock" badge. Values ≤5 show yellow "Low stock". <code>0</code> or the text <code>Out of Stock</code> shows red. Leave blank to hide the inventory display entirely.</p>
           </div>
         </li>
 
@@ -848,7 +848,7 @@
       + hex + ';border:1px solid rgba(0,0,0,0.2);margin-right:4px;vertical-align:middle;"></span>';
   }
 
-  function buildCard(item) {
+  function buildCard(item, rowIdx) {
     const pills = ['animal', 'style', 'size']
       .map(k => item[k] ? '<span class="meta-pill">' + item[k] + '</span>' : '').join('');
     const colorPill = item.color
@@ -860,18 +860,18 @@
       : '<div class="card-img-placeholder" style="background:linear-gradient(135deg,var(--brand-tan),var(--brand-gold));">' + tagSVG() + '</div>';
 
     const badgeHtml = item.badge ? '<span class="card-badge">' + item.badge + '</span>' : '';
+    const rawInv    = (item.inventory || '').trim();
 
     const card = document.createElement('div');
     card.className = 'product-card';
     card.dataset.animal = (item.animal || '').toLowerCase();
-    /* Store key to match on refresh */
-    card.dataset.key = (item.name || '').toLowerCase().replace(/\s+/g,'-');
+    card.dataset.row    = rowIdx;   // ← stable index used by live refresh
     card.innerHTML = imgHtml + badgeHtml
       + '<div class="card-body">'
       + '<div class="card-title">'  + (item.name || 'Unnamed Product') + '</div>'
       + '<div class="card-desc">'   + (item.description || '') + '</div>'
       + '<div class="card-meta">'   + pills + colorPill + '</div>'
-      + '<div class="card-inv-wrap">' + buildInventoryBadge(item.inventory || '') + '</div>'
+      + '<div class="card-inv-wrap">' + buildInventoryBadge(rawInv) + '</div>'
       + '<div class="card-price">'  + (item.price || 'Contact for pricing') + '</div>'
       + '</div>';
     return card;
@@ -916,33 +916,38 @@
   /* ─── LIVE INVENTORY REFRESH ─── */
   /* Polls the sheet every 60 s and updates only the inventory badge on each card */
   let liveRefreshTimer = null;
+  let lastInventoryValues = {}; // rowIndex -> raw inventory string
 
   function startLiveInventory(csvUrl) {
     clearInterval(liveRefreshTimer);
-    liveRefreshTimer = setInterval(() => refreshInventory(csvUrl), 60000);
+    liveRefreshTimer = setInterval(() => refreshInventory(csvUrl), 30000);
   }
 
   async function refreshInventory(csvUrl) {
     try {
-      const r = await fetch('https://corsproxy.io/?' + encodeURIComponent(csvUrl));
+      const r = await fetch('https://corsproxy.io/?' + encodeURIComponent(csvUrl) + '&nocache=' + Date.now());
       if (!r.ok) return;
       const items = parseCSV(await r.text());
-      items.forEach(item => {
-        const key = (item.name || '').toLowerCase().replace(/\s+/g,'-');
-        const card = document.querySelector('.product-card[data-key="' + key + '"]');
+
+      items.forEach((item, idx) => {
+        const rawInv = (item.inventory || '').trim();
+        const card   = document.querySelector('.product-card[data-row="' + idx + '"]');
         if (!card) return;
+
+        /* Only update if value actually changed */
+        if (lastInventoryValues[idx] === rawInv) return;
+        lastInventoryValues[idx] = rawInv;
+
         const wrap = card.querySelector('.card-inv-wrap');
         if (!wrap) return;
-        const newHtml = buildInventoryBadge(item.inventory || '');
-        if (wrap.innerHTML !== newHtml) {
-          wrap.innerHTML = newHtml;
-          /* Flash the card border briefly to signal update */
-          card.style.transition = 'box-shadow 0.3s';
-          card.style.boxShadow  = '0 0 0 2px var(--brand-gold)';
-          setTimeout(() => { card.style.boxShadow = ''; }, 1200);
-        }
+        wrap.innerHTML = buildInventoryBadge(rawInv);
+
+        /* Flash gold border to signal the update */
+        card.style.transition = 'box-shadow 0.4s';
+        card.style.boxShadow  = '0 0 0 3px var(--brand-gold)';
+        setTimeout(() => { card.style.boxShadow = ''; }, 1500);
       });
-    } catch(e) {}
+    } catch(e) { /* silent fail — try again next interval */ }
   }
 
   /* ─── LOAD PRODUCTS (initial full load) ─── */
@@ -970,10 +975,12 @@
 
       grid.innerHTML = '';
       allCards = [];
-      items.forEach(item => {
-        const card = buildCard(item);
+      lastInventoryValues = {};
+      items.forEach((item, idx) => {
+        const card = buildCard(item, idx);
         grid.appendChild(card);
         allCards.push(card);
+        lastInventoryValues[idx] = (item.inventory || '').trim();
       });
 
       buildFilters(items);
