@@ -75,19 +75,24 @@
   .page.active { display: block; }
 
   /* ── HERO SLIDESHOW ── */
-  .hero { position: relative; height: 520px; overflow: hidden; background: var(--brand-dark); }
-  .slides { position: relative; width: 100%; height: 100%; }
-  .slide { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.9s ease; background-size: cover; background-position: center; }
-  .slide.active { opacity: 1; }
-  /* Fallback gradients used when no sheet images are loaded yet */
+  .hero { position: relative; overflow: hidden; background: var(--brand-dark); }
+  .slides { position: relative; width: 100%; }
+  /* ALL slides hidden by default */
+  .slide { display: none; position: relative; width: 100%; }
+  .slide.active { display: block; }
+  /* Fallback gradient slides */
+  .slide-fallback { height: 520px; align-items: center; justify-content: center; }
+  .slide-fallback.active { display: flex; }
   .slide-fallback-1 { background: linear-gradient(135deg, #3b2000 0%, #7a4a00 50%, #c8860a 100%); }
   .slide-fallback-2 { background: linear-gradient(135deg, #0d1f0d 0%, #1a4020 50%, #2d7a40 100%); }
   .slide-fallback-3 { background: linear-gradient(135deg, #1a0a1a 0%, #4a1560 50%, #8b30a8 100%); }
   .slide-fallback-4 { background: linear-gradient(135deg, #1a0808 0%, #5c1010 50%, #c43030 100%); }
   .slide-fallback-5 { background: linear-gradient(135deg, #07121e 0%, #0f3060 50%, #1a5aa0 100%); }
-  .slide-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.6) 100%); }
+  /* Real photo slides — image shows full size, no crop */
+  .slide-photo img { width: 100%; height: auto; display: block; max-height: 700px; object-fit: contain; background: #0a0704; }
+  .slide-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.0) 50%, rgba(0,0,0,0.65) 100%); pointer-events: none; }
   .slide-label { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); text-align: center; color: #fff; z-index: 2; white-space: nowrap; }
-  .slide-label h2 { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; text-shadow: 0 2px 16px rgba(0,0,0,0.6); }
+  .slide-label h2 { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; text-shadow: 0 2px 16px rgba(0,0,0,0.7); }
   .slide-label p { font-size: 1rem; color: var(--brand-gold-light); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; }
   .tag-deco { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%); opacity: 0.22; }
   .slide-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
@@ -186,6 +191,20 @@
   .current-url-display { margin-top: 1rem; padding: 10px 14px; background: rgba(45,120,60,0.12); border: 1px solid rgba(60,180,90,0.25); border-radius: var(--radius); font-size: 0.8rem; color: #7be09a; word-break: break-all; display: none; }
   .current-url-display.show { display: block; }
 
+  /* ── ADMIN DASHBOARD CARDS ── */
+  .admin-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.4rem; margin-bottom: 2.5rem; }
+  .dash-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(200,134,10,0.25); border-radius: 10px; padding: 1.4rem 1.6rem; }
+  .dash-card-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-gold); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px; }
+  .dash-big-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--brand-gold-light); line-height: 1; }
+  .dash-sub { font-size: 0.78rem; color: #777; margin-top: 6px; }
+  .log-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  .log-table th { text-align: left; color: var(--brand-gold); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 8px 8px 0; border-bottom: 1px solid rgba(200,134,10,0.2); }
+  .log-table td { padding: 6px 8px 6px 0; color: #ccc; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: top; }
+  .log-table tr:last-child td { border-bottom: none; }
+  .log-empty { color: #555; font-size: 0.82rem; font-style: italic; padding: 8px 0; }
+  .dash-refresh { background: none; border: 1px solid rgba(200,134,10,0.3); color: var(--brand-gold); border-radius: 20px; font-size: 0.7rem; padding: 2px 10px; cursor: pointer; margin-left: auto; font-family: 'Source Sans 3', sans-serif; }
+  .dash-refresh:hover { background: rgba(200,134,10,0.1); }
+
   /* ── FOOTER ── */
   footer { background: var(--brand-dark); color: #666; text-align: center; font-size: 0.8rem; padding: 1.4rem 2rem; border-top: 2px solid var(--brand-gold); user-select: none; cursor: default; }
   footer span { color: var(--brand-gold); }
@@ -271,8 +290,8 @@
   <!-- Hero Slideshow — populated from Google Sheet -->
   <section class="hero" aria-label="Product slideshow">
     <div class="slides" id="slides-container">
-      <!-- Fallback slides shown until sheet data loads -->
-      <div class="slide slide-fallback-1 active">
+      <!-- Fallback gradient slides shown until sheet data loads -->
+      <div class="slide slide-fallback slide-fallback-1 active">
         <div class="slide-overlay"></div>
         <svg class="tag-deco" width="260" height="200" viewBox="0 0 260 200" fill="none">
           <ellipse cx="130" cy="130" rx="110" ry="60" stroke="white" stroke-width="2"/>
@@ -282,7 +301,7 @@
         </svg>
         <div class="slide-label"><h2>Premium Ear Tags</h2><p>Laser precision — every character, every time</p></div>
       </div>
-      <div class="slide slide-fallback-2">
+      <div class="slide slide-fallback slide-fallback-2">
         <div class="slide-overlay"></div>
         <svg class="tag-deco" width="260" height="200" viewBox="0 0 260 200" fill="none">
           <rect x="40" y="60" width="80" height="110" rx="40" stroke="white" stroke-width="2"/>
@@ -291,7 +310,7 @@
         </svg>
         <div class="slide-label"><h2>All Sizes &amp; Styles</h2><p>Button, flag, two-piece, visual ID tags</p></div>
       </div>
-      <div class="slide slide-fallback-3">
+      <div class="slide slide-fallback slide-fallback-3">
         <div class="slide-overlay"></div>
         <svg class="tag-deco" width="300" height="180" viewBox="0 0 300 180" fill="none">
           <ellipse cx="60" cy="100" rx="45" ry="55" stroke="white" stroke-width="2"/>
@@ -303,11 +322,11 @@
         </svg>
         <div class="slide-label"><h2>Vibrant Color Options</h2><p>Match your herd management system</p></div>
       </div>
-      <div class="slide slide-fallback-4">
+      <div class="slide slide-fallback slide-fallback-4">
         <div class="slide-overlay"></div>
         <div class="slide-label"><h2>Custom Numbering</h2><p>Ranch name, animal ID, breed info &amp; more</p></div>
       </div>
-      <div class="slide slide-fallback-5">
+      <div class="slide slide-fallback slide-fallback-5">
         <div class="slide-overlay"></div>
         <div class="slide-label"><h2>Built for the Ranch</h2><p>Durable, readable, built to last in the field</p></div>
       </div>
@@ -386,7 +405,28 @@
 <div class="page" id="page-setup">
   <div class="setup-page">
     <div class="setup-inner">
-      <div class="setup-title">Google Sheets Setup</div>
+      <div class="setup-title">Admin Dashboard</div>
+      <p class="setup-sub">Monitor your site traffic, recent logins, and manage your Google Sheet connection below.</p>
+
+      <!-- DASHBOARD CARDS -->
+      <div class="admin-dashboard">
+        <div class="dash-card">
+          <div class="dash-card-title">
+            📊 Website Hits
+            <button class="dash-refresh" id="refresh-hits">↻ Refresh</button>
+          </div>
+          <div class="dash-big-num" id="hit-count">—</div>
+          <div class="dash-sub" id="hit-sub">Total page visits since launch</div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-title">🕐 Recent Logins</div>
+          <div id="login-log-display">
+            <div class="log-empty">No logins recorded yet.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="setup-title" style="font-size:1.4rem; margin-top:1rem;">Google Sheets Setup</div>
       <p class="setup-sub">Follow these steps once and your product catalog and slideshow will automatically pull from your Google Sheet every time someone visits the site. Just edit the sheet — the website updates itself.</p>
 
       <ol class="step-list">
@@ -460,7 +500,7 @@
           <div class="step-num">6</div>
           <div class="step-body">
             <strong>Inventory</strong>
-            <p>Put a number like <code>42</code> in the <code>inventory</code> column and the card shows a green "42 in stock" badge. Values ≤5 show yellow "Low stock". <code>0</code> or the text <code>Out of Stock</code> shows red. Leave blank to hide the inventory display entirely.</p>
+            <p>Put a number like <code>42</code> in the <code>inventory</code> column and the card shows a green "42 in stock" badge. Values ≤1000 show yellow "Low stock". <code>0</code> or the text <code>Out of Stock</code> shows red. Leave blank to hide the inventory display entirely.</p>
           </div>
         </li>
 
@@ -502,6 +542,10 @@
   const ADMIN_USER = 'admin';
   const ADMIN_PASS = 'tagsplus2024';   // ← change this password!
 
+  /* ─── HIT COUNTER namespace (change to something unique e.g. your-name-ctp) ─── */
+  const HIT_NAMESPACE = 'customtagsplus';
+  const HIT_KEY       = 'pageviews';
+
   /* ─── TAB SWITCHING ─── */
   const tabBtns = document.querySelectorAll('.tab-btn');
   const pages   = document.querySelectorAll('.page');
@@ -510,6 +554,7 @@
     tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === id));
     pages.forEach(p => p.classList.toggle('active', p.id === 'page-' + id));
     if (id === 'store') initSlideshow();
+    if (id === 'setup') { loadHitCount(); renderLoginLog(); }
   }
   tabBtns.forEach(btn => btn.addEventListener('click', () => showTab(btn.dataset.tab)));
   document.getElementById('logo-home').addEventListener('click', () => showTab('store'));
@@ -554,7 +599,7 @@
     if (e.target === document.getElementById('login-modal')) closeModal();
   });
 
-  function attemptLogin() {
+  async function attemptLogin() {
     const u   = document.getElementById('modal-user').value.trim();
     const p   = document.getElementById('modal-pass').value;
     const err = document.getElementById('modal-error');
@@ -563,6 +608,8 @@
       sessionStorage.setItem('ctp_admin', '1');
       closeModal();
       applyAdminState();
+      /* Fetch location and log the login */
+      await logLogin();
       showTab('setup');
       showCurrentUrl();
     } else {
@@ -581,15 +628,98 @@
     showTab('store');
   });
 
+  /* ─── LOGIN LOG ─── */
+  const LOGIN_LOG_KEY = 'ctp_login_log';
+
+  async function logLogin() {
+    let city = 'Unknown', country = '', ip = '';
+    try {
+      const r = await fetch('https://ipapi.co/json/');
+      if (r.ok) {
+        const d = await r.json();
+        city    = d.city    || 'Unknown';
+        country = d.country_name || '';
+        ip      = d.ip      || '';
+      }
+    } catch(e) {}
+
+    const entry = {
+      time:    new Date().toLocaleString(),
+      city,
+      country,
+      ip
+    };
+
+    let log = [];
+    try { log = JSON.parse(localStorage.getItem(LOGIN_LOG_KEY) || '[]'); } catch(e) {}
+    log.unshift(entry);
+    if (log.length > 20) log = log.slice(0, 20); // keep last 20
+    localStorage.setItem(LOGIN_LOG_KEY, JSON.stringify(log));
+  }
+
+  function renderLoginLog() {
+    const wrap = document.getElementById('login-log-display');
+    if (!wrap) return;
+    let log = [];
+    try { log = JSON.parse(localStorage.getItem(LOGIN_LOG_KEY) || '[]'); } catch(e) {}
+
+    if (!log.length) {
+      wrap.innerHTML = '<div class="log-empty">No logins recorded yet.</div>';
+      return;
+    }
+
+    let html = '<table class="log-table"><thead><tr>'
+      + '<th>Date / Time</th><th>Location</th><th>IP</th>'
+      + '</tr></thead><tbody>';
+    log.forEach(e => {
+      html += '<tr>'
+        + '<td>' + e.time + '</td>'
+        + '<td>' + (e.city || '—') + (e.country ? ', ' + e.country : '') + '</td>'
+        + '<td style="color:#666;font-family:monospace;">' + (e.ip || '—') + '</td>'
+        + '</tr>';
+    });
+    html += '</tbody></table>';
+    wrap.innerHTML = html;
+  }
+
+  /* ─── HIT COUNTER ─── */
+  async function incrementAndLoadHits() {
+    try {
+      /* Hit the counter once per session */
+      if (!sessionStorage.getItem('ctp_hit_counted')) {
+        await fetch('https://api.countapi.xyz/hit/' + HIT_NAMESPACE + '/' + HIT_KEY);
+        sessionStorage.setItem('ctp_hit_counted', '1');
+      }
+    } catch(e) {}
+  }
+
+  async function loadHitCount() {
+    const el  = document.getElementById('hit-count');
+    const sub = document.getElementById('hit-sub');
+    if (!el) return;
+    el.textContent = '…';
+    try {
+      const r = await fetch('https://api.countapi.xyz/get/' + HIT_NAMESPACE + '/' + HIT_KEY);
+      if (r.ok) {
+        const d = await r.json();
+        el.textContent  = (d.value || 0).toLocaleString();
+        sub.textContent = 'Total unique sessions since launch';
+      } else { el.textContent = 'N/A'; }
+    } catch(e) { el.textContent = 'N/A'; sub.textContent = 'Counter unavailable'; }
+  }
+
+  document.getElementById('refresh-hits').addEventListener('click', loadHitCount);
+
   /* ─── SLIDESHOW ─── */
+  let slideshowCur   = 0;
+  let slideshowTimer = null;
   let slideshowReady = false;
-  let slideshowCur = 0;
-  let slideshowTimer;
 
   function initSlideshow() {
     if (slideshowReady) return;
     slideshowReady = true;
     rebuildDots();
+    clearInterval(slideshowTimer);
     slideshowTimer = setInterval(() => slideGoTo(slideshowCur + 1), 5000);
   }
 
@@ -622,40 +752,36 @@
   document.getElementById('next-slide').addEventListener('click', () => slideGoTo(slideshowCur + 1));
   document.getElementById('prev-slide').addEventListener('click', () => slideGoTo(slideshowCur - 1));
 
-  /* Replace fallback slides with real images from the sheet */
+  /* Build photo slides from sheet — full image, no crop */
   function buildSlideshow(items) {
-    const slideItems = items.filter(i => i.slideshow_url);
+    const slideItems = items.filter(i => i.slideshow_url && i.slideshow_url.trim());
     if (!slideItems.length) return; // keep fallback gradients
 
     const container = document.getElementById('slides-container');
-    container.innerHTML = ''; // clear fallbacks
-    slideshowCur = 0;
+    container.innerHTML = '';
+    slideshowCur   = 0;
+    slideshowReady = false;
 
     slideItems.forEach((item, idx) => {
-      const div = document.createElement('div');
-      div.className = 'slide' + (idx === 0 ? ' active' : '');
-      div.style.backgroundImage = 'url(' + item.slideshow_url + ')';
-      div.style.backgroundSize = 'cover';
-      div.style.backgroundPosition = 'center';
-
       const title    = item.slide_title    || item.name || '';
       const subtitle = item.slide_subtitle || '';
 
-      div.innerHTML = '<div class="slide-overlay"></div>'
+      const div = document.createElement('div');
+      div.className = 'slide slide-photo' + (idx === 0 ? ' active' : '');
+
+      div.innerHTML = '<img src="' + item.slideshow_url.trim() + '" alt="' + escHtml(title) + '" loading="lazy">'
+        + '<div class="slide-overlay"></div>'
         + (title ? '<div class="slide-label"><h2>' + escHtml(title) + '</h2>'
-            + (subtitle ? '<p>' + escHtml(subtitle) + '</p>' : '')
-            + '</div>' : '');
+            + (subtitle ? '<p>' + escHtml(subtitle) + '</p>' : '') + '</div>' : '');
       container.appendChild(div);
     });
 
-    // reset timer & dots now that slides are rebuilt
     clearInterval(slideshowTimer);
-    slideshowReady = false; // allow re-init
     initSlideshow();
   }
 
   function escHtml(s) {
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
   /* ─── CSV PARSER ─── */
@@ -687,30 +813,26 @@
   }
 
   /* ─── INVENTORY BADGE ─── */
+  function invTier(raw) {
+    if (!raw && raw !== '0') return null;
+    const lower = String(raw).toLowerCase().trim();
+    if (lower === '' ) return null;
+    if (lower === 'out of stock') return { tier:'red',    label:'Out of stock' };
+    if (lower === 'in stock')     return { tier:'green',  label:'In stock' };
+    if (lower === 'low stock')    return { tier:'yellow', label:'Low stock' };
+    const num = parseInt(raw, 10);
+    if (isNaN(num)) return null;
+    if (num === 0)   return { tier:'red',    label:'Out of stock' };
+    if (num <= 5)    return { tier:'yellow', label: num + ' in stock — low' };
+    return              { tier:'green',  label: num + ' in stock' };
+  }
+
   function buildInventoryBadge(raw) {
-    if (!raw || raw === '') return '';
-    const lower = raw.toLowerCase().trim();
-
-    let tier, label;
-
-    if (lower === 'out of stock' || raw === '0') {
-      tier = 'red'; label = 'Out of stock';
-    } else if (lower === 'in stock') {
-      tier = 'green'; label = 'In stock';
-    } else if (lower === 'low stock') {
-      tier = 'yellow'; label = 'Low stock';
-    } else {
-      // numeric
-      const num = parseInt(raw, 10);
-      if (isNaN(num)) return ''; // unrecognised — skip
-      if (num === 0) { tier = 'red'; label = 'Out of stock'; }
-      else if (num <= 5) { tier = 'yellow'; label = num + ' in stock — low'; }
-      else { tier = 'green'; label = num + ' in stock'; }
-    }
-
+    const t = invTier(raw);
+    if (!t) return '';
     return '<div class="card-inventory">'
-      + '<span class="inv-dot ' + tier + '"></span>'
-      + '<span class="inv-text ' + tier + '">' + label + '</span>'
+      + '<span class="inv-dot '  + t.tier + '"></span>'
+      + '<span class="inv-text ' + t.tier + '">' + t.label + '</span>'
       + '</div>';
   }
 
@@ -733,25 +855,24 @@
       ? '<span class="meta-pill">' + colorDot(item.color) + item.color + '</span>' : '';
 
     const imgHtml = item.image_url
-      ? '<img class="card-img" src="' + item.image_url + '" alt="' + (item.name || '') + '" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
+      ? '<img class="card-img" src="' + item.image_url + '" alt="' + (item.name || '') + '" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
         + '<div class="card-img-placeholder" style="display:none;background:linear-gradient(135deg,var(--brand-tan),var(--brand-gold));">' + tagSVG() + '</div>'
       : '<div class="card-img-placeholder" style="background:linear-gradient(135deg,var(--brand-tan),var(--brand-gold));">' + tagSVG() + '</div>';
 
-    const badgeHtml = item.badge
-      ? '<span class="card-badge">' + item.badge + '</span>' : '';
-
-    const invHtml = buildInventoryBadge(item.inventory || '');
+    const badgeHtml = item.badge ? '<span class="card-badge">' + item.badge + '</span>' : '';
 
     const card = document.createElement('div');
     card.className = 'product-card';
     card.dataset.animal = (item.animal || '').toLowerCase();
+    /* Store key to match on refresh */
+    card.dataset.key = (item.name || '').toLowerCase().replace(/\s+/g,'-');
     card.innerHTML = imgHtml + badgeHtml
       + '<div class="card-body">'
-      + '<div class="card-title">' + (item.name || 'Unnamed Product') + '</div>'
-      + '<div class="card-desc">'  + (item.description || '') + '</div>'
-      + '<div class="card-meta">'  + pills + colorPill + '</div>'
-      + invHtml
-      + '<div class="card-price">' + (item.price || 'Contact for pricing') + '</div>'
+      + '<div class="card-title">'  + (item.name || 'Unnamed Product') + '</div>'
+      + '<div class="card-desc">'   + (item.description || '') + '</div>'
+      + '<div class="card-meta">'   + pills + colorPill + '</div>'
+      + '<div class="card-inv-wrap">' + buildInventoryBadge(item.inventory || '') + '</div>'
+      + '<div class="card-price">'  + (item.price || 'Contact for pricing') + '</div>'
       + '</div>';
     return card;
   }
@@ -771,17 +892,13 @@
     const bar = document.getElementById('filter-bar');
     bar.innerHTML = '';
     if (animals.length < 2) return;
-
     const allBtn = document.createElement('button');
-    allBtn.className = 'filter-btn active';
-    allBtn.textContent = 'All';
+    allBtn.className = 'filter-btn active'; allBtn.textContent = 'All';
     allBtn.addEventListener('click', () => filterCards(''));
     bar.appendChild(allBtn);
-
     animals.forEach(a => {
       const btn = document.createElement('button');
-      btn.className = 'filter-btn';
-      btn.textContent = a;
+      btn.className = 'filter-btn'; btn.textContent = a;
       btn.addEventListener('click', () => filterCards(a.toLowerCase()));
       bar.appendChild(btn);
     });
@@ -792,12 +909,43 @@
       b.classList.toggle('active', b.textContent.toLowerCase() === (animal || 'all'));
     });
     allCards.forEach(card => {
-      const match = !animal || card.dataset.animal === animal;
-      card.style.display = match ? '' : 'none';
+      card.style.display = (!animal || card.dataset.animal === animal) ? '' : 'none';
     });
   }
 
-  /* ─── LOAD PRODUCTS ─── */
+  /* ─── LIVE INVENTORY REFRESH ─── */
+  /* Polls the sheet every 60 s and updates only the inventory badge on each card */
+  let liveRefreshTimer = null;
+
+  function startLiveInventory(csvUrl) {
+    clearInterval(liveRefreshTimer);
+    liveRefreshTimer = setInterval(() => refreshInventory(csvUrl), 60000);
+  }
+
+  async function refreshInventory(csvUrl) {
+    try {
+      const r = await fetch('https://corsproxy.io/?' + encodeURIComponent(csvUrl));
+      if (!r.ok) return;
+      const items = parseCSV(await r.text());
+      items.forEach(item => {
+        const key = (item.name || '').toLowerCase().replace(/\s+/g,'-');
+        const card = document.querySelector('.product-card[data-key="' + key + '"]');
+        if (!card) return;
+        const wrap = card.querySelector('.card-inv-wrap');
+        if (!wrap) return;
+        const newHtml = buildInventoryBadge(item.inventory || '');
+        if (wrap.innerHTML !== newHtml) {
+          wrap.innerHTML = newHtml;
+          /* Flash the card border briefly to signal update */
+          card.style.transition = 'box-shadow 0.3s';
+          card.style.boxShadow  = '0 0 0 2px var(--brand-gold)';
+          setTimeout(() => { card.style.boxShadow = ''; }, 1200);
+        }
+      });
+    } catch(e) {}
+  }
+
+  /* ─── LOAD PRODUCTS (initial full load) ─── */
   async function loadProducts(csvUrl) {
     const grid  = document.getElementById('products-grid');
     const label = document.getElementById('product-count-label');
@@ -818,10 +966,8 @@
         return;
       }
 
-      /* Build slideshow from sheet images */
       buildSlideshow(items);
 
-      /* Build product cards */
       grid.innerHTML = '';
       allCards = [];
       items.forEach(item => {
@@ -831,7 +977,10 @@
       });
 
       buildFilters(items);
-      label.textContent = items.length + ' product' + (items.length !== 1 ? 's' : '') + ' — updated live from your Google Sheet';
+      label.textContent = items.length + ' product' + (items.length !== 1 ? 's' : '') + ' — live inventory updates every 60s';
+
+      startLiveInventory(csvUrl);
+
     } catch (err) {
       grid.innerHTML = '<div class="products-state" style="color:#f07070;">Could not load products.<br><small style="color:#aaa;">Check that your sheet is published and the URL is correct.<br>Error: ' + err.message + '</small></div>';
       label.textContent = '';
@@ -848,7 +997,7 @@
   function showCurrentUrl() {
     const url = getSavedUrl();
     const el  = document.getElementById('current-url-display');
-    if (url) {
+    if (url && el) {
       el.textContent = 'Current URL: ' + url;
       el.classList.add('show');
       document.getElementById('sheet-url-input').value = url;
@@ -869,19 +1018,19 @@
     loadProducts(url);
   });
 
-  /* ─── INITIAL LOAD ─── */
+  /* ─── STARTUP ─── */
+  incrementAndLoadHits();   // count this visit (once per session)
+  initSlideshow();          // start with fallback slides immediately
+
   const initialUrl = getSavedUrl();
   if (initialUrl) {
     loadProducts(initialUrl);
   } else {
-    const grid  = document.getElementById('products-grid');
-    const label = document.getElementById('product-count-label');
-    grid.innerHTML = '<div class="products-state">No product sheet connected yet.<br><small style="color:#aaa;">Click the footer 5 times quickly to access admin setup.</small></div>';
-    label.textContent = '';
+    document.getElementById('products-grid').innerHTML =
+      '<div class="products-state">No product sheet connected yet.<br>'
+      + '<small style="color:#aaa;">Click the footer 5 times quickly to access admin setup.</small></div>';
+    document.getElementById('product-count-label').textContent = '';
   }
-
-  /* Start slideshow with fallback slides right away */
-  initSlideshow();
 </script>
 </body>
 </html>
