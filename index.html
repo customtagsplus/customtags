@@ -500,7 +500,7 @@
           <div class="step-num">6</div>
           <div class="step-body">
             <strong>Inventory</strong>
-            <p>Put a number like <code>42</code> in the <code>inventory</code> column and the card shows a green "42 in stock" badge. Values ≤5 show yellow "Low stock". <code>0</code> or the text <code>Out of Stock</code> shows red. Leave blank to hide the inventory display entirely.</p>
+            <p>Put a number like <code>42</code> in the <code>inventory</code> column and the card shows a green "42 in stock" badge. Values ≤1000 show yellow "Low stock". <code>0</code> or the text <code>Out of Stock</code> shows red. Leave blank to hide the inventory display entirely.</p>
           </div>
         </li>
 
@@ -823,7 +823,7 @@
     const num = parseInt(raw, 10);
     if (isNaN(num)) return null;
     if (num === 0)   return { tier:'red',    label:'Out of stock' };
-    if (num <= 5)    return { tier:'yellow', label: num + ' in stock — low' };
+    if (num <= 1000)    return { tier:'yellow', label: num + ' in stock — low' };
     return              { tier:'green',  label: num + ' in stock' };
   }
 
