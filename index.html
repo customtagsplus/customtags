@@ -822,7 +822,7 @@
     if (lower === 'low stock')    return { tier:'yellow', label:'Low stock' };
     const num = parseInt(raw, 10);
     if (isNaN(num)) return null;
-    if (num === 0)   return { tier:'red',    label:'Out of stock' };
+    if (num <= 0)   return { tier:'red',    label:'Out of stock' };
     if (num <= 1000)    return { tier:'yellow', label: num + ' in stock — low' };
     return              { tier:'green',  label: num + ' in stock' };
   }
