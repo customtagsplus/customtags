@@ -46,6 +46,30 @@
   .tab-btn:hover { color: var(--brand-gold-light); }
   .tab-btn.active { color: var(--brand-gold-light); border-bottom-color: var(--brand-gold); }
 
+  /* ── ADMIN BAR ── */
+  .admin-bar { display: none; background: rgba(30,80,40,0.18); border-bottom: 1px solid rgba(60,180,90,0.25); padding: 7px 1rem; font-size: 0.78rem; color: #7be09a; letter-spacing: 0.06em; }
+  .admin-bar.visible { display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .admin-bar-logout { background: none; border: 1px solid rgba(100,220,130,0.4); color: #7be09a; border-radius: 20px; font-size: 0.72rem; padding: 2px 12px; cursor: pointer; font-family: 'Source Sans 3', sans-serif; }
+  .admin-bar-logout:hover { background: rgba(100,220,130,0.1); }
+
+  /* ── LOGIN MODAL ── */
+  .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,6,2,0.85); z-index: 999; align-items: center; justify-content: center; }
+  .modal-backdrop.open { display: flex; }
+  .login-modal { background: #1e1408; border: 1px solid var(--brand-gold); border-radius: 14px; padding: 2.6rem 2.4rem 2.2rem; width: 100%; max-width: 380px; box-shadow: 0 20px 60px rgba(0,0,0,0.7); position: relative; text-align: center; }
+  .modal-close { position: absolute; top: 14px; right: 16px; background: none; border: none; color: #555; font-size: 1.3rem; cursor: pointer; line-height: 1; }
+  .modal-close:hover { color: #ccc; }
+  .modal-ring { width: 58px; height: 58px; background: var(--brand-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+  .modal-ring svg { width: 30px; height: 30px; }
+  .modal-heading { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--brand-gold-light); margin-bottom: 3px; }
+  .modal-sub { font-size: 0.75rem; color: #666; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.8rem; }
+  .modal-field { text-align: left; margin-bottom: 1rem; }
+  .modal-field label { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-tan); margin-bottom: 6px; }
+  .modal-field input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(200,134,10,0.3); border-radius: var(--radius); color: #f0e6d0; font-family: 'Source Sans 3', sans-serif; font-size: 1rem; padding: 11px 14px; outline: none; transition: border-color 0.2s; }
+  .modal-field input:focus { border-color: var(--brand-gold); }
+  .modal-error { color: #f07070; font-size: 0.82rem; min-height: 20px; margin-bottom: 0.6rem; }
+  .modal-submit { width: 100%; background: var(--brand-gold); color: var(--brand-dark); border: none; border-radius: var(--radius); font-family: 'Source Sans 3', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 13px; cursor: pointer; transition: background 0.2s; }
+  .modal-submit:hover { background: var(--brand-gold-light); }
+
   /* ── PAGES ── */
   .page { display: none; }
   .page.active { display: block; }
@@ -55,14 +79,15 @@
   .slides { position: relative; width: 100%; height: 100%; }
   .slide { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.9s ease; background-size: cover; background-position: center; }
   .slide.active { opacity: 1; }
-  .slide-1 { background: linear-gradient(135deg, #3b2000 0%, #7a4a00 50%, #c8860a 100%); }
-  .slide-2 { background: linear-gradient(135deg, #0d1f0d 0%, #1a4020 50%, #2d7a40 100%); }
-  .slide-3 { background: linear-gradient(135deg, #1a0a1a 0%, #4a1560 50%, #8b30a8 100%); }
-  .slide-4 { background: linear-gradient(135deg, #1a0808 0%, #5c1010 50%, #c43030 100%); }
-  .slide-5 { background: linear-gradient(135deg, #07121e 0%, #0f3060 50%, #1a5aa0 100%); }
-  .slide-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%); }
-  .slide-label { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); text-align: center; color: #fff; z-index: 2; }
-  .slide-label h2 { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; text-shadow: 0 2px 16px rgba(0,0,0,0.5); white-space: nowrap; }
+  /* Fallback gradients used when no sheet images are loaded yet */
+  .slide-fallback-1 { background: linear-gradient(135deg, #3b2000 0%, #7a4a00 50%, #c8860a 100%); }
+  .slide-fallback-2 { background: linear-gradient(135deg, #0d1f0d 0%, #1a4020 50%, #2d7a40 100%); }
+  .slide-fallback-3 { background: linear-gradient(135deg, #1a0a1a 0%, #4a1560 50%, #8b30a8 100%); }
+  .slide-fallback-4 { background: linear-gradient(135deg, #1a0808 0%, #5c1010 50%, #c43030 100%); }
+  .slide-fallback-5 { background: linear-gradient(135deg, #07121e 0%, #0f3060 50%, #1a5aa0 100%); }
+  .slide-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.6) 100%); }
+  .slide-label { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); text-align: center; color: #fff; z-index: 2; white-space: nowrap; }
+  .slide-label h2 { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; text-shadow: 0 2px 16px rgba(0,0,0,0.6); }
   .slide-label p { font-size: 1rem; color: var(--brand-gold-light); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; }
   .tag-deco { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%); opacity: 0.22; }
   .slide-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
@@ -87,27 +112,13 @@
   .section-title::after { content: ''; display: block; height: 3px; background: var(--brand-gold); width: 60%; margin-top: 6px; }
   .section-sub { color: var(--brand-muted); font-size: 0.9rem; margin-top: 4px; }
 
-  /* Filter bar */
   .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-  .filter-btn {
-    background: #fff; border: 1px solid #d4b87a; color: var(--brand-brown);
-    font-family: 'Source Sans 3', sans-serif; font-size: 0.75rem; font-weight: 600;
-    letter-spacing: 0.07em; text-transform: uppercase; padding: 5px 14px;
-    border-radius: 20px; cursor: pointer; transition: all 0.18s;
-  }
+  .filter-btn { background: #fff; border: 1px solid #d4b87a; color: var(--brand-brown); font-family: 'Source Sans 3', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; cursor: pointer; transition: all 0.18s; }
   .filter-btn:hover { background: var(--brand-tan); }
   .filter-btn.active { background: var(--brand-gold); border-color: var(--brand-gold); color: var(--brand-dark); }
 
-  /* Loading / error states */
-  .products-state {
-    grid-column: 1 / -1; text-align: center; padding: 3rem 1rem;
-    color: var(--brand-muted); font-size: 1rem;
-  }
-  .spinner {
-    display: inline-block; width: 36px; height: 36px;
-    border: 3px solid var(--brand-tan); border-top-color: var(--brand-gold);
-    border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 14px;
-  }
+  .products-state { grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: var(--brand-muted); font-size: 1rem; }
+  .spinner { display: inline-block; width: 36px; height: 36px; border: 3px solid var(--brand-tan); border-top-color: var(--brand-gold); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 14px; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
   .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.75rem; }
@@ -119,8 +130,19 @@
   .card-body { padding: 1.2rem 1.4rem 1.4rem; }
   .card-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--brand-brown); margin-bottom: 6px; }
   .card-desc { font-size: 0.875rem; color: #5a4020; line-height: 1.6; margin-bottom: 12px; }
-  .card-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .card-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
   .meta-pill { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; background: var(--brand-cream); border: 1px solid #d4b87a; color: var(--brand-brown); }
+
+  /* Inventory badge */
+  .card-inventory { font-size: 0.78rem; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .inv-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .inv-dot.green  { background: #3db870; }
+  .inv-dot.yellow { background: #d4a017; }
+  .inv-dot.red    { background: #d94040; }
+  .inv-text.green  { color: #2a8f50; }
+  .inv-text.yellow { color: #8a6600; }
+  .inv-text.red    { color: #b03030; }
+
   .card-price { font-size: 1.05rem; font-weight: 700; color: var(--brand-brown); }
   .card-price span { font-size: 0.8rem; font-weight: 400; color: var(--brand-muted); margin-left: 4px; }
 
@@ -139,62 +161,33 @@
   .setup-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--brand-gold-light); margin-bottom: 6px; }
   .setup-title::after { content: ''; display: block; height: 3px; background: var(--brand-gold-light); width: 50%; margin-top: 8px; margin-bottom: 1.5rem; }
   .setup-sub { color: #aaa; font-size: 0.95rem; margin-bottom: 2.5rem; line-height: 1.7; }
-
   .step-list { list-style: none; display: flex; flex-direction: column; gap: 1.4rem; margin-bottom: 2.5rem; }
   .step-item { display: flex; gap: 1.2rem; align-items: flex-start; }
-  .step-num {
-    width: 36px; height: 36px; flex-shrink: 0;
-    background: var(--brand-gold); color: var(--brand-dark);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-weight: 900; font-size: 0.9rem;
-  }
+  .step-num { width: 36px; height: 36px; flex-shrink: 0; background: var(--brand-gold); color: var(--brand-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.9rem; }
   .step-body { flex: 1; padding-top: 6px; }
   .step-body strong { display: block; color: var(--brand-gold-light); font-size: 0.95rem; margin-bottom: 4px; }
   .step-body p { color: #bbb; font-size: 0.875rem; line-height: 1.65; }
   .step-body code { background: rgba(255,255,255,0.08); color: #f0d890; padding: 2px 8px; border-radius: 4px; font-size: 0.83rem; font-family: monospace; }
-
-  .sheet-columns {
-    background: rgba(255,255,255,0.04); border: 1px solid rgba(200,134,10,0.3);
-    border-radius: 8px; overflow: hidden; margin: 1rem 0;
-  }
-  .col-header { display: grid; grid-template-columns: 120px 80px 1fr; background: rgba(200,134,10,0.15); padding: 8px 14px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-gold-light); gap: 10px; }
-  .col-row { display: grid; grid-template-columns: 120px 80px 1fr; padding: 8px 14px; font-size: 0.82rem; color: #ccc; gap: 10px; border-top: 1px solid rgba(255,255,255,0.05); }
+  .sheet-columns { background: rgba(255,255,255,0.04); border: 1px solid rgba(200,134,10,0.3); border-radius: 8px; overflow: hidden; margin: 1rem 0; }
+  .col-header { display: grid; grid-template-columns: 140px 80px 1fr; background: rgba(200,134,10,0.15); padding: 8px 14px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-gold-light); gap: 10px; }
+  .col-row { display: grid; grid-template-columns: 140px 80px 1fr; padding: 8px 14px; font-size: 0.82rem; color: #ccc; gap: 10px; border-top: 1px solid rgba(255,255,255,0.05); }
   .col-row:nth-child(odd) { background: rgba(255,255,255,0.02); }
   .col-name { color: #f0d890; font-family: monospace; }
   .col-req { color: #f07070; font-size: 0.75rem; }
   .col-req.opt { color: #888; }
-
   .url-input-wrap { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1rem; }
-  .url-input {
-    flex: 1; min-width: 260px;
-    background: rgba(255,255,255,0.06); border: 1px solid rgba(200,134,10,0.35);
-    border-radius: var(--radius); color: #f0e6d0;
-    font-family: monospace; font-size: 0.82rem;
-    padding: 10px 14px; outline: none;
-  }
+  .url-input { flex: 1; min-width: 260px; background: rgba(255,255,255,0.06); border: 1px solid rgba(200,134,10,0.35); border-radius: var(--radius); color: #f0e6d0; font-family: monospace; font-size: 0.82rem; padding: 10px 14px; outline: none; }
   .url-input:focus { border-color: var(--brand-gold); }
   .url-input::placeholder { color: #666; }
-  .save-url-btn {
-    background: var(--brand-gold); color: var(--brand-dark); border: none;
-    border-radius: var(--radius); font-family: 'Source Sans 3', sans-serif;
-    font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em;
-    text-transform: uppercase; padding: 10px 22px; cursor: pointer;
-    transition: background 0.2s; white-space: nowrap;
-  }
+  .save-url-btn { background: var(--brand-gold); color: var(--brand-dark); border: none; border-radius: var(--radius); font-family: 'Source Sans 3', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 22px; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
   .save-url-btn:hover { background: var(--brand-gold-light); }
   .url-saved { display: none; color: #7be09a; font-size: 0.82rem; margin-top: 8px; }
   .url-saved.show { display: block; }
-
-  .current-url-display {
-    margin-top: 1rem; padding: 10px 14px;
-    background: rgba(45,120,60,0.12); border: 1px solid rgba(60,180,90,0.25);
-    border-radius: var(--radius); font-size: 0.8rem; color: #7be09a;
-    word-break: break-all; display: none;
-  }
+  .current-url-display { margin-top: 1rem; padding: 10px 14px; background: rgba(45,120,60,0.12); border: 1px solid rgba(60,180,90,0.25); border-radius: var(--radius); font-size: 0.8rem; color: #7be09a; word-break: break-all; display: none; }
   .current-url-display.show { display: block; }
 
   /* ── FOOTER ── */
-  footer { background: var(--brand-dark); color: #666; text-align: center; font-size: 0.8rem; padding: 1.4rem 2rem; border-top: 2px solid var(--brand-gold); }
+  footer { background: var(--brand-dark); color: #666; text-align: center; font-size: 0.8rem; padding: 1.4rem 2rem; border-top: 2px solid var(--brand-gold); user-select: none; cursor: default; }
   footer span { color: var(--brand-gold); }
 
   /* ── RESPONSIVE ── */
@@ -233,9 +226,41 @@
   <nav class="tab-nav">
     <button class="tab-btn active" data-tab="store">🏪 Store</button>
     <button class="tab-btn" data-tab="contact">✉ Contact</button>
-    <button class="tab-btn" data-tab="setup" style="color:rgba(200,134,10,0.55);" id="setup-tab-btn">⚙ Setup</button>
+    <!-- Setup tab hidden — unlock via footer click x5 -->
   </nav>
 </header>
+
+<!-- ADMIN STATUS BAR -->
+<div class="admin-bar" id="admin-bar">
+  <span>⚙ Admin — Setup unlocked</span>
+  <button class="admin-bar-logout" id="admin-logout">Lock &amp; Log Out</button>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal-backdrop" id="login-modal">
+  <div class="login-modal">
+    <button class="modal-close" id="modal-close">&times;</button>
+    <div class="modal-ring">
+      <svg viewBox="0 0 30 30" fill="none">
+        <rect x="7" y="13" width="16" height="12" rx="2" fill="#1a1208"/>
+        <path d="M10 13V10a5 5 0 0110 0v3" stroke="#1a1208" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="15" cy="18" r="2" fill="#c8860a"/>
+      </svg>
+    </div>
+    <div class="modal-heading">Admin Login</div>
+    <div class="modal-sub">Custom Tags Plus</div>
+    <div class="modal-field">
+      <label for="modal-user">Username</label>
+      <input type="text" id="modal-user" autocomplete="username" placeholder="Enter username">
+    </div>
+    <div class="modal-field">
+      <label for="modal-pass">Password</label>
+      <input type="password" id="modal-pass" autocomplete="current-password" placeholder="Enter password">
+    </div>
+    <div class="modal-error" id="modal-error"></div>
+    <button class="modal-submit" id="modal-submit">Unlock Setup</button>
+  </div>
+</div>
 
 
 <!-- ══════════════════════
@@ -243,10 +268,11 @@
 ══════════════════════ -->
 <div class="page active" id="page-store">
 
-  <!-- Slideshow -->
+  <!-- Hero Slideshow — populated from Google Sheet -->
   <section class="hero" aria-label="Product slideshow">
-    <div class="slides">
-      <div class="slide slide-1 active">
+    <div class="slides" id="slides-container">
+      <!-- Fallback slides shown until sheet data loads -->
+      <div class="slide slide-fallback-1 active">
         <div class="slide-overlay"></div>
         <svg class="tag-deco" width="260" height="200" viewBox="0 0 260 200" fill="none">
           <ellipse cx="130" cy="130" rx="110" ry="60" stroke="white" stroke-width="2"/>
@@ -256,7 +282,7 @@
         </svg>
         <div class="slide-label"><h2>Premium Ear Tags</h2><p>Laser precision — every character, every time</p></div>
       </div>
-      <div class="slide slide-2">
+      <div class="slide slide-fallback-2">
         <div class="slide-overlay"></div>
         <svg class="tag-deco" width="260" height="200" viewBox="0 0 260 200" fill="none">
           <rect x="40" y="60" width="80" height="110" rx="40" stroke="white" stroke-width="2"/>
@@ -265,7 +291,7 @@
         </svg>
         <div class="slide-label"><h2>All Sizes &amp; Styles</h2><p>Button, flag, two-piece, visual ID tags</p></div>
       </div>
-      <div class="slide slide-3">
+      <div class="slide slide-fallback-3">
         <div class="slide-overlay"></div>
         <svg class="tag-deco" width="300" height="180" viewBox="0 0 300 180" fill="none">
           <ellipse cx="60" cy="100" rx="45" ry="55" stroke="white" stroke-width="2"/>
@@ -277,11 +303,11 @@
         </svg>
         <div class="slide-label"><h2>Vibrant Color Options</h2><p>Match your herd management system</p></div>
       </div>
-      <div class="slide slide-4">
+      <div class="slide slide-fallback-4">
         <div class="slide-overlay"></div>
         <div class="slide-label"><h2>Custom Numbering</h2><p>Ranch name, animal ID, breed info &amp; more</p></div>
       </div>
-      <div class="slide slide-5">
+      <div class="slide slide-fallback-5">
         <div class="slide-overlay"></div>
         <div class="slide-label"><h2>Built for the Ranch</h2><p>Durable, readable, built to last in the field</p></div>
       </div>
@@ -355,13 +381,13 @@
 
 
 <!-- ══════════════════════
-     PAGE: SETUP
+     PAGE: SETUP (hidden — admin only)
 ══════════════════════ -->
 <div class="page" id="page-setup">
   <div class="setup-page">
     <div class="setup-inner">
       <div class="setup-title">Google Sheets Setup</div>
-      <p class="setup-sub">Follow these steps once and your product catalog will automatically pull from your Google Sheet every time someone visits the site. No coding needed after setup — just edit the sheet and the website updates itself.</p>
+      <p class="setup-sub">Follow these steps once and your product catalog and slideshow will automatically pull from your Google Sheet every time someone visits the site. Just edit the sheet — the website updates itself.</p>
 
       <ol class="step-list">
 
@@ -377,7 +403,7 @@
           <div class="step-num">2</div>
           <div class="step-body">
             <strong>Add these exact column headers in Row 1</strong>
-            <p>The header names must match exactly (capitalization doesn't matter). Add them starting from column A:</p>
+            <p>Header names must match exactly (capitalization doesn't matter). Add them starting from column A:</p>
             <div class="sheet-columns">
               <div class="col-header"><span>Column</span><span>Required?</span><span>What to put in it</span></div>
               <div class="col-row"><span class="col-name">name</span><span class="col-req">Required</span><span>Product name, e.g. Large Cattle Button Tag</span></div>
@@ -386,11 +412,15 @@
               <div class="col-row"><span class="col-name">style</span><span class="col-req opt">Optional</span><span>Button, Flag, Two-Piece, Visual ID…</span></div>
               <div class="col-row"><span class="col-name">size</span><span class="col-req opt">Optional</span><span>Small, Medium, Large, Extra Large…</span></div>
               <div class="col-row"><span class="col-name">color</span><span class="col-req opt">Optional</span><span>Yellow, Green, Red, Blue, Orange…</span></div>
-              <div class="col-row"><span class="col-name">price</span><span class="col-req opt">Optional</span><span>$1.25/tag — or leave blank for "Contact for pricing"</span></div>
+              <div class="col-row"><span class="col-name">price</span><span class="col-req opt">Optional</span><span>$1.25/tag — leave blank for "Contact for pricing"</span></div>
               <div class="col-row"><span class="col-name">badge</span><span class="col-req opt">Optional</span><span>Popular, New, Sale — shows as a gold badge on the card</span></div>
-              <div class="col-row"><span class="col-name">image_url</span><span class="col-req opt">Optional</span><span>Direct URL to a product photo (must be publicly accessible)</span></div>
+              <div class="col-row"><span class="col-name">inventory</span><span class="col-req opt">Optional</span><span>A number (e.g. 42) or text: "In Stock", "Low Stock", "Out of Stock"</span></div>
+              <div class="col-row"><span class="col-name">image_url</span><span class="col-req opt">Optional</span><span>Direct URL to a product photo (publicly accessible)</span></div>
+              <div class="col-row"><span class="col-name">slideshow_url</span><span class="col-req opt">Optional</span><span>Photo URL to show in the hero slideshow — fill this on rows you want as slides</span></div>
+              <div class="col-row"><span class="col-name">slide_title</span><span class="col-req opt">Optional</span><span>Headline text for the slideshow (e.g. "Yellow Cattle Tags")</span></div>
+              <div class="col-row"><span class="col-name">slide_subtitle</span><span class="col-req opt">Optional</span><span>Smaller caption under the headline (e.g. "UV-stable, weatherproof")</span></div>
             </div>
-            <p style="margin-top:8px;">Fill in rows 2, 3, 4… with each product. Add or edit rows anytime — the site always loads the latest data.</p>
+            <p style="margin-top:8px;">Fill rows 2, 3, 4… with each product. Add or edit rows anytime — the site always loads the latest data.</p>
           </div>
         </li>
 
@@ -398,17 +428,17 @@
           <div class="step-num">3</div>
           <div class="step-body">
             <strong>Publish your sheet to the web</strong>
-            <p>In Google Sheets, click <code>File</code> → <code>Share</code> → <code>Publish to web</code>. In the dialog, select your sheet tab, choose <code>Comma-separated values (.csv)</code> format, then click <code>Publish</code>. Confirm when prompted.</p>
+            <p>In Google Sheets: <code>File</code> → <code>Share</code> → <code>Publish to web</code>. Select your sheet tab, choose <code>Comma-separated values (.csv)</code>, then click <code>Publish</code>.</p>
           </div>
         </li>
 
         <li class="step-item">
           <div class="step-num">4</div>
           <div class="step-body">
-            <strong>Copy the CSV link and paste it below</strong>
-            <p>After publishing, Google gives you a link that looks like:<br>
+            <strong>Paste the CSV link below and save</strong>
+            <p>Google gives you a URL like:<br>
             <code>https://docs.google.com/spreadsheets/d/…/pub?gid=0&single=true&output=csv</code><br>
-            Copy that full URL and paste it into the box below, then click Save.</p>
+            Paste it here and click Save &amp; Load.</p>
             <div class="url-input-wrap">
               <input class="url-input" type="url" id="sheet-url-input" placeholder="https://docs.google.com/spreadsheets/d/…/pub?output=csv">
               <button class="save-url-btn" id="save-url-btn">Save &amp; Load</button>
@@ -421,22 +451,38 @@
         <li class="step-item">
           <div class="step-num">5</div>
           <div class="step-body">
-            <strong>For slideshow photos (optional)</strong>
-            <p>Upload photos to any public host (Google Drive with link sharing on, Imgur, GitHub repo, etc.) and paste the direct image URL into the <code>image_url</code> column of your sheet. For the hero slideshow at the top of the page, open <code>index.html</code> in a text editor and replace the gradient backgrounds on <code>.slide-1</code> through <code>.slide-5</code> with <code>background-image: url('your-photo.jpg')</code>.</p>
+            <strong>Slideshow images</strong>
+            <p>Add a public image URL in the <code>slideshow_url</code> column for any row you want featured in the hero slideshow. Use <code>slide_title</code> and <code>slide_subtitle</code> to control the text overlay. Rows without a <code>slideshow_url</code> won't appear as slides. If no rows have a slideshow URL the default gradient slides show instead.</p>
+          </div>
+        </li>
+
+        <li class="step-item">
+          <div class="step-num">6</div>
+          <div class="step-body">
+            <strong>Inventory</strong>
+            <p>Put a number like <code>42</code> in the <code>inventory</code> column and the card shows a green "42 in stock" badge. Values ≤5 show yellow "Low stock". <code>0</code> or the text <code>Out of Stock</code> shows red. Leave blank to hide the inventory display entirely.</p>
+          </div>
+        </li>
+
+        <li class="step-item">
+          <div class="step-num">7</div>
+          <div class="step-body">
+            <strong>Make it permanent for all visitors</strong>
+            <p>Open <code>index.html</code> in a text editor, find <code>const SHEET_CSV_URL = '';</code> near the top of the script, and paste your URL between the quotes. This makes the sheet load for everyone without needing to use the Setup panel.</p>
           </div>
         </li>
 
       </ol>
 
-      <p style="color:#666; font-size:0.82rem; line-height:1.6;">
-        The URL you enter is saved in your browser's local storage so you only need to do this once per device. When you push this file to GitHub Pages, paste the same URL directly into the <code>SHEET_CSV_URL</code> variable at the top of the &lt;script&gt; section in <code>index.html</code> so it works for all visitors without them needing to set it up.
+      <p style="color:#555; font-size:0.82rem; line-height:1.6;">
+        To access this Setup panel again: click the page footer <strong>5 times quickly</strong> and log in.
       </p>
     </div>
   </div>
 </div><!-- /page-setup -->
 
 
-<footer>
+<footer id="footer-trigger">
   &copy; <span id="year"></span> <span>Custom Tags Plus</span> — Laser Engraved Livestock Ear Tags — Built with pride.
 </footer>
 
@@ -444,12 +490,17 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  /* ═══════════════════════════════════════════════════
-     CONFIGURATION
-     After setup, paste your Google Sheet CSV URL here
-     so it works for all visitors automatically:
-  ═══════════════════════════════════════════════════ */
-  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSU4NLzM1nzeuF0GQ9VQgQeXHt4x_9m5jEn0CtiO-3o6mGRmpVIj-rCp7lHObw9cNRdqcURclxAnLOZ/pub?output=csv';   // ← paste your URL between the quotes
+  /* ═══════════════════════════════════════════════
+     CONFIGURATION — paste your CSV URL here so it
+     works for ALL visitors automatically
+  ═══════════════════════════════════════════════ */
+  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSU4NLzM1nzeuF0GQ9VQgQeXHt4x_9m5jEn0CtiO-3o6mGRmpVIj-rCp7lHObw9cNRdqcURclxAnLOZ/pub?output=csv';   // ← paste your Google Sheet CSV URL between the quotes
+
+  /* ═══════════════════════════════════════════════
+     ADMIN CREDENTIALS — change before uploading!
+  ═══════════════════════════════════════════════ */
+  const ADMIN_USER = 'admin';
+  const ADMIN_PASS = 'tagsplus2024';   // ← change this password!
 
   /* ─── TAB SWITCHING ─── */
   const tabBtns = document.querySelectorAll('.tab-btn');
@@ -463,44 +514,161 @@
   tabBtns.forEach(btn => btn.addEventListener('click', () => showTab(btn.dataset.tab)));
   document.getElementById('logo-home').addEventListener('click', () => showTab('store'));
 
+  /* ─── ADMIN AUTH ─── */
+  let isAdmin = sessionStorage.getItem('ctp_admin') === '1';
+
+  function applyAdminState() {
+    const bar = document.getElementById('admin-bar');
+    if (isAdmin) { bar.classList.add('visible'); }
+    else {
+      bar.classList.remove('visible');
+      if (document.getElementById('page-setup').classList.contains('active')) showTab('store');
+    }
+  }
+  applyAdminState();
+
+  /* Secret trigger: click footer 5 times within 2 seconds */
+  let footerClicks = 0, footerTimer;
+  document.getElementById('footer-trigger').addEventListener('click', () => {
+    footerClicks++;
+    clearTimeout(footerTimer);
+    footerTimer = setTimeout(() => { footerClicks = 0; }, 2000);
+    if (footerClicks >= 5) {
+      footerClicks = 0;
+      if (isAdmin) { showTab('setup'); }
+      else { openModal(); }
+    }
+  });
+
+  function openModal() {
+    document.getElementById('login-modal').classList.add('open');
+    document.getElementById('modal-user').value = '';
+    document.getElementById('modal-pass').value = '';
+    document.getElementById('modal-error').textContent = '';
+    setTimeout(() => document.getElementById('modal-user').focus(), 50);
+  }
+  function closeModal() { document.getElementById('login-modal').classList.remove('open'); }
+
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  document.getElementById('login-modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('login-modal')) closeModal();
+  });
+
+  function attemptLogin() {
+    const u   = document.getElementById('modal-user').value.trim();
+    const p   = document.getElementById('modal-pass').value;
+    const err = document.getElementById('modal-error');
+    if (u === ADMIN_USER && p === ADMIN_PASS) {
+      isAdmin = true;
+      sessionStorage.setItem('ctp_admin', '1');
+      closeModal();
+      applyAdminState();
+      showTab('setup');
+      showCurrentUrl();
+    } else {
+      err.textContent = 'Incorrect username or password.';
+      document.getElementById('modal-pass').value = '';
+      document.getElementById('modal-pass').focus();
+    }
+  }
+  document.getElementById('modal-submit').addEventListener('click', attemptLogin);
+  document.getElementById('modal-pass').addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin(); });
+  document.getElementById('modal-user').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('modal-pass').focus(); });
+  document.getElementById('admin-logout').addEventListener('click', () => {
+    isAdmin = false;
+    sessionStorage.removeItem('ctp_admin');
+    applyAdminState();
+    showTab('store');
+  });
+
   /* ─── SLIDESHOW ─── */
   let slideshowReady = false;
+  let slideshowCur = 0;
+  let slideshowTimer;
+
   function initSlideshow() {
     if (slideshowReady) return;
     slideshowReady = true;
-    const slides = document.querySelectorAll('.slide');
+    rebuildDots();
+    slideshowTimer = setInterval(() => slideGoTo(slideshowCur + 1), 5000);
+  }
+
+  function rebuildDots() {
+    const slides = document.querySelectorAll('#slides-container .slide');
     const dotsEl = document.getElementById('slide-dots');
-    let cur = 0, timer;
+    dotsEl.innerHTML = '';
     slides.forEach((_, i) => {
       const d = document.createElement('button');
       d.className = 'dot' + (i === 0 ? ' active' : '');
-      d.setAttribute('aria-label', 'Slide ' + (i+1));
-      d.addEventListener('click', () => goTo(i));
+      d.setAttribute('aria-label', 'Slide ' + (i + 1));
+      d.addEventListener('click', () => slideGoTo(i));
       dotsEl.appendChild(d);
     });
-    function goTo(n) {
-      slides[cur].classList.remove('active'); dotsEl.children[cur].classList.remove('active');
-      cur = (n + slides.length) % slides.length;
-      slides[cur].classList.add('active'); dotsEl.children[cur].classList.add('active');
-      clearInterval(timer); timer = setInterval(() => goTo(cur + 1), 5000);
-    }
-    document.getElementById('next-slide').addEventListener('click', () => goTo(cur + 1));
-    document.getElementById('prev-slide').addEventListener('click', () => goTo(cur - 1));
-    timer = setInterval(() => goTo(cur + 1), 5000);
   }
-  initSlideshow();
+
+  function slideGoTo(n) {
+    const slides = document.querySelectorAll('#slides-container .slide');
+    const dots   = document.querySelectorAll('#slide-dots .dot');
+    if (!slides.length) return;
+    slides[slideshowCur].classList.remove('active');
+    if (dots[slideshowCur]) dots[slideshowCur].classList.remove('active');
+    slideshowCur = (n + slides.length) % slides.length;
+    slides[slideshowCur].classList.add('active');
+    if (dots[slideshowCur]) dots[slideshowCur].classList.add('active');
+    clearInterval(slideshowTimer);
+    slideshowTimer = setInterval(() => slideGoTo(slideshowCur + 1), 5000);
+  }
+
+  document.getElementById('next-slide').addEventListener('click', () => slideGoTo(slideshowCur + 1));
+  document.getElementById('prev-slide').addEventListener('click', () => slideGoTo(slideshowCur - 1));
+
+  /* Replace fallback slides with real images from the sheet */
+  function buildSlideshow(items) {
+    const slideItems = items.filter(i => i.slideshow_url);
+    if (!slideItems.length) return; // keep fallback gradients
+
+    const container = document.getElementById('slides-container');
+    container.innerHTML = ''; // clear fallbacks
+    slideshowCur = 0;
+
+    slideItems.forEach((item, idx) => {
+      const div = document.createElement('div');
+      div.className = 'slide' + (idx === 0 ? ' active' : '');
+      div.style.backgroundImage = 'url(' + item.slideshow_url + ')';
+      div.style.backgroundSize = 'cover';
+      div.style.backgroundPosition = 'center';
+
+      const title    = item.slide_title    || item.name || '';
+      const subtitle = item.slide_subtitle || '';
+
+      div.innerHTML = '<div class="slide-overlay"></div>'
+        + (title ? '<div class="slide-label"><h2>' + escHtml(title) + '</h2>'
+            + (subtitle ? '<p>' + escHtml(subtitle) + '</p>' : '')
+            + '</div>' : '');
+      container.appendChild(div);
+    });
+
+    // reset timer & dots now that slides are rebuilt
+    clearInterval(slideshowTimer);
+    slideshowReady = false; // allow re-init
+    initSlideshow();
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
 
   /* ─── CSV PARSER ─── */
   function parseCSV(text) {
     const lines = text.trim().split(/\r?\n/);
     if (lines.length < 2) return [];
-    const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/['"]/g,''));
+    const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/['"]/g, ''));
     const rows = [];
     for (let i = 1; i < lines.length; i++) {
       const cols = splitCSVLine(lines[i]);
       if (cols.every(c => c.trim() === '')) continue;
       const obj = {};
-      headers.forEach((h, idx) => { obj[h] = (cols[idx] || '').trim().replace(/^["']|["']$/g,''); });
+      headers.forEach((h, idx) => { obj[h] = (cols[idx] || '').trim().replace(/^["']|["']$/g, ''); });
       rows.push(obj);
     }
     return rows;
@@ -518,6 +686,34 @@
     return result;
   }
 
+  /* ─── INVENTORY BADGE ─── */
+  function buildInventoryBadge(raw) {
+    if (!raw || raw === '') return '';
+    const lower = raw.toLowerCase().trim();
+
+    let tier, label;
+
+    if (lower === 'out of stock' || raw === '0') {
+      tier = 'red'; label = 'Out of stock';
+    } else if (lower === 'in stock') {
+      tier = 'green'; label = 'In stock';
+    } else if (lower === 'low stock') {
+      tier = 'yellow'; label = 'Low stock';
+    } else {
+      // numeric
+      const num = parseInt(raw, 10);
+      if (isNaN(num)) return ''; // unrecognised — skip
+      if (num === 0) { tier = 'red'; label = 'Out of stock'; }
+      else if (num <= 5) { tier = 'yellow'; label = num + ' in stock — low'; }
+      else { tier = 'green'; label = num + ' in stock'; }
+    }
+
+    return '<div class="card-inventory">'
+      + '<span class="inv-dot ' + tier + '"></span>'
+      + '<span class="inv-text ' + tier + '">' + label + '</span>'
+      + '</div>';
+  }
+
   /* ─── PRODUCT CARD BUILDER ─── */
   const TAG_COLORS = {
     yellow:'#f5d07a', green:'#60b860', red:'#d94040', blue:'#3a80d2',
@@ -525,23 +721,26 @@
   };
 
   function colorDot(colorName) {
-    const hex = TAG_COLORS[(colorName||'').toLowerCase()] || '#c8860a';
-    return '<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + hex + ';border:1px solid rgba(0,0,0,0.2);margin-right:4px;vertical-align:middle;"></span>';
+    const hex = TAG_COLORS[(colorName || '').toLowerCase()] || '#c8860a';
+    return '<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'
+      + hex + ';border:1px solid rgba(0,0,0,0.2);margin-right:4px;vertical-align:middle;"></span>';
   }
 
   function buildCard(item) {
-    const pills = ['animal','style','size'].map(k => item[k]
-      ? '<span class="meta-pill">' + item[k] + '</span>' : '').join('');
+    const pills = ['animal', 'style', 'size']
+      .map(k => item[k] ? '<span class="meta-pill">' + item[k] + '</span>' : '').join('');
     const colorPill = item.color
       ? '<span class="meta-pill">' + colorDot(item.color) + item.color + '</span>' : '';
 
     const imgHtml = item.image_url
-      ? '<img class="card-img" src="' + item.image_url + '" alt="' + (item.name||'') + '" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
+      ? '<img class="card-img" src="' + item.image_url + '" alt="' + (item.name || '') + '" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
         + '<div class="card-img-placeholder" style="display:none;background:linear-gradient(135deg,var(--brand-tan),var(--brand-gold));">' + tagSVG() + '</div>'
       : '<div class="card-img-placeholder" style="background:linear-gradient(135deg,var(--brand-tan),var(--brand-gold));">' + tagSVG() + '</div>';
 
     const badgeHtml = item.badge
       ? '<span class="card-badge">' + item.badge + '</span>' : '';
+
+    const invHtml = buildInventoryBadge(item.inventory || '');
 
     const card = document.createElement('div');
     card.className = 'product-card';
@@ -549,8 +748,9 @@
     card.innerHTML = imgHtml + badgeHtml
       + '<div class="card-body">'
       + '<div class="card-title">' + (item.name || 'Unnamed Product') + '</div>'
-      + '<div class="card-desc">' + (item.description || '') + '</div>'
-      + '<div class="card-meta">' + pills + colorPill + '</div>'
+      + '<div class="card-desc">'  + (item.description || '') + '</div>'
+      + '<div class="card-meta">'  + pills + colorPill + '</div>'
+      + invHtml
       + '<div class="card-price">' + (item.price || 'Contact for pricing') + '</div>'
       + '</div>';
     return card;
@@ -618,6 +818,10 @@
         return;
       }
 
+      /* Build slideshow from sheet images */
+      buildSlideshow(items);
+
+      /* Build product cards */
       grid.innerHTML = '';
       allCards = [];
       items.forEach(item => {
@@ -670,11 +874,14 @@
   if (initialUrl) {
     loadProducts(initialUrl);
   } else {
-    const grid = document.getElementById('products-grid');
+    const grid  = document.getElementById('products-grid');
     const label = document.getElementById('product-count-label');
-    grid.innerHTML = '<div class="products-state">No product sheet connected yet.<br><small style="color:#aaa;">Go to the ⚙ Setup tab to connect your Google Sheet.</small><br><br><button onclick="showTab(\'setup\')" style="margin-top:10px;background:var(--brand-gold);color:var(--brand-dark);border:none;border-radius:6px;padding:10px 22px;font-weight:700;cursor:pointer;font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;">Open Setup Guide</button></div>';
+    grid.innerHTML = '<div class="products-state">No product sheet connected yet.<br><small style="color:#aaa;">Click the footer 5 times quickly to access admin setup.</small></div>';
     label.textContent = '';
   }
+
+  /* Start slideshow with fallback slides right away */
+  initSlideshow();
 </script>
 </body>
 </html>
