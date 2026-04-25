@@ -90,6 +90,8 @@
   .slide-fallback-5 { background: linear-gradient(135deg, #07121e 0%, #0f3060 50%, #1a5aa0 100%); }
   /* Real photo slides — image shows full size, no crop */
   .slide-photo img { width: 100%; height: auto; display: block; max-height: 700px; object-fit: contain; background: #0a0704; }
+  /* Video slides */
+  .slide-video .slide-vid { width: 100%; height: auto; display: block; max-height: 700px; background: #000; }
   .slide-overlay { display: none; }
   .slide-label { position: absolute; bottom: 0; left: 0; right: 0; text-align: center; color: #fff; z-index: 2; padding: 1.5rem 1rem 2.5rem; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.75) 100%); }
   .slide-label h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
@@ -308,7 +310,7 @@
           <rect x="140" y="40" width="80" height="130" rx="8" stroke="white" stroke-width="2"/>
           <rect x="30" y="25" width="100" height="60" rx="30" stroke="white" stroke-width="2"/>
         </svg>
-        <div class="slide-label"><h2>All Sizes &amp; Styles</h2><p>Button, zTags, two-piece, visual ID tags</p></div>
+        <div class="slide-label"><h2>All Sizes &amp; Styles</h2><p>Button, flag, two-piece, visual ID tags</p></div>
       </div>
       <div class="slide slide-fallback slide-fallback-3">
         <div class="slide-overlay"></div>
@@ -349,12 +351,12 @@
       <div class="why-item">
         <div class="why-icon"><svg viewBox="0 0 26 26"><rect x="4" y="6" width="18" height="14" rx="2"/><path d="M9 6V5a4 4 0 018 0v1"/><circle cx="13" cy="13" r="2"/></svg></div>
         <div class="why-title">Multiple Styles</div>
-        <div class="why-desc">Button, zTags, two-piece, and visual ID styles for cattle, sheep, goats &amp; swine.</div>
+        <div class="why-desc">Button, flag, two-piece, and visual ID styles for cattle, sheep, goats &amp; swine.</div>
       </div>
       <div class="why-item">
         <div class="why-icon"><svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="9"/><circle cx="13" cy="9" r="2" fill="#c8860a"/><circle cx="9" cy="16" r="2" fill="#1a1208"/><circle cx="17" cy="16" r="2" fill="#1a1208"/></svg></div>
-        <div class="why-title">7 Colors</div>
-        <div class="why-desc">White, yellow, orange, green, red, blue, pink.</div>
+        <div class="why-title">10+ Colors</div>
+        <div class="why-desc">White, yellow, orange, green, red, blue, purple, pink, and more in stock.</div>
       </div>
       <div class="why-item">
         <div class="why-icon"><svg viewBox="0 0 26 26"><path d="M4 20L13 5l9 15H4z"/><line x1="13" y1="11" x2="13" y2="15"/><circle cx="13" cy="17" r="1"/></svg></div>
@@ -391,9 +393,9 @@
   <div class="contact-page">
     <div class="contact-inner">
       <h2>Get in Touch</h2>
-      <p>Ready to order custom laser-engraved ear tags for your herd? We handle any size batch — from a handful of custom tags to large ranch orders. Ask about styles, colors.</p>
-      <a href="mailto:customtagsplus@gmail.com" class="contact-link">✉ Send Us an Email</a>
-      <p class="contact-note">Or reach us by phone — 1-605-682-9620!</p>
+      <p>Ready to order custom laser-engraved ear tags for your herd? We handle any size batch — from a handful of custom tags to large ranch orders. Ask about styles, colors, and bulk pricing.</p>
+      <a href="mailto:info@customtagsplus.com" class="contact-link">✉ Send Us an Email</a>
+      <p class="contact-note">Or reach us by phone — ask about bulk pricing!</p>
     </div>
   </div>
 </div>
@@ -456,7 +458,8 @@
               <div class="col-row"><span class="col-name">badge</span><span class="col-req opt">Optional</span><span>Popular, New, Sale — shows as a gold badge on the card</span></div>
               <div class="col-row"><span class="col-name">inventory</span><span class="col-req opt">Optional</span><span>A number (e.g. 42) or text: "In Stock", "Low Stock", "Out of Stock"</span></div>
               <div class="col-row"><span class="col-name">image_url</span><span class="col-req opt">Optional</span><span>Direct URL to a product photo (publicly accessible)</span></div>
-              <div class="col-row"><span class="col-name">slideshow_url</span><span class="col-req opt">Optional</span><span>Photo URL to show in the hero slideshow — fill this on rows you want as slides</span></div>
+              <div class="col-row"><span class="col-name">slideshow_url</span><span class="col-req opt">Optional</span><span>Photo or .mp4 video URL to show in the hero slideshow</span></div>
+              <div class="col-row"><span class="col-name">slideshow_type</span><span class="col-req opt">Optional</span><span>Leave blank for photos. Put <code style="background:rgba(255,255,255,0.1);padding:1px 5px;border-radius:3px;">video</code> for .mp4 files</span></div>
               <div class="col-row"><span class="col-name">slide_title</span><span class="col-req opt">Optional</span><span>Headline text for the slideshow (e.g. "Yellow Cattle Tags")</span></div>
               <div class="col-row"><span class="col-name">slide_subtitle</span><span class="col-req opt">Optional</span><span>Smaller caption under the headline (e.g. "UV-stable, weatherproof")</span></div>
             </div>
@@ -500,7 +503,7 @@
           <div class="step-num">6</div>
           <div class="step-body">
             <strong>Inventory</strong>
-            <p>Put a number like <code>42</code> in the <code>inventory</code> column and the card shows a green "42 in stock" badge. Values ≤1000 show yellow "Low stock". <code>0</code> or the text <code>Out of Stock</code> shows red. Leave blank to hide the inventory display entirely.</p>
+            <p>Put a number like <code>42</code> in the <code>inventory</code> column and the card shows a green "42 in stock" badge. Values ≤5 show yellow "Low stock". <code>0</code> or the text <code>Out of Stock</code> shows red. Leave blank to hide the inventory display entirely.</p>
           </div>
         </li>
 
@@ -740,19 +743,34 @@
     const slides = document.querySelectorAll('#slides-container .slide');
     const dots   = document.querySelectorAll('#slide-dots .dot');
     if (!slides.length) return;
+
+    /* Pause any video on the outgoing slide */
+    const outVid = slides[slideshowCur].querySelector('video');
+    if (outVid) { outVid.pause(); outVid.currentTime = 0; }
+
     slides[slideshowCur].classList.remove('active');
     if (dots[slideshowCur]) dots[slideshowCur].classList.remove('active');
+
     slideshowCur = (n + slides.length) % slides.length;
+
     slides[slideshowCur].classList.add('active');
     if (dots[slideshowCur]) dots[slideshowCur].classList.add('active');
-    clearInterval(slideshowTimer);
-    slideshowTimer = setInterval(() => slideGoTo(slideshowCur + 1), 5000);
+
+    /* Play video on the incoming slide; pause the timer while it runs */
+    const inVid = slides[slideshowCur].querySelector('video');
+    if (inVid) {
+      clearInterval(slideshowTimer); // let video run; it will call slideGoTo on 'ended'
+      inVid.play().catch(() => {});  // catch autoplay block gracefully
+    } else {
+      clearInterval(slideshowTimer);
+      slideshowTimer = setInterval(() => slideGoTo(slideshowCur + 1), 5000);
+    }
   }
 
   document.getElementById('next-slide').addEventListener('click', () => slideGoTo(slideshowCur + 1));
   document.getElementById('prev-slide').addEventListener('click', () => slideGoTo(slideshowCur - 1));
 
-  /* Build photo slides from sheet — full image, no crop */
+  /* Build photo + video slides from sheet */
   function buildSlideshow(items) {
     const slideItems = items.filter(i => i.slideshow_url && i.slideshow_url.trim());
     if (!slideItems.length) return; // keep fallback gradients
@@ -765,14 +783,34 @@
     slideItems.forEach((item, idx) => {
       const title    = item.slide_title    || item.name || '';
       const subtitle = item.slide_subtitle || '';
+      const url      = item.slideshow_url.trim();
+      const isVideo  = (item.slideshow_type || '').toLowerCase() === 'video'
+                       || /\.mp4(\?|$)/i.test(url)
+                       || /\.webm(\?|$)/i.test(url)
+                       || /\.mov(\?|$)/i.test(url);
 
       const div = document.createElement('div');
-      div.className = 'slide slide-photo' + (idx === 0 ? ' active' : '');
+      div.className = 'slide' + (idx === 0 ? ' active' : '');
 
-      div.innerHTML = '<img src="' + item.slideshow_url.trim() + '" alt="' + escHtml(title) + '" loading="lazy">'
-        + '<div class="slide-overlay"></div>'
-        + (title ? '<div class="slide-label"><h2>' + escHtml(title) + '</h2>'
-            + (subtitle ? '<p>' + escHtml(subtitle) + '</p>' : '') + '</div>' : '');
+      const labelHtml = title
+        ? '<div class="slide-label"><h2>' + escHtml(title) + '</h2>'
+          + (subtitle ? '<p>' + escHtml(subtitle) + '</p>' : '') + '</div>'
+        : '';
+
+      if (isVideo) {
+        div.classList.add('slide-video');
+        div.innerHTML = '<video class="slide-vid" src="' + url + '" muted playsinline preload="metadata"></video>'
+          + '<div class="slide-overlay"></div>' + labelHtml;
+
+        /* When video ends, advance to next slide */
+        const vid = div.querySelector('video');
+        vid.addEventListener('ended', () => slideGoTo(slideshowCur + 1));
+      } else {
+        div.classList.add('slide-photo');
+        div.innerHTML = '<img src="' + url + '" alt="' + escHtml(title) + '" loading="lazy">'
+          + '<div class="slide-overlay"></div>' + labelHtml;
+      }
+
       container.appendChild(div);
     });
 
@@ -822,8 +860,8 @@
     if (lower === 'low stock')    return { tier:'yellow', label:'Low stock' };
     const num = parseInt(raw, 10);
     if (isNaN(num)) return null;
-    if (num <= 0)   return { tier:'red',    label:'Out of stock' };
-    if (num <= 1000)    return { tier:'yellow', label: num + ' in stock — low' };
+    if (num === 0)   return { tier:'red',    label:'Out of stock' };
+    if (num <= 5)    return { tier:'yellow', label: num + ' in stock — low' };
     return              { tier:'green',  label: num + ' in stock' };
   }
 
@@ -872,7 +910,7 @@
       + '<div class="card-desc">'   + (item.description || '') + '</div>'
       + '<div class="card-meta">'   + pills + colorPill + '</div>'
       + '<div class="card-inv-wrap">' + buildInventoryBadge(rawInv) + '</div>'
-      + '<div class="card-price">'  + (item.price + '/per Tag with Engraving'|| 'Contact for pricing') + '</div>'
+      + '<div class="card-price">'  + (item.price + '/per Tag with Engraving' || 'Contact for pricing') + '</div>'
       + '</div>';
     return card;
   }
