@@ -81,17 +81,27 @@
   .slide { display: none; position: relative; width: 100%; }
   .slide.active { display: block; }
   /* Fallback gradient slides */
-  .slide-fallback { height: 520px; align-items: center; justify-content: center; }
+  .slide-fallback { min-height: 320px; align-items: center; justify-content: center; }
   .slide-fallback.active { display: flex; }
   .slide-fallback-1 { background: linear-gradient(135deg, #3b2000 0%, #7a4a00 50%, #c8860a 100%); }
   .slide-fallback-2 { background: linear-gradient(135deg, #0d1f0d 0%, #1a4020 50%, #2d7a40 100%); }
   .slide-fallback-3 { background: linear-gradient(135deg, #1a0a1a 0%, #4a1560 50%, #8b30a8 100%); }
   .slide-fallback-4 { background: linear-gradient(135deg, #1a0808 0%, #5c1010 50%, #c43030 100%); }
   .slide-fallback-5 { background: linear-gradient(135deg, #07121e 0%, #0f3060 50%, #1a5aa0 100%); }
-  /* Real photo slides — image shows full size, no crop */
-  .slide-photo img { width: 100%; height: auto; display: block; max-height: 700px; object-fit: contain; background: #0a0704; }
-  /* Video slides */
-  .slide-video .slide-vid { width: 100%; height: auto; display: block; max-height: 700px; background: #000; }
+  /* Real photo slides — full width, natural height, never cropped */
+  .slide-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #0a0704;
+  }
+  /* Video slides — full width, natural height, never cropped */
+  .slide-video .slide-vid {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #000;
+  }
   .slide-overlay { display: none; }
   .slide-label { position: absolute; bottom: 0; left: 0; right: 0; text-align: center; color: #fff; z-index: 2; padding: 1.5rem 1rem 2.5rem; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.75) 100%); }
   .slide-label h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
@@ -216,7 +226,7 @@
     header { flex-direction: column; height: auto; padding: 0.75rem 1rem; gap: 0; }
     .tab-nav { width: 100%; justify-content: center; border-top: 1px solid rgba(255,255,255,0.08); }
     .tab-btn { padding: 0.65rem 0.9rem; font-size: 0.78rem; }
-    .hero { height: 360px; }
+    .hero { min-height: 200px; }
     .slide-label h2 { font-size: 1.5rem; }
     .section-header { flex-direction: column; align-items: flex-start; }
     .col-header, .col-row { grid-template-columns: 110px 60px 1fr; font-size: 0.75rem; }
@@ -910,7 +920,7 @@
       + '<div class="card-desc">'   + (item.description || '') + '</div>'
       + '<div class="card-meta">'   + pills + colorPill + '</div>'
       + '<div class="card-inv-wrap">' + buildInventoryBadge(rawInv) + '</div>'
-      + '<div class="card-price">'  + (item.price + '/per Tag with Engraving' || 'Contact for pricing') + '</div>'
+      + '<div class="card-price">'  + (item.price + '/per Tag with Engraving'|| 'Contact for pricing') + '</div>'
       + '</div>';
     return card;
   }
