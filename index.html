@@ -22,12 +22,7 @@
   body { font-family: 'Source Sans 3', sans-serif; background: var(--brand-cream); color: var(--brand-text); min-height: 100vh; }
 
   /* ── HEADER ── */
-  header {
-    background: var(--brand-dark); padding: 0 2rem;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 72px; position: sticky; top: 0; z-index: 200;
-    border-bottom: 3px solid var(--brand-gold);
-  }
+  header { background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 72px; position: sticky; top: 0; z-index: 200; border-bottom: 3px solid var(--brand-gold); }
   .logo { display: flex; align-items: center; gap: 14px; text-decoration: none; cursor: pointer; }
   .logo-icon { width: 44px; height: 44px; background: var(--brand-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .logo-icon svg { width: 26px; height: 26px; }
@@ -36,13 +31,7 @@
 
   /* ── TAB NAV ── */
   .tab-nav { display: flex; align-items: stretch; height: 100%; }
-  .tab-btn {
-    background: none; border: none; border-bottom: 3px solid transparent; margin-bottom: -3px;
-    color: #bbb; font-family: 'Source Sans 3', sans-serif; font-size: 0.85rem; font-weight: 600;
-    letter-spacing: 0.07em; text-transform: uppercase; padding: 0 1.4rem;
-    cursor: pointer; display: flex; align-items: center; gap: 7px;
-    transition: color 0.2s, border-color 0.2s; white-space: nowrap;
-  }
+  .tab-btn { background: none; border: none; border-bottom: 3px solid transparent; margin-bottom: -3px; color: #bbb; font-family: 'Source Sans 3', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 0 1.4rem; cursor: pointer; display: flex; align-items: center; gap: 7px; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
   .tab-btn:hover { color: var(--brand-gold-light); }
   .tab-btn.active { color: var(--brand-gold-light); border-bottom-color: var(--brand-gold); }
 
@@ -77,10 +66,8 @@
   /* ── HERO SLIDESHOW ── */
   .hero { position: relative; overflow: hidden; background: var(--brand-dark); }
   .slides { position: relative; width: 100%; }
-  /* ALL slides hidden by default */
   .slide { display: none; position: relative; width: 100%; }
   .slide.active { display: block; }
-  /* Fallback gradient slides */
   .slide-fallback { min-height: 320px; align-items: center; justify-content: center; }
   .slide-fallback.active { display: flex; }
   .slide-fallback-1 { background: linear-gradient(135deg, #3b2000 0%, #7a4a00 50%, #c8860a 100%); }
@@ -88,20 +75,8 @@
   .slide-fallback-3 { background: linear-gradient(135deg, #1a0a1a 0%, #4a1560 50%, #8b30a8 100%); }
   .slide-fallback-4 { background: linear-gradient(135deg, #1a0808 0%, #5c1010 50%, #c43030 100%); }
   .slide-fallback-5 { background: linear-gradient(135deg, #07121e 0%, #0f3060 50%, #1a5aa0 100%); }
-  /* Real photo slides — full width, natural height, never cropped */
-  .slide-photo img {
-    width: 100%;
-    height: auto;
-    display: block;
-    background: #0a0704;
-  }
-  /* Video slides — full width, natural height, never cropped */
-  .slide-video .slide-vid {
-    width: 100%;
-    height: auto;
-    display: block;
-    background: #000;
-  }
+  .slide-photo img { width: 100%; height: auto; display: block; background: #0a0704; }
+  .slide-video .slide-vid { width: 100%; height: auto; display: block; background: #000; }
   .slide-overlay { display: none; }
   .slide-label { position: absolute; bottom: 0; left: 0; right: 0; text-align: center; color: #fff; z-index: 2; padding: 1.5rem 1rem 2.5rem; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.75) 100%); }
   .slide-label h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
@@ -128,16 +103,13 @@
   .section-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--brand-brown); position: relative; display: inline-block; }
   .section-title::after { content: ''; display: block; height: 3px; background: var(--brand-gold); width: 60%; margin-top: 6px; }
   .section-sub { color: var(--brand-muted); font-size: 0.9rem; margin-top: 4px; }
-
   .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
   .filter-btn { background: #fff; border: 1px solid #d4b87a; color: var(--brand-brown); font-family: 'Source Sans 3', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; cursor: pointer; transition: all 0.18s; }
   .filter-btn:hover { background: var(--brand-tan); }
   .filter-btn.active { background: var(--brand-gold); border-color: var(--brand-gold); color: var(--brand-dark); }
-
   .products-state { grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: var(--brand-muted); font-size: 1rem; }
   .spinner { display: inline-block; width: 36px; height: 36px; border: 3px solid var(--brand-tan); border-top-color: var(--brand-gold); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 14px; }
   @keyframes spin { to { transform: rotate(360deg); } }
-
   .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.75rem; }
   .product-card { background: #fff; border: 1px solid #e8d5b0; border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.25s, box-shadow 0.25s; position: relative; }
   .product-card:hover { transform: translateY(-4px); box-shadow: 0 10px 36px rgba(92,61,14,0.2); }
@@ -149,8 +121,6 @@
   .card-desc { font-size: 0.875rem; color: #5a4020; line-height: 1.6; margin-bottom: 12px; }
   .card-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
   .meta-pill { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; background: var(--brand-cream); border: 1px solid #d4b87a; color: var(--brand-brown); }
-
-  /* Inventory badge */
   .card-inventory { font-size: 0.78rem; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
   .inv-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
   .inv-dot.green  { background: #3db870; }
@@ -159,7 +129,6 @@
   .inv-text.green  { color: #2a8f50; }
   .inv-text.yellow { color: #8a6600; }
   .inv-text.red    { color: #b03030; }
-
   .card-price { font-size: 1.05rem; font-weight: 700; color: var(--brand-brown); }
   .card-price span { font-size: 0.8rem; font-weight: 400; color: var(--brand-muted); margin-left: 4px; }
 
@@ -203,19 +172,20 @@
   .current-url-display { margin-top: 1rem; padding: 10px 14px; background: rgba(45,120,60,0.12); border: 1px solid rgba(60,180,90,0.25); border-radius: var(--radius); font-size: 0.8rem; color: #7be09a; word-break: break-all; display: none; }
   .current-url-display.show { display: block; }
 
-  /* ── ADMIN DASHBOARD CARDS ── */
+  /* ── ADMIN DASHBOARD ── */
   .admin-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.4rem; margin-bottom: 2.5rem; }
   .dash-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(200,134,10,0.25); border-radius: 10px; padding: 1.4rem 1.6rem; }
   .dash-card-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-gold); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px; }
   .dash-big-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--brand-gold-light); line-height: 1; }
   .dash-sub { font-size: 0.78rem; color: #777; margin-top: 6px; }
-  .log-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  .dash-refresh { background: none; border: 1px solid rgba(200,134,10,0.3); color: var(--brand-gold); border-radius: 20px; font-size: 0.7rem; padding: 2px 10px; cursor: pointer; margin-left: auto; font-family: 'Source Sans 3', sans-serif; }
+  .dash-refresh:hover { background: rgba(200,134,10,0.1); }
+  .log-scroll { overflow-x: auto; }
+  .log-table { width: 100%; min-width: 540px; border-collapse: collapse; font-size: 0.78rem; }
   .log-table th { text-align: left; color: var(--brand-gold); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 8px 8px 0; border-bottom: 1px solid rgba(200,134,10,0.2); }
   .log-table td { padding: 6px 8px 6px 0; color: #ccc; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: top; }
   .log-table tr:last-child td { border-bottom: none; }
   .log-empty { color: #555; font-size: 0.82rem; font-style: italic; padding: 8px 0; }
-  .dash-refresh { background: none; border: 1px solid rgba(200,134,10,0.3); color: var(--brand-gold); border-radius: 20px; font-size: 0.7rem; padding: 2px 10px; cursor: pointer; margin-left: auto; font-family: 'Source Sans 3', sans-serif; }
-  .dash-refresh:hover { background: rgba(200,134,10,0.1); }
 
   /* ── FOOTER ── */
   footer { background: var(--brand-dark); color: #666; text-align: center; font-size: 0.8rem; padding: 1.4rem 2rem; border-top: 2px solid var(--brand-gold); user-select: none; cursor: default; }
@@ -235,9 +205,6 @@
 </head>
 <body>
 
-<!-- ══════════════════════
-     HEADER
-══════════════════════ -->
 <header>
   <a class="logo" id="logo-home">
     <div class="logo-icon">
@@ -261,13 +228,11 @@
   </nav>
 </header>
 
-<!-- ADMIN STATUS BAR -->
 <div class="admin-bar" id="admin-bar">
   <span>⚙ Admin — Setup unlocked</span>
   <button class="admin-bar-logout" id="admin-logout">Lock &amp; Log Out</button>
 </div>
 
-<!-- LOGIN MODAL -->
 <div class="modal-backdrop" id="login-modal">
   <div class="login-modal">
     <button class="modal-close" id="modal-close">&times;</button>
@@ -293,16 +258,10 @@
   </div>
 </div>
 
-
-<!-- ══════════════════════
-     PAGE: STORE
-══════════════════════ -->
+<!-- PAGE: STORE -->
 <div class="page active" id="page-store">
-
-  <!-- Hero Slideshow — populated from Google Sheet -->
   <section class="hero" aria-label="Product slideshow">
     <div class="slides" id="slides-container">
-      <!-- Fallback gradient slides shown until sheet data loads -->
       <div class="slide slide-fallback slide-fallback-1 active">
         <div class="slide-overlay"></div>
         <svg class="tag-deco" width="260" height="200" viewBox="0 0 260 200" fill="none">
@@ -350,7 +309,6 @@
     <div class="slide-dots" id="slide-dots"></div>
   </section>
 
-  <!-- Why Us -->
   <section class="why-strip">
     <div class="why-inner">
       <div class="why-item">
@@ -376,7 +334,6 @@
     </div>
   </section>
 
-  <!-- Products -->
   <section class="section">
     <div class="section-header">
       <div>
@@ -386,19 +343,12 @@
       <div class="filter-bar" id="filter-bar"></div>
     </div>
     <div class="products-grid" id="products-grid">
-      <div class="products-state">
-        <div class="spinner"></div>
-        <div>Loading products from your catalog…</div>
-      </div>
+      <div class="products-state"><div class="spinner"></div><div>Loading products from your catalog…</div></div>
     </div>
   </section>
+</div>
 
-</div><!-- /page-store -->
-
-
-<!-- ══════════════════════
-     PAGE: CONTACT
-══════════════════════ -->
+<!-- PAGE: CONTACT -->
 <div class="page" id="page-contact">
   <div class="contact-page">
     <div class="contact-inner">
@@ -410,121 +360,119 @@
   </div>
 </div>
 
-
-<!-- ══════════════════════
-     PAGE: SETUP (hidden — admin only)
-══════════════════════ -->
+<!-- PAGE: SETUP (hidden — admin only, unlock via footer x5) -->
 <div class="page" id="page-setup">
   <div class="setup-page">
     <div class="setup-inner">
+
       <div class="setup-title">Admin Dashboard</div>
       <p class="setup-sub">Monitor your site traffic, recent logins, and manage your Google Sheet connection below.</p>
 
-      <!-- DASHBOARD CARDS -->
       <div class="admin-dashboard">
         <div class="dash-card">
-          <div class="dash-card-title">
-            📊 Website Hits
-            <button class="dash-refresh" id="refresh-hits">↻ Refresh</button>
-          </div>
+          <div class="dash-card-title">📊 Website Hits <button class="dash-refresh" id="refresh-hits">↻ Refresh</button></div>
           <div class="dash-big-num" id="hit-count">—</div>
-          <div class="dash-sub" id="hit-sub">Total page visits since launch</div>
+          <div class="dash-sub" id="hit-sub">All visitor sessions — every device, every browser</div>
         </div>
         <div class="dash-card">
           <div class="dash-card-title">🕐 Recent Logins</div>
-          <div id="login-log-display">
-            <div class="log-empty">No logins recorded yet.</div>
-          </div>
+          <div class="log-scroll"><div id="login-log-display"><div class="log-empty">No logins recorded yet.</div></div></div>
         </div>
       </div>
 
       <div class="setup-title" style="font-size:1.4rem; margin-top:1rem;">Google Sheets Setup</div>
-      <p class="setup-sub">Follow these steps once and your product catalog and slideshow will automatically pull from your Google Sheet every time someone visits the site. Just edit the sheet — the website updates itself.</p>
+      <p class="setup-sub">Follow these steps once and your product catalog and slideshow will automatically pull from your Google Sheet. Just edit the sheet — the website updates itself.</p>
 
       <ol class="step-list">
-
         <li class="step-item">
           <div class="step-num">1</div>
           <div class="step-body">
-            <strong>Create your Google Sheet</strong>
-            <p>Go to <a href="https://sheets.google.com" target="_blank" style="color:var(--brand-gold-light);">sheets.google.com</a> and create a new spreadsheet. Name it anything you like, e.g. <code>Custom Tags Plus — Products</code>.</p>
+            <strong>Your Sheet is already connected</strong>
+            <p>Your Google Sheet CSV URL is hardcoded in this file. To change it, open <code>index.html</code> and update <code>SHEET_CSV_URL</code> at the top of the script.</p>
           </div>
         </li>
-
         <li class="step-item">
           <div class="step-num">2</div>
           <div class="step-body">
-            <strong>Add these exact column headers in Row 1</strong>
-            <p>Header names must match exactly (capitalization doesn't matter). Add them starting from column A:</p>
+            <strong>Sheet column headers</strong>
             <div class="sheet-columns">
               <div class="col-header"><span>Column</span><span>Required?</span><span>What to put in it</span></div>
-              <div class="col-row"><span class="col-name">name</span><span class="col-req">Required</span><span>Product name, e.g. Large Cattle Button Tag</span></div>
+              <div class="col-row"><span class="col-name">name</span><span class="col-req">Required</span><span>Product name</span></div>
               <div class="col-row"><span class="col-name">description</span><span class="col-req">Required</span><span>Full product description</span></div>
               <div class="col-row"><span class="col-name">animal</span><span class="col-req opt">Optional</span><span>Cattle, Sheep, Goats, Swine, Horses…</span></div>
               <div class="col-row"><span class="col-name">style</span><span class="col-req opt">Optional</span><span>Button, Flag, Two-Piece, Visual ID…</span></div>
               <div class="col-row"><span class="col-name">size</span><span class="col-req opt">Optional</span><span>Small, Medium, Large, Extra Large…</span></div>
               <div class="col-row"><span class="col-name">color</span><span class="col-req opt">Optional</span><span>Yellow, Green, Red, Blue, Orange…</span></div>
-              <div class="col-row"><span class="col-name">price</span><span class="col-req opt">Optional</span><span>$1.25/tag — leave blank for "Contact for pricing"</span></div>
-              <div class="col-row"><span class="col-name">badge</span><span class="col-req opt">Optional</span><span>Popular, New, Sale — shows as a gold badge on the card</span></div>
-              <div class="col-row"><span class="col-name">inventory</span><span class="col-req opt">Optional</span><span>A number (e.g. 42) or text: "In Stock", "Low Stock", "Out of Stock"</span></div>
-              <div class="col-row"><span class="col-name">image_url</span><span class="col-req opt">Optional</span><span>Direct URL to a product photo (publicly accessible)</span></div>
-              <div class="col-row"><span class="col-name">slideshow_url</span><span class="col-req opt">Optional</span><span>Photo or .mp4 video URL to show in the hero slideshow</span></div>
-              <div class="col-row"><span class="col-name">slideshow_type</span><span class="col-req opt">Optional</span><span>Leave blank for photos. Put <code style="background:rgba(255,255,255,0.1);padding:1px 5px;border-radius:3px;">video</code> for .mp4 files</span></div>
-              <div class="col-row"><span class="col-name">slide_title</span><span class="col-req opt">Optional</span><span>Headline text for the slideshow (e.g. "Yellow Cattle Tags")</span></div>
-              <div class="col-row"><span class="col-name">slide_subtitle</span><span class="col-req opt">Optional</span><span>Smaller caption under the headline (e.g. "UV-stable, weatherproof")</span></div>
+              <div class="col-row"><span class="col-name">price</span><span class="col-req opt">Optional</span><span>e.g. $1.25 — shows as "$1.25/per Tag with Engraving"</span></div>
+              <div class="col-row"><span class="col-name">badge</span><span class="col-req opt">Optional</span><span>Popular, New, Sale</span></div>
+              <div class="col-row"><span class="col-name">inventory</span><span class="col-req opt">Optional</span><span>Number, "In Stock", "Low Stock", or "Out of Stock"</span></div>
+              <div class="col-row"><span class="col-name">image_url</span><span class="col-req opt">Optional</span><span>Direct URL to a product photo</span></div>
+              <div class="col-row"><span class="col-name">slideshow_url</span><span class="col-req opt">Optional</span><span>Photo or .mp4 URL for the hero slideshow</span></div>
+              <div class="col-row"><span class="col-name">slideshow_type</span><span class="col-req opt">Optional</span><span>Leave blank for photos; put <code>video</code> for .mp4</span></div>
+              <div class="col-row"><span class="col-name">slide_title</span><span class="col-req opt">Optional</span><span>Headline text on the slide</span></div>
+              <div class="col-row"><span class="col-name">slide_subtitle</span><span class="col-req opt">Optional</span><span>Smaller caption under the headline</span></div>
             </div>
-            <p style="margin-top:8px;">Fill rows 2, 3, 4… with each product. Add or edit rows anytime — the site always loads the latest data.</p>
           </div>
         </li>
-
         <li class="step-item">
           <div class="step-num">3</div>
           <div class="step-body">
-            <strong>Publish your sheet to the web</strong>
-            <p>In Google Sheets: <code>File</code> → <code>Share</code> → <code>Publish to web</code>. Select your sheet tab, choose <code>Comma-separated values (.csv)</code>, then click <code>Publish</code>.</p>
-          </div>
-        </li>
-
-        <li class="step-item">
-          <div class="step-num">4</div>
-          <div class="step-body">
-            <strong>Paste the CSV link below and save</strong>
-            <p>Google gives you a URL like:<br>
-            <code>https://docs.google.com/spreadsheets/d/…/pub?gid=0&single=true&output=csv</code><br>
-            Paste it here and click Save &amp; Load.</p>
+            <strong>Override sheet URL (optional)</strong>
+            <p>Paste a different CSV URL here to switch sheets without editing the file.</p>
             <div class="url-input-wrap">
               <input class="url-input" type="url" id="sheet-url-input" placeholder="https://docs.google.com/spreadsheets/d/…/pub?output=csv">
               <button class="save-url-btn" id="save-url-btn">Save &amp; Load</button>
             </div>
-            <div class="url-saved" id="url-saved">✓ URL saved! Switch to the Store tab to see your products.</div>
+            <div class="url-saved" id="url-saved">✓ URL saved!</div>
             <div class="current-url-display" id="current-url-display"></div>
           </div>
         </li>
-
         <li class="step-item">
-          <div class="step-num">5</div>
+          <div class="step-num">4</div>
           <div class="step-body">
-            <strong>Slideshow images</strong>
-            <p>Add a public image URL in the <code>slideshow_url</code> column for any row you want featured in the hero slideshow. Use <code>slide_title</code> and <code>slide_subtitle</code> to control the text overlay. Rows without a <code>slideshow_url</code> won't appear as slides. If no rows have a slideshow URL the default gradient slides show instead.</p>
+            <strong>Connect Google Apps Script (cross-device hit counter &amp; login log)</strong>
+            <p>① In your Google Sheet → <code>Extensions</code> → <code>Apps Script</code> → delete existing code and paste:</p>
+            <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(200,134,10,0.2);border-radius:6px;padding:1rem;margin:10px 0;font-family:monospace;font-size:0.72rem;color:#c8d890;white-space:pre-wrap;overflow-x:auto;">function doGet(e) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const action = e.parameter.action || '';
+  if (action === 'hit') {
+    let sh = ss.getSheetByName('Hits') || ss.insertSheet('Hits');
+    if (sh.getLastRow() === 0) sh.appendRow(['Count']);
+    if (sh.getLastRow() < 2) sh.appendRow([0]);
+    const c = sh.getRange('A2'); c.setValue((c.getValue()||0)+1);
+    return ContentService.createTextOutput(JSON.stringify({ok:true})).setMimeType(ContentService.MimeType.JSON);
+  }
+  if (action === 'getHits') {
+    const sh = ss.getSheetByName('Hits');
+    const count = sh ? (sh.getRange('A2').getValue()||0) : 0;
+    return ContentService.createTextOutput(JSON.stringify({count})).setMimeType(ContentService.MimeType.JSON);
+  }
+  if (action === 'logLogin') {
+    let sh = ss.getSheetByName('LoginLog') || ss.insertSheet('LoginLog');
+    if (sh.getLastRow() === 0) sh.appendRow(['Time','Type','Screen','Browser','OS','City','Country','IP']);
+    const d = JSON.parse(e.parameter.data||'{}');
+    sh.insertRowAfter(1);
+    sh.getRange(2,1,1,8).setValues([[d.time||'',d.type||'',d.screen||'',d.browser||'',d.os||'',d.city||'',d.country||'',d.ip||'']]);
+    return ContentService.createTextOutput(JSON.stringify({ok:true})).setMimeType(ContentService.MimeType.JSON);
+  }
+  if (action === 'getLogs') {
+    const sh = ss.getSheetByName('LoginLog');
+    if (!sh) return ContentService.createTextOutput('[]').setMimeType(ContentService.MimeType.JSON);
+    const rows = sh.getDataRange().getValues().slice(1).map(r=>({time:r[0],type:r[1],screen:r[2],browser:r[3],os:r[4],city:r[5],country:r[6],ip:r[7]}));
+    return ContentService.createTextOutput(JSON.stringify(rows)).setMimeType(ContentService.MimeType.JSON);
+  }
+  return ContentService.createTextOutput('{}').setMimeType(ContentService.MimeType.JSON);
+}</div>
+            <p>② <code>Deploy</code> → <code>New deployment</code> → Type: <code>Web app</code> → Execute as: <code>Me</code> → Access: <code>Anyone</code> → Deploy → copy the URL</p>
+            <p style="margin-top:6px;">③ Paste the Web App URL here:</p>
+            <div class="url-input-wrap" style="margin-top:10px;">
+              <input class="url-input" type="url" id="apps-script-url-input" placeholder="https://script.google.com/macros/s/…/exec">
+              <button class="save-url-btn" id="save-apps-script-btn">Save</button>
+            </div>
+            <div class="url-saved" id="apps-script-saved">✓ Apps Script URL saved!</div>
+            <div class="current-url-display" id="apps-script-current"></div>
           </div>
         </li>
-
-        <li class="step-item">
-          <div class="step-num">6</div>
-          <div class="step-body">
-            <strong>Inventory</strong>
-            <p>Put a number like <code>42</code> in the <code>inventory</code> column and the card shows a green "42 in stock" badge. Values ≤5 show yellow "Low stock". <code>0</code> or the text <code>Out of Stock</code> shows red. Leave blank to hide the inventory display entirely.</p>
-          </div>
-        </li>
-
-        <li class="step-item">
-          <div class="step-num">7</div>
-          <div class="step-body">
-            <strong>Make it permanent for all visitors</strong>
-            <p>Open <code>index.html</code> in a text editor, find <code>const SHEET_CSV_URL = '';</code> near the top of the script, and paste your URL between the quotes. This makes the sheet load for everyone without needing to use the Setup panel.</p>
-          </div>
-        </li>
-
       </ol>
 
       <p style="color:#555; font-size:0.82rem; line-height:1.6;">
@@ -532,29 +480,30 @@
       </p>
     </div>
   </div>
-</div><!-- /page-setup -->
-
+</div>
 
 <footer id="footer-trigger">
   &copy; <span id="year"></span> <span>Custom Tags Plus</span> — Laser Engraved Livestock Ear Tags — Built with pride.
 </footer>
 
-
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  /* ═══════════════════════════════════════════════
-     CONFIGURATION — paste your CSV URL here so it
-     works for ALL visitors automatically
-  ═══════════════════════════════════════════════ */
-  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSU4NLzM1nzeuF0GQ9VQgQeXHt4x_9m5jEn0CtiO-3o6mGRmpVIj-rCp7lHObw9cNRdqcURclxAnLOZ/pub?output=csv';   // ← paste your Google Sheet CSV URL between the quotes
+  /* ═══════════════════════════════════════════════════
+     YOUR SHEET URL — already connected
+  ═══════════════════════════════════════════════════ */
+  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSU4NLzM1nzeuF0GQ9VQgQeXHt4x_9m5jEn0CtiO-3o6mGRmpVIj-rCp7lHObw9cNRdqcURclxAnLOZ/pub?output=csv';
 
-  /* ═══════════════════════════════════════════════
-     ADMIN CREDENTIALS — change before uploading!
-  ═══════════════════════════════════════════════ */
+  /* ═══════════════════════════════════════════════════
+     ADMIN CREDENTIALS
+  ═══════════════════════════════════════════════════ */
   const ADMIN_USER = 'admin';
-  const ADMIN_PASS = 'tagsplus2024';   // ← change this password!
+  const ADMIN_PASS = 'tagsplus2024';
 
+  /* ═══════════════════════════════════════════════════
+     APPS SCRIPT URL — paste yours in Setup tab or here
+  ═══════════════════════════════════════════════════ */
+  let APPS_SCRIPT_URL = localStorage.getItem('ctp_apps_script_url') || '';
 
   /* ─── TAB SWITCHING ─── */
   const tabBtns = document.querySelectorAll('.tab-btn');
@@ -582,17 +531,13 @@
   }
   applyAdminState();
 
-  /* Secret trigger: click footer 5 times within 2 seconds */
+  /* Footer secret trigger: click 5 times within 2s */
   let footerClicks = 0, footerTimer;
   document.getElementById('footer-trigger').addEventListener('click', () => {
     footerClicks++;
     clearTimeout(footerTimer);
     footerTimer = setTimeout(() => { footerClicks = 0; }, 2000);
-    if (footerClicks >= 5) {
-      footerClicks = 0;
-      if (isAdmin) { showTab('setup'); }
-      else { openModal(); }
-    }
+    if (footerClicks >= 5) { footerClicks = 0; isAdmin ? showTab('setup') : openModal(); }
   });
 
   function openModal() {
@@ -603,25 +548,22 @@
     setTimeout(() => document.getElementById('modal-user').focus(), 50);
   }
   function closeModal() { document.getElementById('login-modal').classList.remove('open'); }
-
   document.getElementById('modal-close').addEventListener('click', closeModal);
-  document.getElementById('login-modal').addEventListener('click', e => {
-    if (e.target === document.getElementById('login-modal')) closeModal();
-  });
+  document.getElementById('login-modal').addEventListener('click', e => { if (e.target === document.getElementById('login-modal')) closeModal(); });
 
   async function attemptLogin() {
-    const u   = document.getElementById('modal-user').value.trim();
-    const p   = document.getElementById('modal-pass').value;
+    const u = document.getElementById('modal-user').value.trim();
+    const p = document.getElementById('modal-pass').value;
     const err = document.getElementById('modal-error');
     if (u === ADMIN_USER && p === ADMIN_PASS) {
       isAdmin = true;
       sessionStorage.setItem('ctp_admin', '1');
       closeModal();
       applyAdminState();
-      /* Fetch location and log the login */
       await logLogin();
       showTab('setup');
       showCurrentUrl();
+      showAppsScriptUrl();
     } else {
       err.textContent = 'Incorrect username or password.';
       document.getElementById('modal-pass').value = '';
@@ -632,117 +574,143 @@
   document.getElementById('modal-pass').addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin(); });
   document.getElementById('modal-user').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('modal-pass').focus(); });
   document.getElementById('admin-logout').addEventListener('click', () => {
-    isAdmin = false;
-    sessionStorage.removeItem('ctp_admin');
-    applyAdminState();
-    showTab('store');
+    isAdmin = false; sessionStorage.removeItem('ctp_admin'); applyAdminState(); showTab('store');
   });
+
+  /* ─── DEVICE INFO ─── */
+  function getDeviceInfo() {
+    const ua = navigator.userAgent;
+    let browser = 'Unknown';
+    if      (/Edg\//.test(ua))       browser = 'Edge';
+    else if (/OPR\/|Opera/.test(ua)) browser = 'Opera';
+    else if (/Chrome\//.test(ua))    browser = 'Chrome';
+    else if (/Firefox\//.test(ua))   browser = 'Firefox';
+    else if (/Safari\//.test(ua))    browser = 'Safari';
+    let os = 'Unknown OS';
+    if      (/Windows NT 10/.test(ua))   os = 'Windows 10/11';
+    else if (/Windows NT 6\.1/.test(ua)) os = 'Windows 7';
+    else if (/Windows/.test(ua))         os = 'Windows';
+    else if (/iPhone/.test(ua))          os = 'iPhone';
+    else if (/iPad/.test(ua))            os = 'iPad';
+    else if (/Android/.test(ua))         os = 'Android';
+    else if (/Mac OS X/.test(ua))        os = 'macOS';
+    else if (/Linux/.test(ua))           os = 'Linux';
+    let type = '🖥 Desktop';
+    if      (/iPhone|Android.*Mobile|Windows Phone/.test(ua)) type = '📱 Mobile';
+    else if (/iPad|Android(?!.*Mobile)/.test(ua))              type = '📱 Tablet';
+    return { browser, os, type, screen: window.screen.width + '×' + window.screen.height };
+  }
 
   /* ─── LOGIN LOG ─── */
   const LOGIN_LOG_KEY = 'ctp_login_log';
 
   async function logLogin() {
+    /* One log entry per device per 24 hours */
+    const LAST_KEY = 'ctp_last_login_log';
+    const last = parseInt(localStorage.getItem(LAST_KEY) || '0', 10);
+    const now  = Date.now();
+    if (now - last < 86400000) return;
+    localStorage.setItem(LAST_KEY, now);
+
     let city = 'Unknown', country = '', ip = '';
     try {
       const r = await fetch('https://ipapi.co/json/');
-      if (r.ok) {
-        const d = await r.json();
-        city    = d.city    || 'Unknown';
-        country = d.country_name || '';
-        ip      = d.ip      || '';
-      }
+      if (r.ok) { const d = await r.json(); city = d.city || 'Unknown'; country = d.country_name || ''; ip = d.ip || ''; }
     } catch(e) {}
 
-    const entry = {
-      time:    new Date().toLocaleString(),
-      city,
-      country,
-      ip
-    };
+    const dev   = getDeviceInfo();
+    const entry = { time: new Date().toLocaleString(), city, country, ip, browser: dev.browser, os: dev.os, type: dev.type, screen: dev.screen };
 
+    /* Send to Apps Script (cross-device) */
+    if (APPS_SCRIPT_URL) {
+      try { await fetch(APPS_SCRIPT_URL + '?action=logLogin&data=' + encodeURIComponent(JSON.stringify(entry)), { mode: 'no-cors' }); } catch(e) {}
+    }
+
+    /* Also save locally as fallback */
     let log = [];
     try { log = JSON.parse(localStorage.getItem(LOGIN_LOG_KEY) || '[]'); } catch(e) {}
     log.unshift(entry);
-    if (log.length > 20) log = log.slice(0, 20); // keep last 20
+    if (log.length > 20) log = log.slice(0, 20);
     localStorage.setItem(LOGIN_LOG_KEY, JSON.stringify(log));
   }
 
-  function renderLoginLog() {
+  async function renderLoginLog() {
     const wrap = document.getElementById('login-log-display');
     if (!wrap) return;
-    let log = [];
-    try { log = JSON.parse(localStorage.getItem(LOGIN_LOG_KEY) || '[]'); } catch(e) {}
 
-    if (!log.length) {
-      wrap.innerHTML = '<div class="log-empty">No logins recorded yet.</div>';
-      return;
+    const last = parseInt(localStorage.getItem('ctp_last_login_log') || '0', 10);
+    const remaining = last ? 86400000 - (Date.now() - last) : 0;
+    let nextInfo = '';
+    if (remaining > 0) {
+      const hrs = Math.floor(remaining / 3600000), mins = Math.floor((remaining % 3600000) / 60000);
+      nextInfo = '<div style="font-size:0.75rem;color:#666;margin-bottom:10px;">⏱ Next log from this device in ' + hrs + 'h ' + mins + 'm</div>';
     }
 
-    let html = '<table class="log-table"><thead><tr>'
-      + '<th>Date / Time</th><th>Location</th><th>IP</th>'
-      + '</tr></thead><tbody>';
-    log.forEach(e => {
+    /* Try Apps Script first (all devices) */
+    if (APPS_SCRIPT_URL) {
+      try {
+        wrap.innerHTML = nextInfo + '<div class="log-empty" style="color:#888;">Loading…</div>';
+        const r = await fetch(APPS_SCRIPT_URL + '?action=getLogs');
+        if (r.ok) {
+          const rows = await r.json();
+          wrap.innerHTML = nextInfo + (rows.length ? buildLogTable(rows) : '<div class="log-empty">No logins recorded yet.</div>');
+          return;
+        }
+      } catch(e) {}
+    }
+
+    /* Fallback: localStorage (this device only) */
+    let log = [];
+    try { log = JSON.parse(localStorage.getItem(LOGIN_LOG_KEY) || '[]'); } catch(e) {}
+    wrap.innerHTML = nextInfo
+      + (APPS_SCRIPT_URL ? '' : '<div style="font-size:0.72rem;color:#666;margin-bottom:8px;">⚠ Showing this device only — connect Apps Script in Step 4 to see all devices.</div>')
+      + (log.length ? buildLogTable(log) : '<div class="log-empty">No logins recorded yet.</div>');
+  }
+
+  function buildLogTable(rows) {
+    let html = '<table class="log-table"><thead><tr><th>Date / Time</th><th>Device</th><th>Browser / OS</th><th>Location</th><th>IP</th></tr></thead><tbody>';
+    rows.forEach(e => {
       html += '<tr>'
-        + '<td>' + e.time + '</td>'
+        + '<td style="white-space:nowrap;">' + (e.time || '—') + '</td>'
+        + '<td>' + (e.type || '—') + (e.screen ? '<br><span style="color:#555;font-size:0.7rem;">' + e.screen + '</span>' : '') + '</td>'
+        + '<td>' + (e.browser || '—') + (e.os ? '<br><span style="color:#555;font-size:0.7rem;">' + e.os + '</span>' : '') + '</td>'
         + '<td>' + (e.city || '—') + (e.country ? ', ' + e.country : '') + '</td>'
-        + '<td style="color:#666;font-family:monospace;">' + (e.ip || '—') + '</td>'
+        + '<td style="color:#555;font-family:monospace;font-size:0.7rem;">' + (e.ip || '—') + '</td>'
         + '</tr>';
     });
-    html += '</tbody></table>';
-    wrap.innerHTML = html;
+    return html + '</tbody></table>';
   }
 
   /* ─── HIT COUNTER ─── */
-  /* Uses counterapi.dev (free, no signup). Change the namespace to something unique. */
-  const HIT_NAMESPACE = 'customtagsplus-v1';
-  const HIT_KEY       = 'visits';
-
   async function incrementAndLoadHits() {
     if (sessionStorage.getItem('ctp_hit_counted')) return;
     sessionStorage.setItem('ctp_hit_counted', '1');
-
-    /* Increment local count always (works offline too) */
     const local = parseInt(localStorage.getItem('ctp_local_hits') || '0', 10) + 1;
     localStorage.setItem('ctp_local_hits', local);
-
-    /* Try remote counter */
-    try {
-      await fetch('https://api.counterapi.dev/v1/' + HIT_NAMESPACE + '/' + HIT_KEY + '/up', { mode: 'cors' });
-    } catch(e) {}
+    if (APPS_SCRIPT_URL) {
+      try { await fetch(APPS_SCRIPT_URL + '?action=hit', { mode: 'no-cors' }); } catch(e) {}
+    }
   }
 
   async function loadHitCount() {
-    const el  = document.getElementById('hit-count');
-    const sub = document.getElementById('hit-sub');
+    const el = document.getElementById('hit-count'), sub = document.getElementById('hit-sub');
     if (!el) return;
     el.textContent = '…';
-
-    /* Try remote first */
-    try {
-      const r = await fetch('https://api.counterapi.dev/v1/' + HIT_NAMESPACE + '/' + HIT_KEY, { mode: 'cors' });
-      if (r.ok) {
-        const d = await r.json();
-        const count = d.count ?? d.value ?? null;
-        if (count !== null) {
-          el.textContent  = Number(count).toLocaleString();
-          sub.textContent = 'Total sessions tracked (all visitors)';
-          return;
-        }
-      }
-    } catch(e) {}
-
-    /* Fallback: show local count */
+    if (APPS_SCRIPT_URL) {
+      try {
+        const r = await fetch(APPS_SCRIPT_URL + '?action=getHits');
+        if (r.ok) { const d = await r.json(); if (d.count !== undefined) { el.textContent = Number(d.count).toLocaleString(); sub.textContent = 'Total sessions — all visitors, all devices'; return; } }
+      } catch(e) {}
+    }
     const local = parseInt(localStorage.getItem('ctp_local_hits') || '0', 10);
     el.textContent  = local.toLocaleString();
-    sub.textContent = 'Visits on this device (remote counter unavailable)';
+    sub.textContent = 'Visits on this device' + (APPS_SCRIPT_URL ? ' (Apps Script unreachable)' : ' — connect Apps Script in Step 4 for all-device count');
   }
 
   document.getElementById('refresh-hits').addEventListener('click', loadHitCount);
 
   /* ─── SLIDESHOW ─── */
-  let slideshowCur   = 0;
-  let slideshowTimer = null;
-  let slideshowReady = false;
+  let slideshowCur = 0, slideshowTimer = null, slideshowReady = false;
 
   function initSlideshow() {
     if (slideshowReady) return;
@@ -769,101 +737,66 @@
     const slides = document.querySelectorAll('#slides-container .slide');
     const dots   = document.querySelectorAll('#slide-dots .dot');
     if (!slides.length) return;
-
-    /* Pause any video on the outgoing slide */
     const outVid = slides[slideshowCur].querySelector('video');
     if (outVid) { outVid.pause(); outVid.currentTime = 0; }
-
     slides[slideshowCur].classList.remove('active');
     if (dots[slideshowCur]) dots[slideshowCur].classList.remove('active');
-
     slideshowCur = (n + slides.length) % slides.length;
-
     slides[slideshowCur].classList.add('active');
     if (dots[slideshowCur]) dots[slideshowCur].classList.add('active');
-
-    /* Play video on the incoming slide; pause the timer while it runs */
     const inVid = slides[slideshowCur].querySelector('video');
-    if (inVid) {
-      clearInterval(slideshowTimer); // let video run; it will call slideGoTo on 'ended'
-      inVid.play().catch(() => {});  // catch autoplay block gracefully
-    } else {
-      clearInterval(slideshowTimer);
-      slideshowTimer = setInterval(() => slideGoTo(slideshowCur + 1), 5000);
-    }
+    if (inVid) { clearInterval(slideshowTimer); inVid.play().catch(() => {}); }
+    else { clearInterval(slideshowTimer); slideshowTimer = setInterval(() => slideGoTo(slideshowCur + 1), 5000); }
   }
 
   document.getElementById('next-slide').addEventListener('click', () => slideGoTo(slideshowCur + 1));
   document.getElementById('prev-slide').addEventListener('click', () => slideGoTo(slideshowCur - 1));
 
-  /* Build photo + video slides from sheet */
   function buildSlideshow(items) {
     const slideItems = items.filter(i => i.slideshow_url && i.slideshow_url.trim());
-    if (!slideItems.length) return; // keep fallback gradients
-
+    if (!slideItems.length) return;
     const container = document.getElementById('slides-container');
     container.innerHTML = '';
-    slideshowCur   = 0;
-    slideshowReady = false;
-
+    slideshowCur = 0; slideshowReady = false;
     slideItems.forEach((item, idx) => {
-      const title    = item.slide_title    || item.name || '';
+      const title    = item.slide_title || item.name || '';
       const subtitle = item.slide_subtitle || '';
       const url      = item.slideshow_url.trim();
-      const isVideo  = (item.slideshow_type || '').toLowerCase() === 'video'
-                       || /\.mp4(\?|$)/i.test(url)
-                       || /\.webm(\?|$)/i.test(url)
-                       || /\.mov(\?|$)/i.test(url);
-
-      const div = document.createElement('div');
-      div.className = 'slide' + (idx === 0 ? ' active' : '');
-
-      const labelHtml = title
-        ? '<div class="slide-label"><h2>' + escHtml(title) + '</h2>'
-          + (subtitle ? '<p>' + escHtml(subtitle) + '</p>' : '') + '</div>'
-        : '';
-
+      const isVideo  = (item.slideshow_type || '').toLowerCase() === 'video' || /\.(mp4|webm|mov)(\?|$)/i.test(url);
+      const div      = document.createElement('div');
+      div.className  = 'slide' + (idx === 0 ? ' active' : '');
+      const labelHtml = title ? '<div class="slide-label"><h2>' + escHtml(title) + '</h2>' + (subtitle ? '<p>' + escHtml(subtitle) + '</p>' : '') + '</div>' : '';
       if (isVideo) {
         div.classList.add('slide-video');
-        div.innerHTML = '<video class="slide-vid" src="' + url + '" muted playsinline preload="metadata"></video>'
-          + '<div class="slide-overlay"></div>' + labelHtml;
-
-        /* When video ends, advance to next slide */
-        const vid = div.querySelector('video');
-        vid.addEventListener('ended', () => slideGoTo(slideshowCur + 1));
+        div.innerHTML = '<video class="slide-vid" src="' + url + '" muted playsinline preload="metadata"></video><div class="slide-overlay"></div>' + labelHtml;
+        div.querySelector('video').addEventListener('ended', () => slideGoTo(slideshowCur + 1));
       } else {
         div.classList.add('slide-photo');
-        div.innerHTML = '<img src="' + url + '" alt="' + escHtml(title) + '" loading="lazy">'
-          + '<div class="slide-overlay"></div>' + labelHtml;
+        div.innerHTML = '<img src="' + url + '" alt="' + escHtml(title) + '" loading="lazy"><div class="slide-overlay"></div>' + labelHtml;
       }
-
       container.appendChild(div);
     });
-
     clearInterval(slideshowTimer);
     initSlideshow();
   }
 
-  function escHtml(s) {
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
+  function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
   /* ─── CSV PARSER ─── */
   function parseCSV(text) {
     const lines = text.trim().split(/\r?\n/);
     if (lines.length < 2) return [];
-    const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/['"]/g, ''));
+    const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/['"]/g,''));
     const rows = [];
     for (let i = 1; i < lines.length; i++) {
       const cols = splitCSVLine(lines[i]);
       if (cols.every(c => c.trim() === '')) continue;
       const obj = {};
-      headers.forEach((h, idx) => { obj[h] = (cols[idx] || '').trim().replace(/^["']|["']$/g, ''); });
+      headers.forEach((h, idx) => { obj[h] = (cols[idx] || '').trim().replace(/^["']|["']$/g,''); });
       rows.push(obj);
     }
     return rows;
   }
-
   function splitCSVLine(line) {
     const result = []; let cur = ''; let inQ = false;
     for (let i = 0; i < line.length; i++) {
@@ -880,77 +813,54 @@
   function invTier(raw) {
     if (!raw && raw !== '0') return null;
     const lower = String(raw).toLowerCase().trim();
-    if (lower === '' ) return null;
-    if (lower === 'out of stock') return { tier:'red',    label:'Out of stock' };
-    if (lower === 'in stock')     return { tier:'green',  label:'In stock' };
-    if (lower === 'low stock')    return { tier:'yellow', label:'Low stock' };
+    if (lower === '')               return null;
+    if (lower === 'out of stock')   return { tier:'red',    label:'Out of stock' };
+    if (lower === 'in stock')       return { tier:'green',  label:'In stock' };
+    if (lower === 'low stock')      return { tier:'yellow', label:'Low stock' };
     const num = parseInt(raw, 10);
-    if (isNaN(num)) return null;
+    if (isNaN(num))  return null;
     if (num === 0)   return { tier:'red',    label:'Out of stock' };
-    if (num <= 1000)    return { tier:'yellow', label: num + ' in stock — low' };
-    return              { tier:'green',  label: num + ' in stock' };
+    if (num <= 1000) return { tier:'yellow', label: num + ' in stock — low' };
+    return                 { tier:'green',  label: num + ' in stock' };
   }
-
   function buildInventoryBadge(raw) {
     const t = invTier(raw);
     if (!t) return '';
-    return '<div class="card-inventory">'
-      + '<span class="inv-dot '  + t.tier + '"></span>'
-      + '<span class="inv-text ' + t.tier + '">' + t.label + '</span>'
-      + '</div>';
+    return '<div class="card-inventory"><span class="inv-dot ' + t.tier + '"></span><span class="inv-text ' + t.tier + '">' + t.label + '</span></div>';
   }
 
   /* ─── PRODUCT CARD BUILDER ─── */
-  const TAG_COLORS = {
-    yellow:'#f5d07a', green:'#60b860', red:'#d94040', blue:'#3a80d2',
-    orange:'#e07820', purple:'#9b4cc0', pink:'#e070b0', white:'#f0f0f0', black:'#333'
-  };
-
-  function colorDot(colorName) {
-    const hex = TAG_COLORS[(colorName || '').toLowerCase()] || '#c8860a';
-    return '<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'
-      + hex + ';border:1px solid rgba(0,0,0,0.2);margin-right:4px;vertical-align:middle;"></span>';
-  }
+  const TAG_COLORS = { yellow:'#f5d07a', green:'#60b860', red:'#d94040', blue:'#3a80d2', orange:'#e07820', purple:'#9b4cc0', pink:'#e070b0', white:'#f0f0f0', black:'#333' };
+  function colorDot(c) { const hex = TAG_COLORS[(c||'').toLowerCase()] || '#c8860a'; return '<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + hex + ';border:1px solid rgba(0,0,0,0.2);margin-right:4px;vertical-align:middle;"></span>'; }
 
   function buildCard(item, rowIdx) {
-    const pills = ['animal', 'style', 'size']
-      .map(k => item[k] ? '<span class="meta-pill">' + item[k] + '</span>' : '').join('');
-    const colorPill = item.color
-      ? '<span class="meta-pill">' + colorDot(item.color) + item.color + '</span>' : '';
-
-    const imgHtml = item.image_url
-      ? '<img class="card-img" src="' + item.image_url + '" alt="' + (item.name || '') + '" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
+    const pills     = ['animal','style','size'].map(k => item[k] ? '<span class="meta-pill">' + item[k] + '</span>' : '').join('');
+    const colorPill = item.color ? '<span class="meta-pill">' + colorDot(item.color) + item.color + '</span>' : '';
+    const imgHtml   = item.image_url
+      ? '<img class="card-img" src="' + item.image_url + '" alt="' + (item.name||'') + '" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
         + '<div class="card-img-placeholder" style="display:none;background:linear-gradient(135deg,var(--brand-tan),var(--brand-gold));">' + tagSVG() + '</div>'
       : '<div class="card-img-placeholder" style="background:linear-gradient(135deg,var(--brand-tan),var(--brand-gold));">' + tagSVG() + '</div>';
-
     const badgeHtml = item.badge ? '<span class="card-badge">' + item.badge + '</span>' : '';
     const rawInv    = (item.inventory || '').trim();
-
+    const priceText = item.price ? item.price + '/per Tag with Engraving' : 'Contact for pricing';
     const card = document.createElement('div');
     card.className = 'product-card';
     card.dataset.animal = (item.animal || '').toLowerCase();
-    card.dataset.row    = rowIdx;   // ← stable index used by live refresh
+    card.dataset.row    = rowIdx;
     card.innerHTML = imgHtml + badgeHtml
       + '<div class="card-body">'
-      + '<div class="card-title">'  + (item.name || 'Unnamed Product') + '</div>'
-      + '<div class="card-desc">'   + (item.description || '') + '</div>'
-      + '<div class="card-meta">'   + pills + colorPill + '</div>'
+      + '<div class="card-title">'    + (item.name || 'Unnamed Product') + '</div>'
+      + '<div class="card-desc">'     + (item.description || '') + '</div>'
+      + '<div class="card-meta">'     + pills + colorPill + '</div>'
       + '<div class="card-inv-wrap">' + buildInventoryBadge(rawInv) + '</div>'
-      + '<div class="card-price">'  + (item.price + '/per Tag with Engraving' || 'Contact for pricing') + '</div>'
+      + '<div class="card-price">'    + priceText + '</div>'
       + '</div>';
     return card;
   }
-
-  function tagSVG() {
-    return '<svg width="80" height="80" viewBox="0 0 80 80" fill="none">'
-      + '<ellipse cx="40" cy="55" rx="32" ry="20" stroke="#5c3d0e" stroke-width="2"/>'
-      + '<rect x="26" y="10" width="28" height="40" rx="14" stroke="#5c3d0e" stroke-width="2"/>'
-      + '<circle cx="40" cy="17" r="4" fill="#5c3d0e"/></svg>';
-  }
+  function tagSVG() { return '<svg width="80" height="80" viewBox="0 0 80 80" fill="none"><ellipse cx="40" cy="55" rx="32" ry="20" stroke="#5c3d0e" stroke-width="2"/><rect x="26" y="10" width="28" height="40" rx="14" stroke="#5c3d0e" stroke-width="2"/><circle cx="40" cy="17" r="4" fill="#5c3d0e"/></svg>'; }
 
   /* ─── FILTER BAR ─── */
   let allCards = [];
-
   function buildFilters(items) {
     const animals = [...new Set(items.map(i => i.animal).filter(Boolean))];
     const bar = document.getElementById('filter-bar');
@@ -960,27 +870,16 @@
     allBtn.className = 'filter-btn active'; allBtn.textContent = 'All';
     allBtn.addEventListener('click', () => filterCards(''));
     bar.appendChild(allBtn);
-    animals.forEach(a => {
-      const btn = document.createElement('button');
-      btn.className = 'filter-btn'; btn.textContent = a;
-      btn.addEventListener('click', () => filterCards(a.toLowerCase()));
-      bar.appendChild(btn);
-    });
+    animals.forEach(a => { const btn = document.createElement('button'); btn.className = 'filter-btn'; btn.textContent = a; btn.addEventListener('click', () => filterCards(a.toLowerCase())); bar.appendChild(btn); });
   }
-
   function filterCards(animal) {
-    document.querySelectorAll('.filter-btn').forEach(b => {
-      b.classList.toggle('active', b.textContent.toLowerCase() === (animal || 'all'));
-    });
-    allCards.forEach(card => {
-      card.style.display = (!animal || card.dataset.animal === animal) ? '' : 'none';
-    });
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === (animal || 'all')));
+    allCards.forEach(card => { card.style.display = (!animal || card.dataset.animal === animal) ? '' : 'none'; });
   }
 
-  /* ─── LIVE INVENTORY REFRESH ─── */
-  /* Polls the sheet every 60 s and updates only the inventory badge on each card */
+  /* ─── LIVE INVENTORY REFRESH (every 30s) ─── */
   let liveRefreshTimer = null;
-  let lastInventoryValues = {}; // rowIndex -> raw inventory string
+  let lastInventoryValues = {};
 
   function startLiveInventory(csvUrl) {
     clearInterval(liveRefreshTimer);
@@ -992,114 +891,94 @@
       const r = await fetch('https://corsproxy.io/?' + encodeURIComponent(csvUrl) + '&nocache=' + Date.now());
       if (!r.ok) return;
       const items = parseCSV(await r.text());
-
       items.forEach((item, idx) => {
         const rawInv = (item.inventory || '').trim();
         const card   = document.querySelector('.product-card[data-row="' + idx + '"]');
         if (!card) return;
-
-        /* Only update if value actually changed */
         if (lastInventoryValues[idx] === rawInv) return;
         lastInventoryValues[idx] = rawInv;
-
         const wrap = card.querySelector('.card-inv-wrap');
         if (!wrap) return;
         wrap.innerHTML = buildInventoryBadge(rawInv);
-
-        /* Flash gold border to signal the update */
         card.style.transition = 'box-shadow 0.4s';
         card.style.boxShadow  = '0 0 0 3px var(--brand-gold)';
         setTimeout(() => { card.style.boxShadow = ''; }, 1500);
       });
-    } catch(e) { /* silent fail — try again next interval */ }
+    } catch(e) {}
   }
 
-  /* ─── LOAD PRODUCTS (initial full load) ─── */
+  /* ─── LOAD PRODUCTS ─── */
   async function loadProducts(csvUrl) {
     const grid  = document.getElementById('products-grid');
     const label = document.getElementById('product-count-label');
     grid.innerHTML = '<div class="products-state"><div class="spinner"></div><div>Loading products…</div></div>';
     label.textContent = 'Loading…';
-
-    const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(csvUrl);
-
     try {
-      const res = await fetch(proxyUrl);
+      const res = await fetch('https://corsproxy.io/?' + encodeURIComponent(csvUrl));
       if (!res.ok) throw new Error('HTTP ' + res.status);
-      const text = await res.text();
-      const items = parseCSV(text);
-
-      if (items.length === 0) {
-        grid.innerHTML = '<div class="products-state">No products found in your sheet yet.<br><small style="color:#aaa;">Make sure your sheet has a header row and at least one data row.</small></div>';
-        label.textContent = '';
-        return;
-      }
-
+      const items = parseCSV(await res.text());
+      if (items.length === 0) { grid.innerHTML = '<div class="products-state">No products found in your sheet yet.</div>'; label.textContent = ''; return; }
       buildSlideshow(items);
-
-      grid.innerHTML = '';
-      allCards = [];
-      lastInventoryValues = {};
-      items.forEach((item, idx) => {
-        const card = buildCard(item, idx);
-        grid.appendChild(card);
-        allCards.push(card);
-        lastInventoryValues[idx] = (item.inventory || '').trim();
-      });
-
+      grid.innerHTML = ''; allCards = []; lastInventoryValues = {};
+      items.forEach((item, idx) => { const card = buildCard(item, idx); grid.appendChild(card); allCards.push(card); lastInventoryValues[idx] = (item.inventory || '').trim(); });
       buildFilters(items);
-      label.textContent = items.length + ' product' + (items.length !== 1 ? 's' : '') + ' — live inventory updates every 60s';
-
+      label.textContent = items.length + ' product' + (items.length !== 1 ? 's' : '') + ' — inventory updates every 30s';
       startLiveInventory(csvUrl);
-
     } catch (err) {
-      grid.innerHTML = '<div class="products-state" style="color:#f07070;">Could not load products.<br><small style="color:#aaa;">Check that your sheet is published and the URL is correct.<br>Error: ' + err.message + '</small></div>';
+      grid.innerHTML = '<div class="products-state" style="color:#f07070;">Could not load products.<br><small style="color:#aaa;">Error: ' + err.message + '</small></div>';
       label.textContent = '';
     }
   }
 
-  /* ─── SETUP PAGE: URL SAVING ─── */
+  /* ─── SETUP: SHEET URL ─── */
   const STORAGE_KEY = 'ctp_sheet_url';
-
-  function getSavedUrl() {
-    return localStorage.getItem(STORAGE_KEY) || SHEET_CSV_URL || '';
-  }
-
+  function getSavedUrl() { return localStorage.getItem(STORAGE_KEY) || SHEET_CSV_URL || ''; }
   function showCurrentUrl() {
     const url = getSavedUrl();
     const el  = document.getElementById('current-url-display');
-    if (url && el) {
-      el.textContent = 'Current URL: ' + url;
-      el.classList.add('show');
-      document.getElementById('sheet-url-input').value = url;
-    }
+    const inp = document.getElementById('sheet-url-input');
+    if (url && el) { el.textContent = 'Current URL: ' + url; el.classList.add('show'); }
+    if (url && inp) inp.value = url;
   }
   showCurrentUrl();
-
   document.getElementById('save-url-btn').addEventListener('click', () => {
     const url = document.getElementById('sheet-url-input').value.trim();
-    if (!url || !url.startsWith('http')) {
-      alert('Please paste a valid Google Sheets CSV URL.');
-      return;
-    }
+    if (!url || !url.startsWith('http')) { alert('Please paste a valid Google Sheets CSV URL.'); return; }
     localStorage.setItem(STORAGE_KEY, url);
     document.getElementById('url-saved').classList.add('show');
     showCurrentUrl();
-    setTimeout(() => { document.getElementById('url-saved').classList.remove('show'); }, 4000);
+    setTimeout(() => document.getElementById('url-saved').classList.remove('show'), 4000);
     loadProducts(url);
   });
 
-  /* ─── STARTUP ─── */
-  incrementAndLoadHits();   // count this visit (once per session)
-  initSlideshow();          // start with fallback slides immediately
+  /* ─── SETUP: APPS SCRIPT URL ─── */
+  function showAppsScriptUrl() {
+    const url = localStorage.getItem('ctp_apps_script_url') || '';
+    const el  = document.getElementById('apps-script-current');
+    const inp = document.getElementById('apps-script-url-input');
+    if (url && el) { el.textContent = 'Current URL: ' + url; el.classList.add('show'); }
+    if (url && inp) inp.value = url;
+  }
+  showAppsScriptUrl();
+  document.getElementById('save-apps-script-btn').addEventListener('click', () => {
+    const url = document.getElementById('apps-script-url-input').value.trim();
+    if (!url || !url.startsWith('http')) { alert('Please paste a valid Apps Script URL.'); return; }
+    localStorage.setItem('ctp_apps_script_url', url);
+    APPS_SCRIPT_URL = url;
+    document.getElementById('apps-script-saved').classList.add('show');
+    showAppsScriptUrl();
+    setTimeout(() => document.getElementById('apps-script-saved').classList.remove('show'), 3000);
+    loadHitCount(); renderLoginLog();
+  });
 
+  /* ─── STARTUP ─── */
+  incrementAndLoadHits();
+  initSlideshow();
   const initialUrl = getSavedUrl();
   if (initialUrl) {
     loadProducts(initialUrl);
   } else {
-    document.getElementById('products-grid').innerHTML =
-      '<div class="products-state">No product sheet connected yet.<br>'
-      + '<small style="color:#aaa;">Click the footer 5 times quickly to access admin setup.</small></div>';
+    document.getElementById('products-grid').innerHTML = '<div class="products-state">No product sheet connected.<br><small style="color:#aaa;">Click the footer 5 times to access admin setup.</small></div>';
     document.getElementById('product-count-label').textContent = '';
   }
 </script>
