@@ -606,13 +606,6 @@
   const LOGIN_LOG_KEY = 'ctp_login_log';
 
   async function logLogin() {
-    /* One log entry per device per 24 hours */
-    const LAST_KEY = 'ctp_last_login_log';
-    const last = parseInt(localStorage.getItem(LAST_KEY) || '0', 10);
-    const now  = Date.now();
-    if (now - last < 86400000) return;
-    localStorage.setItem(LAST_KEY, now);
-
     let city = 'Unknown', country = '', ip = '';
     try {
       const r = await fetch('https://ipapi.co/json/');
@@ -631,7 +624,7 @@
     let log = [];
     try { log = JSON.parse(localStorage.getItem(LOGIN_LOG_KEY) || '[]'); } catch(e) {}
     log.unshift(entry);
-    if (log.length > 20) log = log.slice(0, 20);
+    if (log.length > 100) log = log.slice(0, 100);
     localStorage.setItem(LOGIN_LOG_KEY, JSON.stringify(log));
   }
 
@@ -639,22 +632,14 @@
     const wrap = document.getElementById('login-log-display');
     if (!wrap) return;
 
-    const last = parseInt(localStorage.getItem('ctp_last_login_log') || '0', 10);
-    const remaining = last ? 86400000 - (Date.now() - last) : 0;
-    let nextInfo = '';
-    if (remaining > 0) {
-      const hrs = Math.floor(remaining / 3600000), mins = Math.floor((remaining % 3600000) / 60000);
-      nextInfo = '<div style="font-size:0.75rem;color:#666;margin-bottom:10px;">⏱ Next log from this device in ' + hrs + 'h ' + mins + 'm</div>';
-    }
-
     /* Try Apps Script first (all devices) */
     if (APPS_SCRIPT_URL) {
       try {
-        wrap.innerHTML = nextInfo + '<div class="log-empty" style="color:#888;">Loading…</div>';
+        wrap.innerHTML = '<div class="log-empty" style="color:#888;">Loading…</div>';
         const r = await fetch(APPS_SCRIPT_URL + '?action=getLogs');
         if (r.ok) {
           const rows = await r.json();
-          wrap.innerHTML = nextInfo + (rows.length ? buildLogTable(rows) : '<div class="log-empty">No logins recorded yet.</div>');
+          wrap.innerHTML = rows.length ? buildLogTable(rows) : '<div class="log-empty">No logins recorded yet.</div>';
           return;
         }
       } catch(e) {}
@@ -663,8 +648,7 @@
     /* Fallback: localStorage (this device only) */
     let log = [];
     try { log = JSON.parse(localStorage.getItem(LOGIN_LOG_KEY) || '[]'); } catch(e) {}
-    wrap.innerHTML = nextInfo
-      + (APPS_SCRIPT_URL ? '' : '<div style="font-size:0.72rem;color:#666;margin-bottom:8px;">⚠ Showing this device only — connect Apps Script in Step 4 to see all devices.</div>')
+    wrap.innerHTML = (APPS_SCRIPT_URL ? '' : '<div style="font-size:0.72rem;color:#666;margin-bottom:8px;">⚠ Showing this device only — connect Apps Script in Step 4 to see all devices.</div>')
       + (log.length ? buildLogTable(log) : '<div class="log-empty">No logins recorded yet.</div>');
   }
 
