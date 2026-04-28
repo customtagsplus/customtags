@@ -674,8 +674,8 @@
 
   /* ─── HIT COUNTER ─── */
   async function incrementAndLoadHits() {
-    if (sessionStorage.getItem('ctp_hit_counted')) return;
-    sessionStorage.setItem('ctp_hit_counted', '1');
+    if (localStorage.getItem('ctp_hit_counted')) return; // already counted on this device
+    localStorage.setItem('ctp_hit_counted', '1');
     const local = parseInt(localStorage.getItem('ctp_local_hits') || '0', 10) + 1;
     localStorage.setItem('ctp_local_hits', local);
     if (APPS_SCRIPT_URL) {
