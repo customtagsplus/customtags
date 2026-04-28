@@ -615,9 +615,15 @@
     const dev   = getDeviceInfo();
     const entry = { time: new Date().toLocaleString(), city, country, ip, browser: dev.browser, os: dev.os, type: dev.type, screen: dev.screen };
 
-    /* Send to Apps Script (cross-device) */
+    /* Send to Apps Script (cross-device) — using image trick to bypass CORS */
     if (APPS_SCRIPT_URL) {
-      try { await fetch(APPS_SCRIPT_URL + '?action=logLogin&data=' + encodeURIComponent(JSON.stringify(entry)), { mode: 'no-cors' }); } catch(e) {}
+      try {
+        const url = APPS_SCRIPT_URL + '?action=logLogin&data=' + encodeURIComponent(JSON.stringify(entry));
+        /* Use no-cors fetch — Apps Script receives it even if browser blocks the response */
+        fetch(url, { method: 'GET', mode: 'no-cors' }).catch(() => {});
+        /* Also fire via Image as a backup — guaranteed to send, no CORS restrictions */
+        new Image().src = url;
+      } catch(e) {}
     }
 
     /* Also save locally as fallback */
@@ -673,7 +679,10 @@
     const local = parseInt(localStorage.getItem('ctp_local_hits') || '0', 10) + 1;
     localStorage.setItem('ctp_local_hits', local);
     if (APPS_SCRIPT_URL) {
-      try { await fetch(APPS_SCRIPT_URL + '?action=hit', { mode: 'no-cors' }); } catch(e) {}
+      try {
+        fetch(APPS_SCRIPT_URL + '?action=hit', { method: 'GET', mode: 'no-cors' }).catch(() => {});
+        new Image().src = APPS_SCRIPT_URL + '?action=hit';
+      } catch(e) {}
     }
   }
 
