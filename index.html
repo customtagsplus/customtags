@@ -836,7 +836,7 @@
       : '<div class="card-img-placeholder" style="background:linear-gradient(135deg,var(--brand-tan),var(--brand-gold));">' + tagSVG() + '</div>';
     const badgeHtml = item.badge ? '<span class="card-badge">' + item.badge + '</span>' : '';
     const rawInv    = (item.inventory || '').trim();
-    const priceText = item.price ? item.price +  : 'Contact for pricing';
+    const priceText = item.price ? item.price  : 'Contact for pricing';
     const card = document.createElement('div');
     card.className = 'product-card';
     card.dataset.animal = (item.animal || '').toLowerCase();
